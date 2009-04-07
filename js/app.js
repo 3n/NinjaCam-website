@@ -1,3 +1,6 @@
 window.addEvent('domready', function(){
-	console.log('ready')
+	new MicroApp('twitter-and-flickr', [
+		[ new Flickr, 
+		  new Twitter ]
+	]).to_html()
 })

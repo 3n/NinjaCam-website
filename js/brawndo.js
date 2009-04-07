@@ -18,7 +18,7 @@ Inspiration:
 
 var MooTools = {
 	'version': '1.2.1',
-	'build': '78348b4c552d737c822c825c761f5673fd05abe7'
+	'build': '0d4845aab3d9a4fdee2f0d4a6dd59210e4b697cf'
 };
 
 var Native = function(options){
@@ -100,7 +100,7 @@ Native.typize = function(object, family){
 	};
 	for (var g in generics){
 		for (var i = generics[g].length; i--;) Native.genericize(window[g], generics[g][i], true);
-	}
+	};
 })();
 
 var Hash = new Native({
@@ -155,8 +155,8 @@ Array.alias('forEach', 'each');
 
 function $A(iterable){
 	if (iterable.item){
-		var l = iterable.length, array = new Array(l);
-		while (l--) array[l] = iterable[l];
+		var array = [];
+		for (var i = 0, l = iterable.length; i < l; i++) array[i] = iterable[i];
 		return array;
 	}
 	return Array.prototype.slice.call(iterable);
@@ -205,18 +205,13 @@ function $lambda(value){
 };
 
 function $merge(){
-	var args = Array.slice(arguments);
-	args.unshift({});
-	return $mixin.apply(null, args);
-};
-
-function $mixin(mix){
-	for (var i = 1, l = arguments.length; i < l; i++){
+	var mix = {};
+	for (var i = 0, l = arguments.length; i < l; i++){
 		var object = arguments[i];
 		if ($type(object) != 'object') continue;
 		for (var key in object){
 			var op = object[key], mp = mix[key];
-			mix[key] = (mp && $type(op) == 'object' && $type(mp) == 'object') ? $mixin(mp, op) : $unlink(op);
+			mix[key] = (mp && $type(op) == 'object' && $type(mp) == 'object') ? $merge(mp, op) : $unlink(op);
 		}
 	}
 	return mix;
@@ -360,7 +355,7 @@ Browser.Plugins.Flash = (function(){
 	}, function(){
 		return new ActiveXObject('ShockwaveFlash.ShockwaveFlash').GetVariable('$version');
 	}) || '0 r0').match(/\d+/g);
-	return {version: parseInt(version[0] || 0 + '.' + version[1], 10) || 0, build: parseInt(version[2], 10) || 0};
+	return {version: parseInt(version[0] || 0 + '.' + version[1] || 0), build: parseInt(version[2] || 0)};
 })();
 
 function $exec(text){
@@ -520,7 +515,7 @@ Array.implement({
 		for (var i = 0, j = array.length; i < j; i++) this.push(array[i]);
 		return this;
 	},
-	
+
 	getLast: function(){
 		return (this.length) ? this[this.length - 1] : null;
 	},
@@ -835,7 +830,8 @@ Hash.implement({
 	},
 
 	include: function(key, value){
-		if (this[key] == undefined) this[key] = value;
+		var k = this[key];
+		if (k == undefined) this[key] = value;
 		return this;
 	},
 
@@ -1177,9 +1173,7 @@ var attributes = {
 var bools = ['compact', 'nowrap', 'ismap', 'declare', 'noshade', 'checked', 'disabled', 'readonly', 'multiple', 'selected', 'noresize', 'defer'];
 var camels = ['value', 'accessKey', 'cellPadding', 'cellSpacing', 'colSpan', 'frameBorder', 'maxLength', 'readOnly', 'rowSpan', 'tabIndex', 'useMap'];
 
-bools = bools.associate(bools);
-
-Hash.extend(attributes, bools);
+Hash.extend(attributes, bools.associate(bools));
 Hash.extend(attributes, camels.associate(camels.map(String.toLowerCase)));
 
 var inserters = {
@@ -1364,10 +1358,6 @@ Element.implement({
 
 	getParents: function(match, nocash){
 		return walk(this, 'parentNode', null, match, true, nocash);
-	},
-	
-	getSiblings: function(match, nocash) {
-		return this.getParent().getChildren(match, nocash).erase(this);
 	},
 
 	getChildren: function(match, nocash){
@@ -1597,7 +1587,7 @@ License:
 	http://www.clientcide.com/wiki/cnet-libraries#license
 */
 var Clientcide = {
-	version: '%build%',
+	version: 'd156ccca0d10fb1973fa688083d5be411cc2b1d9',
 	setAssetLocation: function(baseHref) {
 		if (window.StickyWin && StickyWin.ui) {
 			StickyWin.UI.refactor({
@@ -1785,150 +1775,116 @@ License:
 	MIT-style license.
 */
 
-function Class(params){
-	
-	if (params instanceof Function) params = {initialize: params};
-	
-	var newClass = function(){
-		Object.reset(this);
-		if (newClass._prototyping) return this;
-		this._current = $empty;
-		var value = (this.initialize) ? this.initialize.apply(this, arguments) : this;
-		delete this._current; delete this.caller;
-		return value;
-	}.extend(this);
-	
-	newClass.implement(params);
-	
-	newClass.constructor = Class;
-	newClass.prototype.constructor = newClass;
+var Class = new Native({
 
-	return newClass;
+	name: 'Class',
 
-};
+	initialize: function(properties){
+		properties = properties || {};
+		var klass = function(){
+			for (var key in this){
+				if ($type(this[key]) != 'function') this[key] = $unlink(this[key]);
+			}
+			this.constructor = klass;
+			if (Class.prototyping) return this;
+			var instance = (this.initialize) ? this.initialize.apply(this, arguments) : this;
+			if (this.options && this.options.initialize) this.options.initialize.call(this);
+			return instance;
+		};
 
-Function.prototype.protect = function(){
-	this._protected = true;
-	return this;
-};
-
-Object.reset = function(object, key){
-		
-	if (key == null){
-		for (var p in object) Object.reset(object, p);
-		return object;
-	}
-	
-	delete object[key];
-	
-	switch ($type(object[key])){
-		case 'object':
-			var F = function(){};
-			F.prototype = object[key];
-			var i = new F;
-			object[key] = Object.reset(i);
-		break;
-		case 'array': object[key] = $unlink(object[key]); break;
-	}
-	
-	return object;
-	
-};
-
-new Native({name: 'Class', initialize: Class}).extend({
-
-	instantiate: function(F){
-		F._prototyping = true;
-		var proto = new F;
-		delete F._prototyping;
-		return proto;
-	},
-	
-	wrap: function(self, key, method){
-		method = method._origin || method;
-		
-		return function(){
-			if (method._protected && this._current == null) throw new Error('The method "' + key + '" cannot be called.');
-			var caller = this.caller, current = this._current;
-			this.caller = current; this._current = arguments.callee;
-			var result = method.apply(this, arguments);
-			this._current = current; this.caller = caller;
-			return result;
-		}.extend({_owner: self, _origin: method, _name: key});
-
-	}
-	
-});
-
-Class.implement({
-	
-	implement: function(key, value){
-		
-		if ($type(key) == 'object'){
-			for (var p in key) this.implement(p, key[p]);
-			return this;
+		for (var mutator in Class.Mutators){
+			if (!properties[mutator]) continue;
+			properties = Class.Mutators[mutator](properties, properties[mutator]);
+			delete properties[mutator];
 		}
-		
-		var mutator = Class.Mutators[key];
-		
-		if (mutator){
-			value = mutator.call(this, value);
-			if (value == null) return this;
-		}
-		
-		var proto = this.prototype;
 
-		switch ($type(value)){
-			
-			case 'function':
-				if (value._hidden) return this;
-				proto[key] = Class.wrap(this, key, value);
-			break;
-			
-			case 'object':
-				var previous = proto[key];
-				if ($type(previous) == 'object') $mixin(previous, value);
-				else proto[key] = $unlink(value);
-			break;
-			
-			case 'array':
-				proto[key] = $unlink(value);
-			break;
-			
-			default: proto[key] = value;
-
-		}
-		
-		return this;
-
+		$extend(klass, this);
+		klass.constructor = Class;
+		klass.prototype = properties;
+		return klass;
 	}
-	
+
 });
 
 Class.Mutators = {
-	
-	Extends: function(parent){
 
-		this.parent = parent;
-		this.prototype = Class.instantiate(parent);
-
-		this.implement('parent', function(){
-			var name = this.caller._name, previous = this.caller._owner.parent.prototype[name];
-			if (!previous) throw new Error('The method "' + name + '" has no parent.');
-			return previous.apply(this, arguments);
-		}.protect());
-
+	Extends: function(self, klass){
+		Class.prototyping = klass.prototype;
+		var subclass = new klass;
+		delete subclass.parent;
+		subclass = Class.inherit(subclass, self);
+		delete Class.prototyping;
+		return subclass;
 	},
 
-	Implements: function(items){
-		$splat(items).each(function(item){
-			if (item instanceof Function) item = Class.instantiate(item);
-			this.implement(item);
-		}, this);
-
+	Implements: function(self, klasses){
+		$splat(klasses).each(function(klass){
+			Class.prototying = klass;
+			$extend(self, ($type(klass) == 'class') ? new klass : klass);
+			delete Class.prototyping;
+		});
+		return self;
 	}
-	
+
 };
+
+Class.extend({
+
+	inherit: function(object, properties){
+		var caller = arguments.callee.caller;
+		for (var key in properties){
+			var override = properties[key];
+			var previous = object[key];
+			var type = $type(override);
+			if (previous && type == 'function'){
+				if (override != previous){
+					if (caller){
+						override.__parent = previous;
+						object[key] = override;
+					} else {
+						Class.override(object, key, override);
+					}
+				}
+			} else if(type == 'object'){
+				object[key] = $merge(previous, override);
+			} else {
+				object[key] = override;
+			}
+		}
+
+		if (caller) object.parent = function(){
+			return arguments.callee.caller.__parent.apply(this, arguments);
+		};
+
+		return object;
+	},
+
+	override: function(object, name, method){
+		var parent = Class.prototyping;
+		if (parent && object[name] != parent[name]) parent = null;
+		var override = function(){
+			var previous = this.parent;
+			this.parent = parent ? parent[name] : object[name];
+			var value = method.apply(this, arguments);
+			this.parent = previous;
+			return value;
+		};
+		object[name] = override;
+	}
+
+});
+
+Class.implement({
+
+	implement: function(){
+		var proto = this.prototype;
+		$each(arguments, function(properties){
+			Class.inherit(proto, properties);
+		});
+		return this;
+	}
+
+});
 
 /*
 Script: Class.Extras.js
@@ -2815,9 +2771,10 @@ Element.implement({
 	getOffsets: function(){
 		if (Browser.Engine.trident){
 			var bound = this.getBoundingClientRect(), html = this.getDocument().documentElement;
+			var is_fixed = styleString(this, 'position') == 'fixed';
 			return {
-				x: bound.left + html.scrollLeft - html.clientLeft,
-				y: bound.top + html.scrollTop - html.clientTop
+				x: bound.left + (is_fixed ? 0 : html.scrollLeft) - html.clientLeft,
+				y: bound.top +  (is_fixed ? 0 : html.scrollTop)  - html.clientTop
 			};
 		}
 
@@ -2882,21 +2839,21 @@ Element.implement({
 Native.implement([Document, Window], {
 
 	getSize: function(){
-		if (Browser.Engine.presto || Browser.Engine.webkit) {
-			var win = this.getWindow();
-			return {x: win.innerWidth, y: win.innerHeight};
-		}
+		var win = this.getWindow();
+		if (Browser.Engine.presto || Browser.Engine.webkit) return {x: win.innerWidth, y: win.innerHeight};
 		var doc = getCompatElement(this);
 		return {x: doc.clientWidth, y: doc.clientHeight};
 	},
 
 	getScroll: function(){
-		var win = this.getWindow(), doc = getCompatElement(this);
+		var win = this.getWindow();
+		var doc = getCompatElement(this);
 		return {x: win.pageXOffset || doc.scrollLeft, y: win.pageYOffset || doc.scrollTop};
 	},
 
 	getScrollSize: function(){
-		var doc = getCompatElement(this), min = this.getSize();
+		var doc = getCompatElement(this);
+		var min = this.getSize();
 		return {x: Math.max(doc.scrollWidth, min.x), y: Math.max(doc.scrollHeight, min.y)};
 	},
 
@@ -3327,7 +3284,7 @@ Element.implement({
 			var color = result.match(/rgba?\([\d\s,]+\)/);
 			if (color) result = result.replace(color[0], color[0].rgbToHex());
 		}
-		if (Browser.Engine.presto || (Browser.Engine.trident && !$chk(parseInt(result, 10)))){
+		if (Browser.Engine.presto || (Browser.Engine.trident && !$chk(parseInt(result)))){
 			if (property.test(/^(height|width)$/)){
 				var values = (property == 'width') ? ['left', 'right'] : ['top', 'bottom'], size = 0;
 				values.each(function(value){
@@ -3443,10 +3400,10 @@ Selectors.Utils = {
 		if (Selectors.Cache.nth[argument]) return Selectors.Cache.nth[argument];
 		var parsed = argument.match(/^([+-]?\d*)?([a-z]+)?([+-]?\d*)?$/);
 		if (!parsed) return false;
-		var inta = parseInt(parsed[1], 10);
+		var inta = parseInt(parsed[1]);
 		var a = (inta || inta === 0) ? inta : 1;
 		var special = parsed[2] || false;
-		var b = parseInt(parsed[3], 10) || 0;
+		var b = parseInt(parsed[3]) || 0;
 		if (a != 0){
 			b--;
 			while (b < 1) b += a;
@@ -3664,7 +3621,7 @@ Selectors.Pseudo = new Hash({
 	checked: function(){
 		return this.checked;
 	},
-	
+
 	empty: function(){
 		return !(this.innerText || this.textContent || '').length;
 	},
@@ -3740,10 +3697,6 @@ Selectors.Pseudo = new Hash({
 
 	odd: function(argument, local){
 		return Selectors.Pseudo['nth-child'].call(this, '2n', local);
-	},
-	
-	selected: function() {
-		return this.selected;
 	}
 
 });
@@ -3805,17 +3758,17 @@ var Fx = new Class({
 		return Fx.compute(from, to, delta);
 	},
 
-	check: function(){
+	check: function(caller){
 		if (!this.timer) return true;
 		switch (this.options.link){
 			case 'cancel': this.cancel(); return true;
-			case 'chain': this.chain(this.caller.bind(this, arguments)); return false;
+			case 'chain': this.chain(caller.bind(this, Array.slice(arguments, 1))); return false;
 		}
 		return false;
 	},
 
 	start: function(from, to){
-		if (!this.check(from, to)) return this;
+		if (!this.check(arguments.callee, from, to)) return this;
 		this.from = from;
 		this.to = to;
 		this.time = 0;
@@ -4040,7 +3993,7 @@ Fx.Tween = new Class({
 	},
 
 	start: function(property, from, to){
-		if (!this.check(property, from, to)) return this;
+		if (!this.check(arguments.callee, property, from, to)) return this;
 		var args = Array.flatten(arguments);
 		this.property = this.options.property || args.shift();
 		var parsed = this.prepare(this.element, this.property, args);
@@ -4173,6 +4126,22 @@ Selectors.Pseudo.visible = function(){
 	return this.is_visible();
 };
 /*
+Script: Event.addEventOnce.js
+	Extends the Event class (using .implement) with a method to add an event only once.
+*/
+
+Event.implement({
+	addEventOnce: function(type, func){		
+		this.addEvent(type, function(e){ func(e); this.removeEvent(type, arguments.callee) });
+		return this;
+	}	
+});
+
+Native.implement([Element, Window, Document], {
+	addEventOnce: Event.prototype.addEventOnce
+})
+
+/*
 Script: JustTheTip.js
 	Tool-tip class that allows for arbitrary HTML and provides lots of events
 	to hook into. 
@@ -4183,16 +4152,23 @@ Script: JustTheTip.js
 	The tip will stay up as long as your mouse is in the element, or the tip itself.
 	
 	You can add elements to a given tip instance whenever you want using add_element()
+	
+	todo tests for multiple show/hide events
 */
 
 var JustTheTip = new Class({
 	Implements: [Options, Events],
+	// Binds: ['hide_tip'],
 	
 	options : {
 		show_delay : 400,
 		hide_delay : 200,
+		show_event : 'mouseenter',
+		hide_event : 'mouseleave',
 		tip_html   : '',
 		tip_class  : 'tip',
+		tip_enter  : 'mouseenter',
+		tip_leave  : 'mouseleave',
 		fade_in_duration  : 0,
 		fade_out_duration : 0,
 		x_location : 'right',
@@ -4201,7 +4177,7 @@ var JustTheTip = new Class({
 	
 	initialize: function(elements, options){
 		this.setOptions(options)
-		
+
 		this.the_tip = new Element('div', {
 			'class' 	: this.options.tip_class,
 			'styles' 	: {
@@ -4212,12 +4188,16 @@ var JustTheTip = new Class({
 				'z-index'   : 100
 			}
 		}).inject(document.body)
-			.addEvents({
-				'mouseenter' : this.tip_enter.bind(this),
-				'mouseleave' : this.tip_leave.bind(this)	
-			})
-			.set('html', this.options.tip_html)
+			.set('html', this.options.tip_html);
+
+		[this.options.tip_enter].flatten().each(function(te){
+			this.the_tip.addEvent(te, this.tip_enter.bind(this))
+		}, this);
+		[this.options.tip_leave].flatten().each(function(tl){
+			this.the_tip.addEvent(tl, this.tip_leave.bind(this))
+		}, this);
 			
+		this.hide_callback = this.hide_tip.bind(this);	
 		this.is_it_in_yet = false
 		this.attach_events(elements)
 		
@@ -4225,19 +4205,25 @@ var JustTheTip = new Class({
 	},
 	
 	attach_events: function(elements){
+		var show_event = this.options.show_event
+		var hide_event = this.options.hide_event
+		
 		$$(elements).each(function(elem){
 			elem.store('just_the_tip_on', true);
-			elem.addEvents({
-				'mouseenter' : this.show_tip.bind(this, elem),	
-				'mouseleave' : this.hide_tip.bind(this)
-			})
+			[this.options.show_event].flatten().each(function(se){
+				elem.addEvent(se, this.show_tip.bind(this, elem))
+			}, this);
 		}.bind(this))
 	},
 
 	show_tip: function(elem){
 		$clear(this.timer)
 		this.timer = (function(){
-			this.current_element = elem
+			this.current_element = elem;
+
+			[this.options.hide_event].flatten().each(function(he){
+				this.current_element.addEvent(he, this.hide_callback)
+			}, this);
 			
 			if (elem.retrieve('just_the_tip_on')){
 				switch(this.options.x_location){
@@ -4263,6 +4249,10 @@ var JustTheTip = new Class({
 		$clear(this.timer)
 		this.timer = (function(){
 			if (!this.is_it_in_yet) {				
+				[this.options.hide_event].flatten().each(function(he){
+					this.current_element.removeEvent(he, this.hide_callback)
+				}, this);
+				
 				this.the_tip.f4de(
 					'out', 
 					this.options.fade_out_duration, 
@@ -4287,7 +4277,7 @@ var JustTheTip = new Class({
 	tip_enter: function(){
 		this.is_it_in_yet = true
 	},
-	tip_leave: function(){			
+	tip_leave: function(){
 		this.is_it_in_yet = false
 		this.hide_tip()
 	}
@@ -4320,18 +4310,12 @@ Function.implement({
 	}
 })
 
-MooTools.More = {
-	'version': 'rc01'
-};
 /*
 Script: Fx.Scroll.js
 	Effect to smoothly scroll any element, including the window.
 
-	License:
-		MIT-style license.
-
-	Authors:
-		Valerio Proietti
+License:
+	MIT-style license.
 */
 
 Fx.Scroll = new Class({
@@ -4339,7 +4323,7 @@ Fx.Scroll = new Class({
 	Extends: Fx,
 
 	options: {
-		offset: {x: 0, y: 0},
+		offset: {'x': 0, 'y': 0},
 		wheelStops: true
 	},
 
@@ -4368,9 +4352,12 @@ Fx.Scroll = new Class({
 	},
 
 	compute: function(from, to, delta){
-		return [0, 1].map(function(i){
-			return Fx.compute(from[i], to[i], delta);
+		var now = [];
+		var x = 2;
+		x.times(function(i){
+			now.push(Fx.compute(from[i], to[i], delta));
 		});
+		return now;
 	},
 
 	start: function(x, y){
@@ -4862,6 +4849,8 @@ Element.Events.domready = {
 Script: CSSTransitions.Tween.js
 	Mirrors the API for Fx.Tween but uses CSS Transitions for effects. Does not depend on Fx. 
 	Supports CSS Transforms as well, like translateY and rotate. Just pass in option is_transform:true
+	
+	todo use transitionend event instead of timers?
 */
 
 // Just a dummy object, for now. Will eventually be the parent class for CSSTransitions and its siblings. 
@@ -5104,12 +5093,8 @@ Cookie.dispose = function(key, options){
 Script: Hash.Cookie.js
 	Class for creating, reading, and deleting Cookies in JSON format.
 
-	License:
-		MIT-style license.
-
-	Authors:
-		Valerio Proietti
-		Aaron Newton
+License:
+	MIT-style license.
 */
 
 Hash.Cookie = new Class({
@@ -5140,13 +5125,22 @@ Hash.Cookie = new Class({
 
 });
 
-Hash.each(Hash.prototype, function(method, name){
-	if (typeof method == 'function') Hash.Cookie.implement(name, function(){
-		var value = method.apply(this.hash, arguments);
-		if (this.options.autoSave) this.save();
-		return value;
+Hash.Cookie.implement((function(){
+
+	var methods = {};
+
+	Hash.each(Hash.prototype, function(method, name){
+		methods[name] = function(){
+			var value = method.apply(this.hash, arguments);
+			if (this.options.autoSave) this.save();
+			return value;
+		};
 	});
-});
+
+	return methods;
+
+})());
+
 /*
 Script: BrawndoButton.js
 	Class for handling class/text toggling of a button. Can be used to make a toggle button
@@ -5201,4 +5195,380 @@ var BrawndoButton = new Class({
 		if (fire_events) this.fireEvent('onComplete', this.count);
 	}
 });
+
+var MicroAppView = new Class({
+	Implements: Options,
+	options: {
+		base_class    : 'cell',
+		main_class    : 'single-wide',
+		custom_class	: '',
+		title 				: '',
+		act_like_link : true,
+		
+		new_class     : 'new-icon',
+		new_title     : 'I\'m new, to you.',
+		new_html			: 'new',
+		
+		show_tip      : true,
+		tip_options   : {},
+		tip_html_fn   : function(tip, elem){
+											return "<a class='title' href='" 
+												+ elem.retrieve('source') + "'>" + elem.retrieve('title') 
+												+ "</a><span class='date'>" + elem.retrieve('created') + "</span>"
+										},
+		
+		created_on		: new Date(1985,5,31),
+		source				: '#'
+	},
+	initialize: function(html, options){
+		this.setOptions(options)
+		this.html = html
+		
+		this.update_element()
+		
+		if (this.options.show_tip) this.setup_tip()
+		this.add_events()
+		
+		return this
+	},
+	
+	create_element: function(){
+		this.element = this.element || new Element('div')
+		this.element.addClass(this.options.base_class)
+								.addClass(this.options.main_class)
+								.addClass(this.options.custom_class)
+		
+		if 			($type(this.html) === 'element') this.element.adopt(this.html)
+		else if ($type(this.html) === 'string')  this.element.set('html', this.html)
+		
+		if (!this.element.getElement('.'+this.options.new_class))
+			this.element.adopt(new Element('div', {
+				'class' : this.options.new_class, 
+				'title' : this.options.new_title,
+				'html'  : this.options.new_html
+			}))
+
+		this.element.store('source',  this.options.source)
+		this.element.store('title',   this.options.title)
+		this.element.store('created', this.options.created_on.timeDiffInWords())
+
+		return this.element
+	},
+	
+	update_element: function(){
+		this.element = this.create_element()
+		return this
+	},
+
+	setup_tip: function(){
+	  MicroAppView.tip = MicroAppView.tip || new JustTheTip(null, $merge({
+    	showDelay  : 400,
+    	x_location : 'left',
+    	y_location : 'bottom',
+    	fade_in_duration  : 100,
+    	fade_out_duration : 200
+    }, this.options.tip_options)).addEvent('tipShown', function(tip,elem){
+        tip.set('html', this.options.tip_html_fn(tip,elem))
+      }.bind(this))
+	},
+	
+	add_events: function(){
+		if (this.options.act_like_link && this.options.source.length > 14) this.element.act_like_link(this.options.source)
+		if (this.options.show_tip) MicroAppView.tip.add_element(this.element)
+	},
+	
+	to_html: function(){
+		return this.element
+	}
+})
+MicroAppView.tip = null
+
+var MicroAppImageView = new Class({
+	Extends : MicroAppView,
+	options : {
+		width  : 140,
+		height : 140
+	},
+	initialize: function(src, options){
+		this.setOptions(options)
+		
+		var elem = new Element('img', {
+			'src' 	: src,
+			'styles': { 'display':'none'	}
+		})
+		
+		return this.parent(elem, options)
+	},
+	
+	to_html: function(){
+		var width  = this.options.width
+		var height = this.options.height
+		this.html.on_has_width(function(){ 
+			this.setStyle('display','block').thumbnail.delay(1, this, [width, height])
+		}.bind(this.html))
+		
+		return this.parent()
+	}
+})
+var MicroAppModel = new Class({
+	Implements: [Events, Options],
+	initialize: function(options){
+		this.setOptions(options)
+		this.db = []
+		this.data_ready = false
+		return this
+	},
+	
+	get_data: function(){
+		if (this.data_ready)
+			this.fireEvent('dataReady', this)
+		else
+			new JsonP(
+				this.options.json_url, 
+				$merge(	{abortAfter : 1000, retries : 1, onComplete : this.process_data.bind(this) }, this.options.json_opts) 
+			).request()
+			
+		return this
+	},
+	
+	process_data: function(){
+		this.db = this.db.map(function(row){
+			row.model = this
+			return row
+		}, this)
+		
+		this.data_ready = true
+		this.fireEvent('dataReady', this)
+	},
+	
+	sort_by: function(field){
+		return this._sort_by.cache(this)(field)
+	},
+	_sort_by: function(field){
+		return this.db.sort(function(a,b){
+			a[field] - b[field]
+		})
+	},
+	new_items: function(){
+		return this.db.filter(function(x){
+			return x.is_new
+		})
+	},
+	_item_is_new: function(){ return false },
+	
+	create_views: function(limit){
+		var limit = limit || 100
+		this.cells = [this.title_elem].combine(this.db.map(function(row){ 
+			if (limit > 1) {
+				var cell = this._to_cell.apply(row)
+				cell.element.hasClass('double-wide') ? limit -= 2 : --limit // todo extract
+				return cell.to_html()
+			}
+		}.bind(this))).flatten()
+		
+		return this.cells
+		// return [this.title_elem].combine(this.db.map(function(row){ return this._to_cell.apply(row).to_html() }.bind(this))).first(limit||100)
+	},
+	
+	current_user: function(){
+		return this.options.user_name || this.options.user;
+	}
+})
+
+var Flickr = new Class({
+	Extends    : MicroAppModel,
+	options : {
+		site_name  : "flickr",
+		nombre     : "SEEING", 
+		json_url   : "http://api.flickr.com/services/feeds/photos_public.gne",
+		web_source : "http://www.flickr.com",
+		json_opts  : { globalFunction : 'jsonFlickrFeed',
+									 data: { lang   : "en-us",
+										       format : 'json' } },
+	 	initial_limit : 15		
+	},								
+	
+	initialize: function(options){
+		this.parent(options)
+		if (this.options.json_opts.data.id === '') this.options.json_url = null
+		
+		return this
+	},
+	
+	process_data: function(json){
+		this.db = json.items.map(function(json_item){
+			return {
+				title       : json_item.title,
+				created_on  : Date.parse(json_item.date_taken),
+				img_url     : json_item.media.m,
+				source      : json_item.link,
+				description : json_item.description,
+				tags        : json_item.tags,
+				is_new      : this._item_is_new(Date.parse(json_item.date_taken), this.options.site_name)
+			}
+	  }.bind(this))
+
+		this.parent()
+		return this.db
+	},
+	
+	_to_cell: function(){
+		return new MicroAppImageView(this.img_url, { 
+			'title' 		   : this.title, 
+			'created_on'   : this.created_on,
+			'source' 		   : this.source,
+			'custom_class' : (this.is_new ? 'new' : '')
+		})
+	}
+});
+var Twitter = new Class({
+	Extends : MicroAppModel,
+	options : {
+		site_name  : "twitter",
+		nombre     : "SAYING",
+		json_url   : "http://search.twitter.com/search.json",
+		json_opts  : { data: {} },
+		web_source : "http://www.twitter.com",
+	 	initial_limit : 15
+	},
+  
+  initialize: function(options){
+		this.options.web_source = "http://www.twitter.com/" + this.current_user()
+		this.options.json_opts.data.q  = "from:" + this.current_user()
+		return this.parent(options);
+  },
+
+	process_data: function(json){
+		this.db = json.results.map(function(json_item){
+			return {
+				title       : json_item.text,
+				created_on  : Date.parse(json_item.created_at),
+				source      : "http://www.twitter.com/" + json_item.from_user + "/status/" + json_item.id,
+				html        : json_item.text.make_urls_links().link_replies().link_hashcodes(),
+				is_new 			: this._item_is_new(json_item.created_at, this.options.site_name)
+			}
+	  }.bind(this))
+	
+		this.parent()
+		return this.db
+	},					
+	
+	_to_cell: function(){
+		return new MicroAppView(this.html, { 
+			'main_class'	 : (this.title.length > 90) ? 'double-wide' : 'single-wide',
+			'custom_class' : 'text tweet ' + (this.is_new ? 'new' : ''),
+			'created_on'	 : this.created_on,
+			'source'			 : this.source
+		})
+	}	
+});
+
+var MicroApp = new Class({
+	Implements : [Events, Options],
+	options : {
+		show_nav : false,
+		show_title_elems : false
+	},
+	initialize: function(elem, buckets, options){
+		this.setOptions(options)
+		this.element = $(elem)
+		this.buckets = buckets
+		
+		if (this.options.show_nav && window.FixedNav) 
+			// todo change from fixednav to microappnav
+			this.nav = new FixedNav(new Element('ul', {'id':'microapp-nav'}).inject(this.element, 'before'), this.element)
+			
+		return this
+	},
+	
+	to_html: function(format){
+		format = format || 'grouped'
+		this.element.set('html','')
+		
+		this.buckets.each(function(b,i){
+			b.each(function(m){
+				m.injected = false
+				m.bucket = i				
+				m.removeEvents('dataReady')
+					.addEvent('dataReady', this["_"+format].bind(this))					
+				this.fireEvent('modelInit', m)					
+				m.get_data()
+			}, this)
+		}, this)
+	},
+	
+	_grouped: function(model){	
+		if (model.db.length === 0) return
+		var finished_models = this.buckets.flatten().filter(function(m){ return m.injected })
+		
+		if (this.options.show_nav) this.nav.element.simple_show()
+		
+		// todo make nav html customizeable
+		if (this.options.show_nav) 				
+			model.nav = model.nav || new Element('li', {
+				'class' : model.options.site_name + (model.new_items().length > 0 ? ' opaque' : ''),
+				'html'  : model.options.nombre + ' ' + (model.new_items().length || '')
+			}).addEvent('click', function(){ this.removeClass('opaque') })
+
+		// todo make title elem customizeable
+		if (this.options.show_title_elems)
+			model.title_elem = model.title_elem || new Element('div', {
+				'class' : 'cell single-wide grid-title ' + model.options.site_name, 
+				'html'  : model.options.nombre
+			}).act_like_link(model.options.web_source)
+				.adopt( new Element('span', {'class':'show-all','html':'SHOW ' + model.db.length}).addEvent('click', this.model_toggle_all.bind(model)) )
+		else
+			model.title_elem = model.title_elem || new Element('div', {'class':'grid-title'})
+
+		this.fireEvent('modelProcessing', model)
+
+		if (finished_models.length > 0){
+			finished_models.each(function(fm){
+				if (model.bucket < fm.bucket || (fm.sort_by('created_on').first().created_on < model.sort_by('created_on').first().created_on && fm.bucket >= model.bucket)){
+					if (!model.injected){
+						model.create_views(model.options.initial_limit).each(function(cell){ cell.inject(fm.title_elem,'before') }, this)
+						if (this.options.show_nav) this.nav.add_pair( [model.nav.inject(fm.nav, 'before'), model.title_elem] )
+					}						
+					model.injected = true
+				}
+			}, this)
+		}
+		
+		if (!model.injected) {
+			this.element.adopt( model.create_views(model.options.initial_limit) )
+			if (this.options.show_nav) this.nav.add_pair( [model.nav.inject(this.nav.element, 'bottom'), model.title_elem] )
+			model.injected = true
+		}
+		
+		if (finished_models.length == this.buckets.flatten().length - 1){
+			this.fireEvent('MicroAppViewFinished')
+			if (this.options.show_nav) this.nav.handle_hash_scroll()
+		}			
+	},
+	_sorted: function(model){
+		if (model.db.length === 0) return
+		var finished_models = this.buckets.flatten().filter(function(m){ return m.data_ready })
+		this.sorted_cells = this.sorted_cells || []
+	
+		if (this.options.show_nav) this.nav.element.simple_hide()
+	
+		this.sorted_cells = this.sorted_cells.include(model.db.first(20).map(function(x){ return x.model._to_cell.apply(x) })).flatten().sort(function(a,b){
+			if      (a.options.created_on >  b.options.created_on) return 1
+			else if (a.options.created_on <= b.options.created_on) return -1
+			else return 0
+		})
+		
+		if (finished_models.length === this.buckets.flatten().length)
+			this.element.adopt(this.sorted_cells.reverse().map(function(x){ return x.to_html() }))
+	},
+	
+	model_toggle_all: function(e){
+		e.stop()
+		if (this.options.show_title_elems) {		
+			this.cells.filter(function(c){ return !c.hasClass('grid-title') }.bind(this)).each(function(cell){ cell.destroy() })
+			this.title_elem.getFirst('span').set('html', this.cells.length > this.initial_limit ? 'SHOW ' + this.db.length : 'SHOW ' + this.initial_limit)
+		}
+		this.create_views(this.cells.length > this.initial_limit ? this.initial_limit : null).reverse().each(function(cell){ cell.inject(this.title_elem,'after') }, this)
+	}
+})
 
