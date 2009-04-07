@@ -1587,7 +1587,7 @@ License:
 	http://www.clientcide.com/wiki/cnet-libraries#license
 */
 var Clientcide = {
-	version: 'd156ccca0d10fb1973fa688083d5be411cc2b1d9',
+	version: '63e5e3e361ac554bdb4f288fcfcd48c661e053e4',
 	setAssetLocation: function(baseHref) {
 		if (window.StickyWin && StickyWin.ui) {
 			StickyWin.UI.refactor({
@@ -5396,6 +5396,7 @@ var Flickr = new Class({
 	},
 	
 	process_data: function(json){
+		console.log(json)
 		this.db = json.items.map(function(json_item){
 			return {
 				title       : json_item.title,
@@ -5433,9 +5434,10 @@ var Twitter = new Class({
 	},
   
   initialize: function(options){
+		this.parent(options)
 		this.options.web_source = "http://www.twitter.com/" + this.current_user()
 		this.options.json_opts.data.q  = "from:" + this.current_user()
-		return this.parent(options);
+		return this
   },
 
 	process_data: function(json){
