@@ -1587,7 +1587,7 @@ License:
 	http://www.clientcide.com/wiki/cnet-libraries#license
 */
 var Clientcide = {
-	version: 'b88a0948c6d928e633cd5a821bc9497af8de1bcc',
+	version: '257855ab0ed87fc37ed5772ab9d65904a58d93f2',
 	setAssetLocation: function(baseHref) {
 		if (window.StickyWin && StickyWin.ui) {
 			StickyWin.UI.refactor({
@@ -4217,14 +4217,14 @@ var JustTheTip = new Class({
 	},
 
 	show_tip: function(elem){
+		this.current_element = elem;
+		[this.options.hide_event].flatten().each(function(he){
+			this.current_element.addEvent(he, this.hide_callback)
+		}, this);
+		
 		$clear(this.timer)
 		this.timer = (function(){
-			this.current_element = elem;
 
-			[this.options.hide_event].flatten().each(function(he){
-				this.current_element.addEvent(he, this.hide_callback)
-			}, this);
-			
 			if (elem.retrieve('just_the_tip_on')){
 				switch(this.options.x_location){
 					case 'left'   : var x = elem.getLeft(); break;
