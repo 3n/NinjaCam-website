@@ -53,5 +53,30 @@ h1 {
 .new-icon {
   display:none;
 }
+.grid-title {
+  display:none;
+}
+
+.cell {
+  float    : left;
+  margin   : 0 10px 10px 0;  
+  overflow : hidden;
+  position : relative;
+  cursor   : pointer;
+}
+  .cell.single-wide {
+    width  : 140px;
+    height : 140px;  
+  }
+  .cell.double-wide {
+    width  : 280px;
+    height : 140px;  
+  }
+  .cell.full-width {
+    width : 780px;
+  }
+  body.iphone .cell.full-width {
+    width : 460px;
+  }
 
 
