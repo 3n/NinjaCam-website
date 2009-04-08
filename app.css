@@ -65,12 +65,12 @@ h1 {
   cursor   : pointer;
 }
   .cell.single-wide {
-    width  : 140px;
-    height : 140px;  
+    width  : 150px;
+    height : 150px;  
   }
   .cell.double-wide {
-    width  : 280px;
-    height : 140px;  
+    width  : 200px;
+    height : 150px;  
   }
   .cell.full-width {
     width : 780px;
