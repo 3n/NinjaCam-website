@@ -28,10 +28,16 @@ table {font-size:inherit;font:100%;}
  */ 
 pre,code,kbd,samp,tt {font-family:monospace;*font-size:108%;line-height:99%;}
 
+
+
+
+
+
 body {
   font-family: Futura, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background-color:#111;
   color:white;
+  font-size:100%;  
 }
 
 #wrapper {
@@ -44,11 +50,14 @@ body {
   }
 
 h1 {
-  font-size:5em;
+  font-size:80px;
 }
 
 
 /* Flickr / Twitter Grid */
+
+#twitter-and-flickr {
+}
 
 .new-icon {
   display:none;
@@ -58,11 +67,13 @@ h1 {
 }
 
 .cell {
-  float    : left;
-  margin   : 0 10px 10px 0;  
-  overflow : hidden;
-  position : relative;
-  cursor   : pointer;
+  float       : left;
+  margin      : 0 10px 10px 0;  
+  overflow    : hidden;
+  position    : relative;
+  cursor      : pointer;
+  font-size   : 13px;
+  line-height : 20px;
 }
   .cell.single-wide {
     width  : 150px;
