@@ -1587,7 +1587,7 @@ License:
 	http://www.clientcide.com/wiki/cnet-libraries#license
 */
 var Clientcide = {
-	version: '257855ab0ed87fc37ed5772ab9d65904a58d93f2',
+	version: '8033871f07aa80ce89cab126236bd229589d47c8',
 	setAssetLocation: function(baseHref) {
 		if (window.StickyWin && StickyWin.ui) {
 			StickyWin.UI.refactor({
@@ -5429,12 +5429,12 @@ var Flickr = new Class({
 	},
 	
 	_to_cell: function(){
-		return new MicroAppImageView(this.img_url, { 
+		return new MicroAppImageView(this.img_url, $merge({ 
 			'title' 		   : this.title, 
 			'created_on'   : this.created_on,
 			'source' 		   : this.source,
 			'custom_class' : (this.is_new ? 'new' : '')
-		})
+		}, this.model.options.image_view_options))
 	}
 });
 var Twitter = new Class({
@@ -5471,13 +5471,20 @@ var Twitter = new Class({
 	},					
 	
 	_to_cell: function(){
+		var twitpic_match = this.html.match(/twitpic\.com\/(\w+)/)
+		var show_twitpic = this.model.options.show_twitpic && twitpic_match && twitpic_match.length > 1
+		if (show_twitpic) {
+			var src = "http://www.twitpic.com/show/thumb/" + this.html.match(/twitpic\.com\/(\w+)/)[1]
+			this.html += "<img clas='microapp-twitpic' src='" + src + "'/>"
+		}
+			
 		return new MicroAppView(this.html, { 
-			'main_class'	 : (this.title.length > 90) ? 'double-wide' : 'single-wide',
+			'main_class'	 : (this.title.length > 90 || show_twitpic) ? 'double-wide' : 'single-wide',
 			'custom_class' : 'text tweet ' + (this.is_new ? 'new' : ''),
 			'created_on'	 : this.created_on,
 			'source'			 : this.source
 		})
-	}	
+	}
 });
 
 var MicroApp = new Class({
