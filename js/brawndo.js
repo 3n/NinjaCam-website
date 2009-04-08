@@ -1587,7 +1587,7 @@ License:
 	http://www.clientcide.com/wiki/cnet-libraries#license
 */
 var Clientcide = {
-	version: '63e5e3e361ac554bdb4f288fcfcd48c661e053e4',
+	version: 'b88a0948c6d928e633cd5a821bc9497af8de1bcc',
 	setAssetLocation: function(baseHref) {
 		if (window.StickyWin && StickyWin.ui) {
 			StickyWin.UI.refactor({
@@ -5396,18 +5396,33 @@ var Flickr = new Class({
 	},
 	
 	process_data: function(json){
-		console.log(json)
-		this.db = json.items.map(function(json_item){
-			return {
-				title       : json_item.title,
-				created_on  : Date.parse(json_item.date_taken),
-				img_url     : json_item.media.m,
-				source      : json_item.link,
-				description : json_item.description,
-				tags        : json_item.tags,
-				is_new      : this._item_is_new(Date.parse(json_item.date_taken), this.options.site_name)
-			}
-	  }.bind(this))
+		if (json.items){
+			this.db = json.items.map(function(json_item){
+				// todo add user_name
+				return {
+					title       : json_item.title,
+					created_on  : Date.parse(json_item.date_taken),
+					img_url     : json_item.media.m,
+					source      : json_item.link,
+					description : json_item.description,
+					tags        : json_item.tags,
+					is_new      : this._item_is_new(Date.parse(json_item.date_taken), this.options.site_name)
+				}
+		  }.bind(this))
+		} else if (json.photos && json.photos.photo) {
+			this.db = json.photos.photo.map(function(json_item){
+				return {
+					title       : json_item.title,
+					user_name   : json_item.ownername,
+					created_on  : Date.parse(json_item.datetaken),
+					img_url     : "http://farm" + json_item.farm + ".static.flickr.com/" + json_item.server + "/" + json_item.id + "_" + json_item.secret + "_m.jpg",
+					source      : "http://flickr.com/photos/" + json_item.owner + "/" + json_item.id,
+					description : "",
+					tags        : json_item.tags,
+					is_new      : this._item_is_new(Date.parse(json_item.datetaken), this.options.site_name)
+				}
+			}.bind(this))
+		}
 
 		this.parent()
 		return this.db
