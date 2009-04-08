@@ -1587,7 +1587,7 @@ License:
 	http://www.clientcide.com/wiki/cnet-libraries#license
 */
 var Clientcide = {
-	version: '8033871f07aa80ce89cab126236bd229589d47c8',
+	version: 'b4a2187c9179a7c01a9229d50b9a3e752cdf5d0e',
 	setAssetLocation: function(baseHref) {
 		if (window.StickyWin && StickyWin.ui) {
 			StickyWin.UI.refactor({
@@ -5461,7 +5461,7 @@ var Twitter = new Class({
 				title       : json_item.text,
 				created_on  : Date.parse(json_item.created_at),
 				source      : "http://www.twitter.com/" + json_item.from_user + "/status/" + json_item.id,
-				html        : json_item.text.make_urls_links().link_replies().link_hashcodes(),
+				html        : this._gen_html(json_item),
 				is_new 			: this._item_is_new(json_item.created_at, this.options.site_name)
 			}
 	  }.bind(this))
@@ -5470,16 +5470,24 @@ var Twitter = new Class({
 		return this.db
 	},					
 	
-	_to_cell: function(){
-		var twitpic_match = this.html.match(/twitpic\.com\/(\w+)/)
-		var show_twitpic = this.model.options.show_twitpic && twitpic_match && twitpic_match.length > 1
-		if (show_twitpic) {
-			var src = "http://www.twitpic.com/show/thumb/" + this.html.match(/twitpic\.com\/(\w+)/)[1]
-			this.html += "<img clas='microapp-twitpic' src='" + src + "'/>"
-		}
-			
+	_gen_html: function(json_item){
+		if (this.options.gen_html)
+			return this.options.gen_html(json_item)
+		else {
+			var base = json_item.text.make_urls_links().link_replies().link_hashcodes();
+			var twitpic_match = base.match(/twitpic\.com\/(\w+)/)
+			var show_twitpic = this.options.show_twitpic && twitpic_match && twitpic_match.length > 1
+			if (show_twitpic) {
+				var src = "http://www.twitpic.com/show/thumb/" + base.match(/twitpic\.com\/(\w+)/)[1]
+				base += "<img class='microapp-twitpic' src='" + src + "'/>"
+			}
+			return base
+		} 
+	},
+	
+	_to_cell: function(){			
 		return new MicroAppView(this.html, { 
-			'main_class'	 : (this.title.length > 90 || show_twitpic) ? 'double-wide' : 'single-wide',
+			'main_class'	 : (this.html > 90 || this.html.match(/<img/)) ? 'double-wide' : 'single-wide',
 			'custom_class' : 'text tweet ' + (this.is_new ? 'new' : ''),
 			'created_on'	 : this.created_on,
 			'source'			 : this.source

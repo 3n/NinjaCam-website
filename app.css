@@ -41,8 +41,8 @@ body {
 }
 
 #wrapper {
-  width    : 780px;
-  margin   : 20px auto;  
+  width    : 1000px;
+  margin   : 0 auto;  
   position : relative;
 }
   body.iphone #wrapper {
@@ -80,7 +80,7 @@ h1 {
     height : 150px;  
   }
   .cell.double-wide {
-    width  : 300px;
+    width  : 310px;
     height : 150px;  
   }
   .cell.full-width {
@@ -90,4 +90,7 @@ h1 {
     width : 460px;
   }
 
+.microapp-twitpic {
+  float:right;
+}
 
