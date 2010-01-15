@@ -120,7 +120,6 @@ a {
   overflow    : hidden;
   position    : relative;
   cursor      : pointer;
-/*  font-size   : 13px;*/
   line-height : 20px;
 	margin: 0 6px 13px 7px;
 }
@@ -152,6 +151,7 @@ a {
 /* non-layout styles */
 
 .cell {
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
 
