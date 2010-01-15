@@ -77,7 +77,7 @@ a {
   width:100%;
   height:1000px;
   position:absolute;
-  background: -webkit-gradient(radial, 50% 100, 100, 50% 100, 600, from(#1a1a1a), to(#0A0A0A), color-stop(.2,#111));
+  background: -webkit-gradient(radial, 50% 100, 100, 50% 100, 700, from(#222), to(#0A0A0A), color-stop(.4,#141414));
 }
 
 #top-spacer { height:64px; }
@@ -128,6 +128,10 @@ a {
     width  : 114px;
     height : 114px;
   }
+
+.cell img {
+  min-width:114px;
+}
 
 .microapp-twitpic {
   float:right;
