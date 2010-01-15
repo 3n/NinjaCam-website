@@ -37,9 +37,12 @@ pre,code,kbd,samp,tt {font-family:monospace;*font-size:108%;line-height:99%;}
 
 body {
   font-family: "DinPro", 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color:#0a0a0a;
   color:white;
   font-size:100%;
+
+  background-color:#0a0a0a;  
+
+
 }
 
 h1 {
@@ -47,8 +50,14 @@ h1 {
   font-weight:bold;
 }
 
+#glow {
+  width:100%;
+  height:1000px;
+  position:absolute;
+  background: -webkit-gradient(radial, 50% 100, 100, 50% 100, 600, from(#1a1a1a), to(#0A0A0A), color-stop(.2,#111));
+}
 
-#header { height:100px; }
+#header { height:64px; }
 
 
 #ninjacam-concept-overview p {
@@ -101,3 +110,19 @@ h1 {
 
 
 .tip { display:none !important; }
+
+
+
+
+
+
+
+
+
+
+/* non-layout styles */
+
+.cell {
+}
+
+
