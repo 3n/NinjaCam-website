@@ -39,10 +39,7 @@ body {
   font-family: "DinPro", 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color:white;
   font-size:100%;
-
   background-color:#0a0a0a;  
-
-
 }
 
 h1 {  
@@ -53,12 +50,14 @@ h1 {
 
 h2 {
   font-size:120%;
+  font-weight:lighter;
+  font-style:italic;  
 }
 
 p {
   font-weight:lighter;
-  color:#aaa;
-  font-size:80%;
+  color:#9f9f9f;
+  font-size:90%;
   line-height:1.5em;
 }
 
@@ -93,7 +92,7 @@ a {
   height:1000px;
 }
 #iphone {
-  opacity: 0.3;
+  opacity: 0.1;
   width: 242px;
 }
 #iphone:hover { opacity: 1.0;}
