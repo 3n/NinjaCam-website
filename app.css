@@ -33,30 +33,40 @@ pre,code,kbd,samp,tt {font-family:monospace;*font-size:108%;line-height:99%;}
 
 
 
+
+
 body {
-  font-family: Futura, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color:#111;
+  font-family: "DinPro", 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color:#010101;
   color:white;
-  font-size:100%;  
+  font-size:100%;
 }
 
-#wrapper {
-  width    : 1000px;
-  margin   : 0 auto;  
-  position : relative;
-}
-  body.iphone #wrapper {
-    width: 540px !important;
-  }
-
-h1 {
-  font-size:80px;
+h2 {
+  font-size:300%;
+  font-weight:bold;
 }
 
+h3 {
+  font-size:150%;
+}
+
+
+#ninjacam-overview {
+  height:1000px;
+}
+#iphone {
+  opacity: 0.3;
+  margin-top:50px;
+}
+#iphone:hover { opacity: 1.0;}
 
 /* Flickr / Twitter Grid */
 
 #twitter-and-flickr {
+	width:584px;
+	display:inline;
+	float:left;
 }
 
 .new-icon {
@@ -67,30 +77,27 @@ h1 {
 }
 
 .cell {
+  display:inline-block;
   float       : left;
-  margin      : 0 10px 10px 0;  
   overflow    : hidden;
   position    : relative;
   cursor      : pointer;
-  font-size   : 13px;
+/*  font-size   : 13px;*/
   line-height : 20px;
+	margin: 0 6px 13px 7px;
 }
   .cell.single-wide {
-    width  : 150px;
-    height : 150px;  
+    width  : 133px;
+    height : 133px;  
   }
-  .cell.double-wide {
-    width  : 310px;
-    height : 150px;  
-  }
-  .cell.full-width {
-    width : 780px;
-  }
-  body.iphone .cell.full-width {
-    width : 460px;
-  }
+/*  .cell.double-wide {
+    width  : 279px;
+    height : 133px;  
+  }*/
 
 .microapp-twitpic {
   float:right;
 }
 
+
+.tip { display:none !important; }
