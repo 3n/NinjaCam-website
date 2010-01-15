@@ -37,34 +37,38 @@ pre,code,kbd,samp,tt {font-family:monospace;*font-size:108%;line-height:99%;}
 
 body {
   font-family: "DinPro", 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color:#010101;
+  background-color:#0a0a0a;
   color:white;
   font-size:100%;
 }
 
-h2 {
-  font-size:300%;
+h1 {
+  font-size:150%;
   font-weight:bold;
 }
 
-h3 {
-  font-size:150%;
+
+#header { height:100px; }
+
+
+#ninjacam-concept-overview p {
+  font-weight:lighter;
 }
 
-
-#ninjacam-overview {
+#ninjacam-app-overview {
   height:1000px;
 }
 #iphone {
   opacity: 0.3;
-  margin-top:50px;
+  width: 242px;
 }
 #iphone:hover { opacity: 1.0;}
 
 /* Flickr / Twitter Grid */
 
 #twitter-and-flickr {
-	width:584px;
+  margin-top:8px;
+	width:512px;
 	display:inline;
 	float:left;
 }
@@ -87,8 +91,8 @@ h3 {
 	margin: 0 6px 13px 7px;
 }
   .cell.single-wide {
-    width  : 100px;
-    height : 100px;  
+    width  : 114px;
+    height : 114px;
   }
 
 .microapp-twitpic {
