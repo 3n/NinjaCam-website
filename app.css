@@ -49,6 +49,15 @@ h1 {
   font-size:150%;
   font-weight:bold;
 }
+h2 {
+  font-size:120%;
+}
+
+p {
+  font-weight:lighter;
+  color:#aaa;
+  font-size:80%;
+}
 
 #glow {
   width:100%;
@@ -58,7 +67,10 @@ h1 {
 }
 
 #header { height:64px; }
-
+#subtext { color:#aaa; }
+#tweet-info { 
+  margin-top:55px; 
+}
 
 #ninjacam-concept-overview p {
   font-weight:lighter;
