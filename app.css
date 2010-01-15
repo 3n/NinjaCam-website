@@ -87,13 +87,9 @@ h3 {
 	margin: 0 6px 13px 7px;
 }
   .cell.single-wide {
-    width  : 133px;
-    height : 133px;  
+    width  : 100px;
+    height : 100px;  
   }
-/*  .cell.double-wide {
-    width  : 279px;
-    height : 133px;  
-  }*/
 
 .microapp-twitpic {
   float:right;

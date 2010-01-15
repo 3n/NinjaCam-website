@@ -5445,49 +5445,38 @@ var Twitter = new Class({
 		json_url   : "http://search.twitter.com/search.json",
 		json_opts  : { data: {} },
 		web_source : "http://www.twitter.com",
-	 	initial_limit : 15
+	 	initial_limit : 15,
+	 	shouldIncludeItem: function(){ return true; },
+	 	gen_html: function(item){
+	 	  return item.text.make_urls_links().link_replies().link_hashcodes(); 
+	 	}
 	},
   
   initialize: function(options){
 		this.parent(options)
 		this.options.web_source = "http://www.twitter.com/" + this.current_user()
-		this.options.json_opts.data.q  = "from:" + this.current_user()
+		this.options.json_opts.data.q = this.options.json_opts.data.q || "from:" + this.current_user()
 		return this
   },
 
 	process_data: function(json){
 		this.db = json.results.map(function(json_item){
-			return {
+			return this.options.shouldIncludeItem(json_item) ? {
 				title       : json_item.text,
 				created_on  : Date.parse(json_item.created_at),
 				source      : "http://www.twitter.com/" + json_item.from_user + "/status/" + json_item.id,
-				html        : this._gen_html(json_item),
+				html        : this.options.gen_html(json_item),
 				is_new 			: this._item_is_new(json_item.created_at, this.options.site_name)
-			}
-	  }.bind(this))
+			} : null
+	  }.bind(this)).flatten()
 	
 		this.parent()
 		return this.db
-	},					
-	
-	_gen_html: function(json_item){
-		if (this.options.gen_html)
-			return this.options.gen_html(json_item)
-		else {
-			var base = json_item.text.make_urls_links().link_replies().link_hashcodes();
-			var twitpic_match = base.match(/twitpic\.com\/(\w+)/)
-			var show_twitpic = this.options.show_twitpic && twitpic_match && twitpic_match.length > 1
-			if (show_twitpic) {
-				var src = "http://www.twitpic.com/show/thumb/" + base.match(/twitpic\.com\/(\w+)/)[1]
-				base += "<img class='microapp-twitpic' src='" + src + "'/>"
-			}
-			return base
-		} 
 	},
 	
 	_to_cell: function(){			
 		return new MicroAppView(this.html, { 
-			'main_class'	 : (this.html > 90 || this.html.match(/<img/)) ? 'double-wide' : 'single-wide',
+			'main_class'	 : this.html > 90 ? 'double-wide' : 'single-wide',
 			'custom_class' : 'text tweet ' + (this.is_new ? 'new' : ''),
 			'created_on'	 : this.created_on,
 			'source'			 : this.source
