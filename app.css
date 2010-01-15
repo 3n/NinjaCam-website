@@ -45,10 +45,12 @@ body {
 
 }
 
-h1 {
-  font-size:150%;
+h1 {  
+  font-size:200%;
+/*  font-family:futura;*/
   font-weight:bold;
 }
+
 h2 {
   font-size:120%;
 }
@@ -57,7 +59,19 @@ p {
   font-weight:lighter;
   color:#aaa;
   font-size:80%;
+  line-height:1.5em;
 }
+
+a {
+  color:#00A5FF;
+  text-decoration:none;
+}
+  a:hover {
+    text-decoration:underline;
+  }
+
+
+
 
 #glow {
   width:100%;
@@ -66,11 +80,10 @@ p {
   background: -webkit-gradient(radial, 50% 100, 100, 50% 100, 600, from(#1a1a1a), to(#0A0A0A), color-stop(.2,#111));
 }
 
-#header { height:64px; }
-#subtext { color:#aaa; }
-#tweet-info { 
-  margin-top:55px; 
-}
+#top-spacer { height:64px; }
+
+#header { height:114px; margin-bottom:14px; }
+#subtext { color:#666; }
 
 #ninjacam-concept-overview p {
   font-weight:lighter;
