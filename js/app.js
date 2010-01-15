@@ -32,3 +32,7 @@ window.addEvent('domready', function(){
 		]]
 	).to_html();
 });
+
+// image expansion UX options
+// lightboner style, click and it gets bigger up above with the metadata to the right.
+// maybe do like: click an image it expands in place, then as you hover over others they expand in place as well.
