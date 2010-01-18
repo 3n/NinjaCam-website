@@ -26,6 +26,7 @@ window.addEvent('domready', function(){
 				  else if (url.test(/twitpic/))
 				    url = "http://twitpic.com/show/thumb/" + url.match(/([^\/]+$)/)[0];
 				  
+          // return "<img src='" + url + "'/><p>" + item.text.replace("#ninjacam","").replace(/http:\/\/[^\s]+/,"") + "</p>";
           return "<img src='" + url + "'/>";
 				}
 			})

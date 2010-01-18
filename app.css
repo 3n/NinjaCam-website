@@ -44,7 +44,6 @@ body {
 
 h1 {  
   font-size:200%;
-/*  font-family:futura;*/
   font-weight:bold;
 }
 
@@ -56,9 +55,9 @@ h2 {
 
 p {
   font-weight:lighter;
-  color:#9f9f9f;
+  color:#aaa;
   font-size:90%;
-  line-height:1.5em;
+  line-height:1.4em;
 }
 
 a {
