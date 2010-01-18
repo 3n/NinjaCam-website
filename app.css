@@ -79,18 +79,20 @@ a {
   background: -webkit-gradient(radial, 50% 100, 100, 50% 100, 700, from(#333), to(#0A0A0A), color-stop(.4,#141414));
 }
 
-/*#top-spacer { height:64px; }
-
-#header { height:114px; margin-bottom:14px; }
-#subtext { color:#666; }*/
-
 #header { 
   height:42px; 
   margin-top:42px;
+  margin-bottom:10px;
 }
+  #header > * {
+    border-bottom:2px solid #666;
+    padding-bottom:5px;
+  }
   #header h2 {
-    height:20px;
-    margin-top:20px;
+    color:white;
+/*    font-weight:bold;*/
+    height:28px;
+    margin-top:13px;
   }
 #sub-header { 
   height:114px; 
