@@ -50,7 +50,7 @@ h1 {
 h2 {
   font-size:120%;
   font-weight:lighter;
-  font-style:italic;  
+  color:#666;  
 }
 
 p {
@@ -75,13 +75,28 @@ a {
   width:100%;
   height:1000px;
   position:absolute;
+  top:0;
   background: -webkit-gradient(radial, 50% 100, 100, 50% 100, 700, from(#333), to(#0A0A0A), color-stop(.4,#141414));
 }
 
-#top-spacer { height:64px; }
+/*#top-spacer { height:64px; }
 
 #header { height:114px; margin-bottom:14px; }
-#subtext { color:#666; }
+#subtext { color:#666; }*/
+
+#header { 
+  height:42px; 
+  margin-top:42px;
+}
+  #header h2 {
+    height:20px;
+    margin-top:20px;
+  }
+#sub-header { 
+  height:114px; 
+  margin-bottom:14px; 
+  font-style:italic;    
+}
 
 #ninjacam-concept-overview p {
   font-weight:lighter;
