@@ -33,8 +33,8 @@ window.addEvent('domready', function(){
 		  onHtmlUpdated: function(){ 
 		    $('twitter-and-flickr').getChildren('div.cell').each(function(cell){
           cell.getFirst().thumbnail(114,114,'thumbnail');
-          // new Element('div', {'class': 'thumb-wrapper'}).wraps(cell.getFirst());
-          new Element('div', {'class': 'thumb-wrapper'}).inject(cell.getFirst(),'bottom');
+          // new Element('div', {'class': 'thumb-wrapper'}).inject(cell.getFirst(),'bottom');
+          new Element('div', {'class': 'thumb-wrapper'}).inject(cell, 'top');          
 		    });
 		    
         $('twitter-and-flickr').setStyle('visibility','visible');
