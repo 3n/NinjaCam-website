@@ -6855,7 +6855,7 @@ var MicroApp = new Class({
 		}
 		
 		if (finished_models.length == this.buckets.flatten().length - 1){
-			this.fireEvent('MicroAppViewFinished');
+			this.fireEvent('htmlUpdated');
 			if (this.options.show_nav) this.nav.handle_hash_scroll();
 		}			
 	},
@@ -6875,7 +6875,7 @@ var MicroApp = new Class({
 		
 		if (finished_models.length === this.buckets.flatten().length){
 			this.element.adopt(this.sorted_cells.reverse().map(function(x){ return x.to_html(); }));		  
-		  this.fireEvent('MicroAppViewFinished');
+			this.fireEvent('htmlUpdated');
 		}
 	},
 	

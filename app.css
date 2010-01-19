@@ -110,6 +110,7 @@ a {
   height:114px; 
   margin-bottom:14px; 
   font-style:italic;    
+  font-weight:lighter;
 }
 
 #ninjacam-concept-overview p {
@@ -131,6 +132,7 @@ a {
   margin-top:8px;
 	width:512px;
 	display:inline;
+	visibility:hidden;
 	float:left;
 }
 
