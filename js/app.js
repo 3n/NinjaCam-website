@@ -18,8 +18,11 @@ window.addEvent('domready', function(){
 				shouldIncludeItem: function(item){
 				  return item.text.test(twitter_image_regex);
 				},
-				gen_html: function(item){
+				gen_html: function(item){				  
 				  var url = item.text.match(twitter_image_regex)[0];
+				  
+				  console.log(url)
+				  
 				  if (url.test(/yfrog/))
 				    url += ".th.jpg";
 				  else if (url.test(/twitpic/))
