@@ -39,7 +39,6 @@ body {
   font-family: "DinPro", 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color:white;
   font-size:100%;
-  background-color:#0a0a0a;  
 }
 
 h1 {  
@@ -86,6 +85,14 @@ a {
   position:absolute;
   top:0;
   background: -webkit-gradient(radial, 50% -100, 100, 50% -100, 1100, from(#333), to(#0d0d0d), color-stop(.4,#141414));
+  opacity:0.7;
+}
+#texture {
+  background-image: url('bg.png');
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;  
 }
 
 #header { 
