@@ -26,14 +26,13 @@ window.addEvent('domready', function(){
 				    url = "http://twitpic.com/show/thumb/" + url.match(/([^\/]+$)/)[0];
 				  
           return "<img src='" + url + "'/><p>" + item.text.replace("#ninjacam","").replace(/http:\/\/[^\s]+/,"") + "</p>";
-          // return "<img src='" + url + "'/>";
 				}
 			})
 		]],
 		{
 		  onHtmlUpdated: function(){ 
 		    $('twitter-and-flickr').getChildren('div.cell').each(function(cell){
-          cell.getFirst().thumbnail(114,114);
+          cell.getFirst().thumbnail(114,114,'thumbnail');
 		    });
 		    
         $('twitter-and-flickr').setStyle('visibility','visible');

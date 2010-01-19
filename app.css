@@ -154,7 +154,7 @@ a {
 }
   .cell.single-wide {
     width  : 114px;
-    height : 114px;
+/*    height : 114px;*/
   }
 
 .cell img {
@@ -179,13 +179,13 @@ a {
 
 /* non-layout styles */
 
-.cell {
+.cell .thumbnail {
   -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6);
   
   border: 1px solid #363636;
   margin: -1px 6px 13px 6px;
 }
-.cell:hover {
+.cell .thumbnail:hover {
   border: 3px solid #00A5FF;
   margin: -3px 4px 11px 4px;
   -webkit-border-radius:3px;
