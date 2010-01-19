@@ -2,7 +2,7 @@ window.addEvent('domready', function(){
   var twitter_image_regex = new RegExp(/(\w+:\/\/(yfrog|twitpic)+\.[A-Za-z0-9-_:;\(\)%&\?\/.=]+)/);
   
 	new MicroApp('twitter-and-flickr', [
-		[ new Flickr({ 
+		[ /*new Flickr({ 
 				image_view_options : {
 					width  : 133,
 					height : 133 },
@@ -11,7 +11,7 @@ window.addEvent('domready', function(){
 															method  : 'flickr.photos.search', 
 															api_key : 'f31a8e4819faa5ec28ed3db580b76fb9',
 															media   : 'photos',
-															extras  : 'date_taken,owner_name,tags' } } }), 
+															extras  : 'date_taken,owner_name,tags' } } }), */
 		  new Twitter({
         user_name    : 'ninjacam',
 				show_twitpic : true,
@@ -33,6 +33,8 @@ window.addEvent('domready', function(){
 		  onHtmlUpdated: function(){ 
 		    $('twitter-and-flickr').getChildren('div.cell').each(function(cell){
           cell.getFirst().thumbnail(114,114,'thumbnail');
+          // new Element('div', {'class': 'thumb-wrapper'}).wraps(cell.getFirst());
+          new Element('div', {'class': 'thumb-wrapper'}).inject(cell.getFirst(),'bottom');
 		    });
 		    
         $('twitter-and-flickr').setStyle('visibility','visible');

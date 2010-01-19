@@ -98,7 +98,7 @@ a {
     text-transform:uppercase;
 
     /* alts */
-    text-shadow: 2px 2px 2px black;
+    text-shadow: 1px 1px 2px black;
     color:white;
     font-weight:normal;
 
@@ -146,7 +146,6 @@ a {
 .cell {
   display:inline-block;
   float       : left;
-  overflow    : hidden;
   position    : relative;
   cursor      : pointer;
   line-height : 20px;
@@ -154,7 +153,6 @@ a {
 }
   .cell.single-wide {
     width  : 114px;
-/*    height : 114px;*/
   }
 
 .cell img {
@@ -178,18 +176,23 @@ a {
 
 
 /* non-layout styles */
-
+.cell .thumbnail, .cell .thumb-wrapper {
+  -webkit-border-radius:8px;
+}
 .cell .thumbnail {
-  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6);
-  
-  border: 1px solid #363636;
-  margin: -1px 6px 13px 6px;
+  -webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.6);  
+  border-top:1px solid rgba(255,255,255,0.4);
 }
-.cell .thumbnail:hover {
+
+.cell .thumb-wrapper {
+  height:111px;
+  width:111px;  
+  position:absolute;
+  top:0;
+}
+.cell .thumb-wrapper:hover {
   border: 3px solid #00A5FF;
-  margin: -3px 4px 11px 4px;
-  -webkit-border-radius:3px;
+  margin: -3 4px 11px 4px;
 }
-/*.cell, .cell div, .cell img { -webkit-border-radius:10px; overflow:hidden;}*/
 
 
