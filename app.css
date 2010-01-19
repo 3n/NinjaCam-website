@@ -192,6 +192,7 @@ a {
 }
 .cell .thumb-wrapper:hover {
   border: 3px solid #00A5FF;
+/*  -webkit-border-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#007DC2)) 3;*/
   margin: -3 4px 11px 4px;
 }
 
