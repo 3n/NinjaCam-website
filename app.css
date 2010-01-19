@@ -77,7 +77,7 @@ a {
   height:1000px;
   position:absolute;
   top:0;
-  background: -webkit-gradient(radial, 50% -100, 100, 50% -100, 1100, from(#333), to(#0A0A0A), color-stop(.3,#141414));
+  background: -webkit-gradient(radial, 50% -100, 100, 50% -100, 1100, from(#333), to(#0d0d0d), color-stop(.4,#141414));
 }
 
 #header { 
@@ -90,21 +90,16 @@ a {
     padding-bottom:2px;
   }
   #header h2 {
-    color:#666;
-    font-weight:bold;
     height:28px;
-    margin-top:13px;
-    
+    margin-top:13px;    
     text-transform:uppercase;
-
-    /* alts */
     text-shadow: 1px 1px 2px black;
     color:white;
     font-weight:normal;
 
-    color:#00A5FF;
-    
-    color:#999;
+    /* alts */
+    color:#00A5FF;    
+    color:#aaa;
   }
 #sub-header { 
   height:114px; 
@@ -165,7 +160,7 @@ a {
   padding-left:2px;
   font-size:80%;
   line-height:1.25em;
-  color:#ccc;
+  color:#bbb;
   font-weight:lighter;
   word-wrap:break-word;
 }
