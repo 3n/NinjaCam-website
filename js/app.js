@@ -1,6 +1,6 @@
 window.addEvent('domready', function(){
   // twitpic, yfrog, twitgoo, tweetphoto, mobypicture, or img.ly
-  var twitter_image_regex = new RegExp(/(\w+:\/\/(yfrog|twitpic)+\.[A-Za-z0-9-_:;\(\)%&\?\/.=]+)/);
+  var twitter_image_regex = new RegExp(/(\w+:\/\/(yfrog|twitpic|twitgoo)+\.[A-Za-z0-9-_:;\(\)%&\?\/.=]+)/);
   
 	new MicroApp('twitter-and-flickr', [
 		[ /*new Flickr({ 
@@ -26,6 +26,8 @@ window.addEvent('domready', function(){
             url += ".th.jpg";
 				  else if (url.test(/twitpic/))
             url = "http://twitpic.com/show/thumb/" + url.match(/([^\/]+$)/)[0];
+          else if (ufl.test(/twitgoo/))
+            url = "http://twitgoo.com/show/thumb/" + url.match(/([^\/]+$)/)[0];
             
           return "<img src='" + url + "'/><p>" + item.text.replace(/http:\/\/[^\s]+|^RT|@[^\s]+/g,"").replace(/#ninjacam\s*$/g,"") + "</p>";
 				}
@@ -40,6 +42,7 @@ window.addEvent('domready', function(){
           // turn thumbnail urls into full size for the various services
           cell.getFirst('.thumbnail').getFirst('img').mod('src', function(old_src){
             return old_src.replace(".th.jpg", ":iphone")
+                          .replace("http://twitgoo.com/show/thumb/", "http://twitgoo.com/show/img/")            
                           .replace("http://twitpic.com/show/thumb/", "http://twitpic.com/show/large/");
           });
 		    });
