@@ -94,6 +94,8 @@ a {
     font-weight:bold;
     height:28px;
     margin-top:13px;
+    
+    text-transform:uppercase;
 
     /* alts */
     text-shadow: 2px 2px 2px black;
