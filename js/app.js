@@ -31,7 +31,7 @@ window.addEvent('domready', function(){
 		{
 		  onHtmlUpdated: function(){ 
 		    $('twitter-and-flickr').getChildren('div.cell').each(function(cell){
-          cell.getFirst().thumbnail(114,114,'thumbnail');
+          cell.getFirst().thumbnail(114,114,'thumbnail icon');
           new Element('div', {'class': 'thumb-wrapper'}).inject(cell, 'top');          
 		    });
 		    
