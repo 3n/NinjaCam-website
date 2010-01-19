@@ -51,10 +51,16 @@ h1 {
 h2 {
   font-size:120%;
   font-weight:lighter;
-  color:#666;  
+  color:#666;
 }
 
-h3 { margin-bottom:5px; }
+h3 { 
+  margin-bottom:5px; 
+  font-weight:lighter;
+  line-height:1.5em;
+  font-size:110%;
+  text-shadow:0 0 5px #00A5FF;
+}
 
 p {
   font-weight:lighter;
@@ -124,7 +130,7 @@ a {
 
 #ninjacam-app-overview {
   height:1000px;
-  margin-top:5px;
+  margin-top:2px;
 }
 #iphone {
   opacity: 0.1;
