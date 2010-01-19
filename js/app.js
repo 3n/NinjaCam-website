@@ -1,4 +1,5 @@
 window.addEvent('domready', function(){
+  // twitpic, yfrog, twitgoo, tweetphoto, mobypicture, or img.ly
   var twitter_image_regex = new RegExp(/(\w+:\/\/(yfrog|twitpic)+\.[A-Za-z0-9-_:;\(\)%&\?\/.=]+)/);
   
 	new MicroApp('twitter-and-flickr', [
@@ -20,13 +21,12 @@ window.addEvent('domready', function(){
 				},
 				gen_html: function(item){				  
 				  var url = item.text.match(twitter_image_regex)[0];
-				  
-				  console.log(url)
-				  
+
 				  if (url.test(/yfrog/))
-				    url += ".th.jpg";
+            url += ".th.jpg";
 				  else if (url.test(/twitpic/))
-				    url = "http://twitpic.com/show/thumb/" + url.match(/([^\/]+$)/)[0];
+            url = "http://twitpic.com/show/thumb/" + url.match(/([^\/]+$)/)[0];
+            
           return "<img src='" + url + "'/><p>" + item.text.replace(/http:\/\/[^\s]+|^RT|@[^\s]+/g,"").replace(/#ninjacam\s*$/g,"") + "</p>";
 				}
 			})
@@ -36,9 +36,15 @@ window.addEvent('domready', function(){
 		    $('twitter-and-flickr').getChildren('div.cell').each(function(cell){
           cell.getFirst().thumbnail(114,114,'thumbnail icon');
           new Element('div', {'class': 'thumb-wrapper'}).inject(cell, 'top');          
+          
+          // turn thumbnail urls into full size for the various services
+          cell.getFirst('.thumbnail').getFirst('img').mod('src', function(old_src){
+            return old_src.replace(".th.jpg", ":iphone")
+                          .replace("http://twitpic.com/show/thumb/", "http://twitpic.com/show/large/");
+          });
 		    });
 		    
-        $('twitter-and-flickr').setStyle('visibility','visible');
+        $('twitter-and-flickr').fade('in');
 		  }
 		}
 	).to_html();

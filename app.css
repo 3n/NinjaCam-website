@@ -150,8 +150,10 @@ a {
   margin-top:8px;
 	width:512px;
 	display:inline;
-	visibility:hidden;
 	float:left;
+	
+	visibility:hidden;
+	opacity:0;
 }
 
 .new-icon {
