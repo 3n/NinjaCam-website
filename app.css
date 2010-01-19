@@ -83,7 +83,7 @@ a {
 #header { 
   height:42px; 
   margin-top:42px;
-  margin-bottom:10px;
+  margin-bottom:5px;
 }
   #header > * {
     border-bottom:1px solid #444;
@@ -104,7 +104,7 @@ a {
 
     color:#00A5FF;
     
-    color:#ccc;
+    color:#999;
   }
 #sub-header { 
   height:114px; 
