@@ -153,7 +153,7 @@ a {
 }
   .cell.single-wide {
     width  : 114px;
-    height : 220px;
+    height : 210px;
   }
 
 .cell img {
@@ -184,8 +184,8 @@ a {
 /* non-layout styles */
 .cell .thumbnail {
   -webkit-border-radius:8px;  
-  -webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.6);  
-  border-top:1px solid rgba(255,255,255,0.4);
+  -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.7);  
+  border-top:1px solid rgba(255,255,255,0.5);
   margin-top:-119px;
 }
 
