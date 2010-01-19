@@ -22,7 +22,7 @@ provides: [MooTools, Native, Hash.base, Array.each, $util]
 
 var MooTools = {
 	'version': '1.2.5dev',
-	'build': 'b998b202f8ff4cbbc30821e6b3f3b7e76b9c02a4'
+	'build': '964fe12cb3d5bca43d8ad5003e28ade9ea6a15ef'
 };
 
 var Native = function(options){
@@ -2430,6 +2430,8 @@ Request.JSONP = new Class({
 
 		var script = new Element('script', {type: 'text/javascript', src: src});
 		Request.JSONP.request_map['request_' + index] = function(){ this.success(arguments, script); }.bind(this);
+		if (this.options.globalFunction)
+		  window[this.options.globalFunction] = Request.JSONP.request_map['request_' + index];
 		return script.inject(this.options.injectScript);
 	},
 
@@ -6663,7 +6665,7 @@ var Flickr = new Class({
 		nombre     : "SEEING", 
 		json_url   : "http://api.flickr.com/services/feeds/photos_public.gne",
 		web_source : "http://www.flickr.com",
-		json_opts  : { globalFunction : 'jsonFlickrFeed',
+		json_opts  : { globalFunction : 'jsonFlickrApi',
 									 data: { lang   : "en-us",
 										       format : 'json' } },
 	 	initial_limit : 15		
