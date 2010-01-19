@@ -45,6 +45,7 @@ body {
 h1 {  
   font-size:200%;
   font-weight:bold;
+  text-shadow: 1px 1px 5px black;  
 }
 
 h2 {
@@ -85,14 +86,23 @@ a {
   margin-bottom:10px;
 }
   #header > * {
-    border-bottom:1px solid #555;
-    padding-bottom:5px;
+    border-bottom:1px solid #444;
+    padding-bottom:2px;
   }
   #header h2 {
-    color:white;
-/*    font-weight:bold;*/
+    color:#666;
+    font-weight:bold;
     height:28px;
     margin-top:13px;
+
+    /* alts */
+    text-shadow: 2px 2px 2px black;
+    color:white;
+    font-weight:normal;
+
+    color:#00A5FF;
+    
+    color:#ccc;
   }
 #sub-header { 
   height:114px; 
