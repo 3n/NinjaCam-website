@@ -39,6 +39,7 @@ body {
   font-family: "DinPro", 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color:white;
   font-size:100%;
+  background-color:#111;
 }
 
 h1 {  
@@ -84,8 +85,8 @@ a {
   height:1000px;
   position:absolute;
   top:0;
-  background: -webkit-gradient(radial, 50% -100, 100, 50% -100, 1100, from(#333), to(#0d0d0d), color-stop(.4,#141414));
-  opacity:0.7;
+/*  background: -webkit-gradient(radial, 50% -100, 100, 50% -100, 1100, from(#333), to(#0d0d0d), color-stop(.4,#141414));*/
+  background: -webkit-gradient(radial, 50% -100, 100, 50% -100, 1100, from(rgba(255,255,255,0.2)), to(rgba(0,0,0,0)));
 }
 #texture {
   background-image: url('bg.png');
@@ -93,7 +94,7 @@ a {
   height:100%;
   position:absolute;
   top:0;  
-}
+} 
 
 #header { 
   height:42px; 
