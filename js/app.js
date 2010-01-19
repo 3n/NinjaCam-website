@@ -24,8 +24,7 @@ window.addEvent('domready', function(){
 				    url += ".th.jpg";
 				  else if (url.test(/twitpic/))
 				    url = "http://twitpic.com/show/thumb/" + url.match(/([^\/]+$)/)[0];
-				  
-          return "<img src='" + url + "'/><p>" + item.text.replace("#ninjacam","").replace(/http:\/\/[^\s]+/,"") + "</p>";
+          return "<img src='" + url + "'/><p>" + item.text.replace(/http:\/\/[^\s]+|^RT|@[^\s]+/g,"").replace(/#ninjacam\s*$/g,"") + "</p>";
 				}
 			})
 		]],
