@@ -42,7 +42,7 @@ body {
   color:white;
   font-size:100%;
   background-color:#111;
-  background-image: url('bg.png');
+  background-image: url('images/bg.png');
 }
 
 h1 {  
@@ -161,7 +161,7 @@ a {
   -webkit-border-radius:5px;  
   height:52px;
   float:left;
-  width:178px;
+  width:155px;
   margin: 0 0px 10px 10px;  
 }
 #buy-now {
@@ -176,19 +176,33 @@ a {
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0.05)), to(rgba(0,0,0,0.05)));
   border-top:1px solid rgba(255,255,255,0.2);
 }
-  #buy-wrapper:hover #buy-now {
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#016296));
-    border-top:1px solid rgba(255,255,255,0.8);    
-    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
-    color:#00324D;    
-  }
-  #buy-wrapper:hover #icon-large {
-    -webkit-box-shadow: 0 0 10px #00A5FF;
-  }
   
 #available-on-the {
   font-size:62%;
 }
+
+#iphone-icon {
+  background-image: url('images/iphone_icon.png');
+  width:24px;
+  height:41px;
+  float:left;
+  margin-right:10px;
+  margin-top:2px;
+}
+
+#buy-wrapper:hover #buy-now {
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#016296));
+  border-top:1px solid rgba(255,255,255,0.8);    
+  text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+  color:#00324D;    
+}
+#buy-wrapper:hover #icon-large {
+  -webkit-box-shadow: 0 0 10px #00A5FF;
+}
+#buy-wrapper:hover #iphone-icon {
+  background-position:-24px;
+}
+
 
 #iphone {
   opacity: 0.0;
