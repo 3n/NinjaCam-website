@@ -147,7 +147,7 @@ a {
 }
 
 #icon-large {
-  width:44px;
+  width:52px;
   float:left;
 }
 
@@ -159,18 +159,19 @@ a {
   border:1px solid rgba(0,0,0,0.7);
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.1);
   -webkit-border-radius:5px;  
-  height:44px;
+  height:52px;
   float:left;
   width:178px;
-  margin: 0 0px 10px 11px;  
+  margin: 0 0px 10px 10px;  
 }
 #buy-now {
   font-weight:bold;
-  font-size:120%;
+  font-size:130%;
   text-shadow: 2px 2px 1px rgba(0,0,0,0.8);
-  height:27px;
+  height:43px;
+  line-height:0.9em;
   
-  padding:8px 10px;
+  padding:4px 10px;
   -webkit-border-radius:5px;
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0.05)), to(rgba(0,0,0,0.05)));
   border-top:1px solid rgba(255,255,255,0.2);
@@ -184,6 +185,10 @@ a {
   #buy-wrapper:hover #icon-large {
     -webkit-box-shadow: 0 0 10px #00A5FF;
   }
+  
+#available-on-the {
+  font-size:62%;
+}
 
 #iphone {
   opacity: 0.1;
@@ -260,7 +265,7 @@ a {
 /* non-layout styles */
 .icon {
   -webkit-border-radius:8px;  
-  -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.7);  
+  -webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.6);  
   border-top:1px solid rgba(255,255,255,0.5);
 }
 
