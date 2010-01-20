@@ -131,13 +131,24 @@ a {
 
 #ninjacam-concept-overview p {
   font-weight:lighter;
+
+/*  padding:3px 8px 7px 8px;
+  width:143px;
+  background:rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 -1px 1px rgba(255,255,255,0.1);
+  -webkit-border-radius:8px;*/
 }
 
 #tweet-info img {
   margin-right:17px;
   margin-top:4px;
   float:right;
+  -webkit-border-radius:8px;  
+  -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.3);  
 }
+  #tweet-info img:hover {
+    -webkit-box-shadow: 0 0 10px #00A5FF;
+  }
 
 
 #ninjacam-app-overview {
