@@ -146,6 +146,33 @@ a {
 #ninjacam-app-overview {
   margin-top:2px;
 }
+
+
+#buy-now-wrapper {
+  border:1px solid rgba(0,0,0,0.7);
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.1);
+  -webkit-border-radius:5px;
+  width:240px;  
+  height:44px;
+  margin: 10px 0 10px -3px;
+}
+#buy-now {
+  font-weight:bold;
+  font-size:120%;
+  text-shadow: 2px 2px 2px rgba(0,0,0,0.8);
+  height:27px;
+  
+  padding:8px 10px;
+  -webkit-border-radius:5px;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0.05)), to(rgba(0,0,0,0.05)));
+  border-top:1px solid rgba(255,255,255,0.2);
+  
+  cursor:pointer;
+}
+  #buy-now:hover {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#0085CF));
+  }
+
 #iphone {
   opacity: 0.1;
   width: 175px;
