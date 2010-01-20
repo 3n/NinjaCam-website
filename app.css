@@ -88,6 +88,15 @@ a {
   background: -webkit-gradient(radial, 50% -100, 100, 50% -100, 1400, from(rgba(255,255,255,0.15)), to(rgba(0,0,0,0)));
 }
 
+#spotlight {
+  background: -webkit-gradient(radial, 50% 250, 150, 66% -100, 0, from(rgba(0,0,0,0)), to(rgba(255,255,255,0.2)));
+  position: absolute;
+  top:-22;
+  right:137px;
+  width:300px;
+  height:400px;
+}
+
 #header { 
   height:42px; 
   margin-top:42px;
