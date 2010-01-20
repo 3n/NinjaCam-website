@@ -202,6 +202,7 @@ a {
   font-weight:lighter;
   word-wrap:break-word;
   display:block;
+  font-style:italic;    
 }
 
 .tip { display:none !important; }
