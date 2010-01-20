@@ -112,6 +112,31 @@ a {
     color:#00A5FF;    
 /*    color:#aaa;*/
   }
+
+#new {
+  display:block;
+  width:40px;
+  height:30px;
+  padding-top:10px;
+  background-color:#F72F3C;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FF525D), to(#AA272F));
+  position:absolute;
+  left:180px;
+  top:-6px;
+  -webkit-border-radius:40px;
+  color:white;
+  font-weight:bold;
+  font-size:70%;
+  text-shadow:0 -1px 0 black;
+  text-align:center;
+  -webkit-transform: rotate(15deg); 
+  -moz-transform: rotate(15deg);
+
+  -webkit-transition: -webkit-transform 0.1s ease-in-out;  
+}
+  #new:hover {
+    -webkit-transform: translateY(-3px);
+  }
   
 #sub-header { 
   margin-bottom:14px; 
