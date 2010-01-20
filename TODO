@@ -1,5 +1,12 @@
 Image expansion UX
-
+	like the tumblr theme used on lightboner, grid of images below single expanded image.
+	clicking any in grid makes it the big one
+	add controls and key nav for cycling through set of images.
+	show metadata off to the right of image
+	fancy animations prolly
+	
+get user names from RT (or check api response) and link them, as well as other metadata
+	
 link to follow twitter.com/ninjacam
 
 make iphone graphic for appstore button
