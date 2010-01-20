@@ -170,7 +170,8 @@ a {
   cursor:pointer;
 }
   #buy-now:hover {
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#0085CF));
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#016296));
+    border-top:1px solid rgba(255,255,255,0.8);    
   }
 
 #iphone {
