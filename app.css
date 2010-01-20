@@ -174,7 +174,7 @@ a {
 #icon-large {
   width:52px;
   float:left;
-  -webkit-transition: -webkit-box-shadow 0.3s ease-in;    
+  -webkit-transition: -webkit-box-shadow 0.3s ease-in-out;    
 }
 
 #buy-wrapper { 
@@ -236,7 +236,7 @@ a {
   width: 175px;
   float:right;
 }
-#iphone:hover { opacity: 1.0;}
+/*#iphone:hover { opacity: 1.0;}*/
 
 /* Flickr / Twitter Grid */
 
