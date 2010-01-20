@@ -1,3 +1,17 @@
+// var base10_to_base58 = function(num){
+//     if (typeof num !== 'number') num = parseInt(num);
+//     var enc = '';
+//     var alpha = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
+//     var div = num;
+//     while (num >= 58) {
+//         div = num / 58;
+//         var mod = (num - (58 * Math.floor(div)));
+//         enc = '' + alpha.substr(mod, 1) + enc;
+//         num = Math.floor(div);
+//     }
+//     return (div) ? '' + alpha.substr(div, 1) + enc: enc;
+// }
+
 window.addEvent('domready', function(){
   // supported: twitpic, yfrog, twitgoo, tweetphoto, img.ly
   // not:       mobypicture
