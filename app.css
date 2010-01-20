@@ -159,7 +159,7 @@ a {
 #buy-now {
   font-weight:bold;
   font-size:120%;
-  text-shadow: 2px 2px 2px rgba(0,0,0,0.8);
+  text-shadow: 2px 2px 1px rgba(0,0,0,0.8);
   height:27px;
   
   padding:8px 10px;
