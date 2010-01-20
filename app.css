@@ -154,6 +154,7 @@ a {
 #buy-wrapper { 
   cursor:pointer; 
   margin-top:14px;
+  float:left;
 }
 #buy-now-wrapper {
   border:1px solid rgba(0,0,0,0.7);
