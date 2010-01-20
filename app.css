@@ -110,14 +110,10 @@ a {
 /*    color:#aaa;*/
   }
   
-#icon-large {
-  width:50px;
-}
-  
 #sub-header { 
 /*  height:114px; */
   margin-bottom:14px; 
-  font-style:italic;    
+/*  font-style:italic;    */
   font-weight:lighter;
 }
 
@@ -147,14 +143,23 @@ a {
   margin-top:2px;
 }
 
+#icon-large {
+  width:44px;
+  float:left;
+}
 
+#buy-wrapper { 
+  cursor:pointer; 
+  margin-top:14px;
+}
 #buy-now-wrapper {
   border:1px solid rgba(0,0,0,0.7);
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.1);
-  -webkit-border-radius:5px;
-  width:240px;  
+  -webkit-border-radius:5px;  
   height:44px;
-  margin: 13px 0 10px -3px;
+  float:left;
+  width:178px;
+  margin: 0 0px 10px 11px;  
 }
 #buy-now {
   font-weight:bold;
@@ -166,12 +171,13 @@ a {
   -webkit-border-radius:5px;
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0.05)), to(rgba(0,0,0,0.05)));
   border-top:1px solid rgba(255,255,255,0.2);
-  
-  cursor:pointer;
 }
-  #buy-now:hover {
+  #buy-wrapper:hover #buy-now {
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#016296));
     border-top:1px solid rgba(255,255,255,0.8);    
+  }
+  #buy-wrapper:hover #icon-large {
+    -webkit-box-shadow: 0 0 10px #00A5FF;
   }
 
 #iphone {
