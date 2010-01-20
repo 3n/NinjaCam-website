@@ -53,6 +53,7 @@ h2 {
   font-size:120%;
   font-weight:lighter;
   color:#666;
+  text-shadow: 0 1px 0 black;  
 }
 
 h3 { 
@@ -113,7 +114,6 @@ a {
 #sub-header { 
   margin-bottom:14px; 
 /*  font-style:italic;    */
-  font-weight:lighter;
 }
 
 #ninjacam-concept-overview p {
@@ -127,6 +127,8 @@ a {
 }
 
 #tweet-info img {
+  width:36px;
+  height:36px;  
   margin-right:17px;
   margin-top:4px;
   float:right;
