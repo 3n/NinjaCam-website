@@ -96,7 +96,7 @@ a {
 #header { 
   height:42px; 
   margin-top:42px;
-  margin-bottom:5px;
+  margin-bottom:10px;
 }
   #header > * {
     border-bottom:1px solid #444;
