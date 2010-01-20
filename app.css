@@ -174,6 +174,7 @@ a {
 #icon-large {
   width:52px;
   float:left;
+  -webkit-transition: -webkit-box-shadow 0.3s ease-in;    
 }
 
 #buy-wrapper { 
@@ -223,7 +224,7 @@ a {
   color:#00324D;    
 }
 #buy-wrapper:hover #icon-large {
-  -webkit-box-shadow: 0 0 10px #00A5FF;
+  -webkit-box-shadow: 0 0 20px #00A5FF;
 }
 #buy-wrapper:hover #iphone-icon {
   background-position:-24px;
