@@ -6481,7 +6481,7 @@ var MicroAppView = new Class({
 		main_class    : 'single-wide',
 		custom_class	: '',
 		title 				: '',
-		act_like_link : true,
+		act_like_link : false,
 		
 		new_class     : 'new-icon',
 		new_title     : 'I\'m new, to you.',

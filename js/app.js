@@ -1,3 +1,41 @@
+var TheLouvre = new Class({
+  Implements: [Options, Events],
+  
+  options: {
+    selector: "img",
+    iniitially_showing_index: null,
+    show_event: "click",
+    
+    on_show: function(show_zone, the_art){
+      show_zone.set('html','').grab(the_art);
+    }
+  },
+  
+  initialize: function(elem, options){
+    this.setOptions(options);
+    this.element = elem;
+    this.the_art = this.element.getElements(this.options.selector);
+    this.show_zone = this.options.show_zone_element || new Element('div').inject(this.element, 'top');
+    
+    this.attach_events();
+    
+    if ($chk(this.options.iniitially_expanded_index))
+      this.show(this.options.iniitially_expanded_index);
+  },
+  
+  attach_events: function(){
+    this.the_art.each(function(art,i){
+      art.addEvent(this.options.show_event, this.show.bind(this,i));
+    }, this);
+  },
+  
+  show: function(index){
+    
+    this.showing_index = index;
+    this.options.on_show(this.show_zone, this.the_art[this.showing_index]);
+  }
+});
+
 window.addEvent('domready', function(){
   // supported: twitpic, yfrog, twitgoo, tweetphoto, img.ly
   // not:       mobypicture
@@ -54,6 +92,14 @@ window.addEvent('domready', function(){
 		    });
 		    
         $('twitter-and-flickr').fade('in');
+        
+        new TheLouvre($('twitter-and-flickr'), {
+          selector: "div.thumbnail img",
+          on_show: function(show_zone, the_art){
+            console.log(the_art.get('src'))
+            show_zone.set('html','').grab(new Element('img', {'src': the_art.get('src')}));
+          }
+        });
 		  }
 		}
 	).to_html();
