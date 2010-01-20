@@ -133,6 +133,13 @@ a {
   font-weight:lighter;
 }
 
+#tweet-info img {
+  margin-right:17px;
+  margin-top:4px;
+  float:right;
+}
+
+
 #ninjacam-app-overview {
   height:1000px;
   margin-top:2px;
