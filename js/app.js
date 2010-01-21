@@ -34,8 +34,8 @@ var TheLouvre = new Class({
     
     this.attach_events();
     
-    if ($chk(this.options.iniitially_expanded_index))
-      this.show(this.options.iniitially_expanded_index);
+    if ($chk(this.options.iniitially_showing_index))
+      this.show(this.options.iniitially_showing_index);
       
     return this;      
   },
@@ -132,7 +132,8 @@ window.addEvent('domready', function(){
         
         new TheLouvre($('twitter-and-flickr'), {
           selector         : " .cell",
-          show_image_class : "the_louvre_show_image icon",          
+          show_image_class : "the_louvre_show_image icon",
+          iniitially_showing_index : 0,          
           get_img_src      : function(the_art){
             return the_art.getFirst('.thumbnail').getFirst('img').get('src');
           },
