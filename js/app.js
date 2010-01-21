@@ -34,7 +34,11 @@ var TheLouvre = new Class({
     this.attach_events();
     
     if ($defined(Fx.Slide))
-      this.the_slide = new Fx.Slide(this.show_zone);
+      this.the_slide = new Fx.Slide(this.show_zone, {
+        onComplete: function(){
+          this.fireEvent(this.is_open ? 'open' : 'close');
+        }.bind(this)
+      });
     
     if ($chk(this.options.iniitially_showing_index)){
       this.is_open = true;
