@@ -22,6 +22,15 @@ var TheLouvre = new Class({
         new Element('img', {'class': this.options.show_image_class, 'src': this.options.get_img_src(the_art, index)}),
         new Element('p',   {'class': this.options.show_caption_class, 'html': this.options.get_caption(the_art, index)})
       ]);
+    },
+    show_zone_transition: function(show_zone, the_art, index, update_data){
+      show_zone.set('tween', {
+        duration: 50,
+        onComplete: function(){
+          update_data(); 
+          show_zone.set('tween', {duration: 80}).fade('in');
+        }
+      }).fade('out');
     }
   },
   
@@ -32,13 +41,7 @@ var TheLouvre = new Class({
     this.show_zone = this.options.show_zone_element || new Element('div', {'id': this.options.show_zone_id}).inject(this.element, 'top');
     
     this.attach_events();
-    
-    if ($defined(Fx.Slide))
-      this.the_slide = new Fx.Slide(this.show_zone, {
-        onComplete: function(){
-          this.fireEvent(this.is_open ? 'open' : 'close');
-        }.bind(this)
-      });
+    this.setup_effects();
     
     if ($chk(this.options.iniitially_showing_index)){
       this.is_open = true;
@@ -56,6 +59,16 @@ var TheLouvre = new Class({
     return this;    
   },
   
+  setup_effects: function(){
+    if ($defined(Fx.Slide)){
+      this.the_slide = new Fx.Slide(this.show_zone, {
+        onComplete: function(){
+          this.fireEvent(this.is_open ? 'open' : 'close');
+        }.bind(this)
+      });
+    }
+  },
+  
   show: function(index){    
     if (this.options.toggle && index === this.showing_index && this.is_open)
       return this.close();
@@ -64,7 +77,13 @@ var TheLouvre = new Class({
     
     if ($defined(index)){
       this.showing_index = index;
-      this.options.update_show_zone.call(this, this.show_zone, this.the_art[this.showing_index], this.showing_index);
+      
+      this.options.show_zone_transition(
+        this.show_zone, 
+        this.the_art[this.showing_index], 
+        this.showing_index,
+        this.options.update_show_zone.bind(this, [this.show_zone, this.the_art[this.showing_index], this.showing_index])
+      );
 
       this.the_art.removeClass(this.options.active_art_class);
       this.the_art[this.showing_index].addClass(this.options.active_art_class);
