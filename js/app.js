@@ -33,8 +33,11 @@ var TheLouvre = new Class({
     
     this.attach_events();
     
-    if ($chk(this.options.iniitially_showing_index))
+    if ($chk(this.options.iniitially_showing_index)){
+      this.is_open = true;
       this.show(this.options.iniitially_showing_index);
+    } else
+      this.close();
       
     return this;      
   },
@@ -64,7 +67,6 @@ var TheLouvre = new Class({
   },
   open: function(){
     // attach key events
-    // fancy slide effect yo
 
     this.the_slide = this.the_slide || new Fx.Slide(this.show_zone);
     this.the_slide.hide();
@@ -75,9 +77,12 @@ var TheLouvre = new Class({
   },
   close: function(){
     // detach key events
-    // fancy slide effect yo
 
-    this.the_slide.slideOut();
+    this.the_slide = this.the_slide || new Fx.Slide(this.show_zone);
+    if (this.is_open)
+      this.the_slide.slideOut();
+    else
+      this.the_slide.hide();
     this.is_open = false;    
     
     return this;
