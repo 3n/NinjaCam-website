@@ -305,6 +305,23 @@ a {
 
 
 
+#the_louvre_show_zone {
+  height:314px;
+  border-bottom:1px solid #444;
+  margin:0 7px 7px 7px;
+}
+#the_louvre_show_zone .the_louvre_show_image {
+  max-height:300px;
+  max-width:60%;
+  margin-left:1px;
+  float:left;
+}
+#the_louvre_show_zone .the_louvre_show_caption {
+  float:left;
+  width:38%;
+  margin-left:2%;
+  color:white;
+}
 
 
 

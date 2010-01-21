@@ -2,12 +2,25 @@ var TheLouvre = new Class({
   Implements: [Options, Events],
   
   options: {
-    selector: "img",
-    iniitially_showing_index: null,
-    show_event: "click",
-    
-    on_show: function(show_zone, the_art){
-      show_zone.set('html','').grab(the_art);
+    selector     : "img",
+    show_event   : "click",
+    show_zone_id : "the_louvre_show_zone",
+    show_image_class   : "the_louvre_show_image",
+    show_caption_class : "the_louvre_show_caption",    
+    iniitially_showing_index: null,   
+    show_toggle : true,
+
+    get_img_src : function(the_art){
+      return the_art.get('src');
+    },
+    get_caption : function(the_art){
+      return "";
+    },
+    update_show_zone: function(show_zone, the_art, index){
+      show_zone.set('html','').adopt([
+        new Element('img', {'class': this.options.show_image_class, 'src': this.options.get_img_src(the_art, index)}),
+        new Element('p',   {'class': this.options.show_caption_class, 'html': this.options.get_caption(the_art, index)})
+      ]);
     }
   },
   
@@ -15,7 +28,7 @@ var TheLouvre = new Class({
     this.setOptions(options);
     this.element = elem;
     this.the_art = this.element.getElements(this.options.selector);
-    this.show_zone = this.options.show_zone_element || new Element('div').inject(this.element, 'top');
+    this.show_zone = this.options.show_zone_element || new Element('div', {'id': this.options.show_zone_id}).inject(this.element, 'top');
     
     this.attach_events();
     
@@ -32,7 +45,7 @@ var TheLouvre = new Class({
   show: function(index){
     
     this.showing_index = index;
-    this.options.on_show(this.show_zone, this.the_art[this.showing_index]);
+    this.options.update_show_zone.call(this, this.show_zone, this.the_art[this.showing_index], this.showing_index);
   }
 });
 
@@ -94,10 +107,9 @@ window.addEvent('domready', function(){
         $('twitter-and-flickr').fade('in');
         
         new TheLouvre($('twitter-and-flickr'), {
-          selector: "div.thumbnail img",
-          on_show: function(show_zone, the_art){
-            console.log(the_art.get('src'))
-            show_zone.set('html','').grab(new Element('img', {'src': the_art.get('src')}));
+          selector    : "div.thumbnail img",
+          get_caption : function(the_art){
+            return the_art.getParent().getParent().getFirst('p').get('text');
           }
         });
 		  }
