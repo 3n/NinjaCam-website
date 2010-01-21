@@ -71,12 +71,16 @@ var TheLouvre = new Class({
   open: function(){
     // attach key events
 
-    if (this.the_slide){
-      this.the_slide.hide();
-      this.the_slide.slideIn();
-    } else
-      this.show_zone.setStyle('display','block');
-
+    $try(
+      this.options.custom_open,
+      function(){
+        if (this.the_slide){
+          this.the_slide.hide();
+          this.the_slide.slideIn();
+        } else
+          this.show_zone.setStyle('display','block');
+      }.bind(this)
+    );
 
     this.is_open = true;
     
@@ -84,14 +88,19 @@ var TheLouvre = new Class({
   },
   close: function(){
     // detach key events
-
-    if (this.the_slide){
-      if (this.is_open)
-        this.the_slide.slideOut();
-      else
-        this.the_slide.hide();
-    } else
-      this.show_zone.setStyle('display','none');
+    
+    $try(
+      this.options.custom_close,
+      function(){
+        if (this.the_slide){
+          if (this.is_open)
+            this.the_slide.slideOut();
+          else
+            this.the_slide.hide();
+        } else
+          this.show_zone.setStyle('display','none');
+      }.bind(this)
+    );
 
     this.is_open = false;    
     
