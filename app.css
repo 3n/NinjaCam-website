@@ -30,7 +30,21 @@ pre,code,kbd,samp,tt {font-family:monospace;*font-size:108%;line-height:99%;}
 
 
 
-
+@font-face {
+  font-family: 'din';
+  src: url('DINPro-Bold.otf') format('opentype');
+  font-weight:bold;
+}
+@font-face {
+  font-family: 'din';
+  src: url('DINPro-Light.otf') format('opentype');
+  font-weight:lighter;
+}
+@font-face {
+  font-family: 'din';
+  src: url('DINPro-Black.otf') format('opentype');
+  font-weight:bolder;
+}
 
 
 html {
@@ -38,7 +52,7 @@ html {
 }
 
 body {
-  font-family: "DinPro", 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "din", 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color:white;
   font-size:100%;
   background-color:#111;
@@ -47,7 +61,7 @@ body {
 
 h1 {  
   font-size:200%;
-  font-weight:bold;
+  font-weight:bolder;
   text-shadow: 1px 1px 5px black;  
 }
 
@@ -311,7 +325,7 @@ a {
 
 
 #the_louvre_show_zone {
-  height:314px;
+  height:320px;
   border-bottom:1px solid #444;
   margin:0 7px 7px 7px;
 }
