@@ -38,8 +38,8 @@ var TheLouvre = new Class({
     this.setOptions(options);
     this.element = elem;
     this.the_art = this.element.getElements(this.options.selector);
-    this.show_zone = this.options.show_zone_element || new Element('div', {'id': this.options.show_zone_id}).inject(this.element, 'top');
     
+    this.setup_show_zone();
     this.attach_events();
     this.setup_effects();
     
@@ -50,6 +50,11 @@ var TheLouvre = new Class({
       this.close();
       
     return this;      
+  },
+  
+  setup_show_zone: function(){
+    this.show_zone = this.options.show_zone_element || new Element('div', {'id': this.options.show_zone_id}).inject(this.element, 'top');
+    this.show_zone_wrapper = new Element('div', {id: this.options.show_zone_id + '_wrapper'}).wraps(this.show_zone);
   },
   
   attach_events: function(){
@@ -105,6 +110,7 @@ var TheLouvre = new Class({
       }.bind(this)
     );
 
+    this.show_zone_wrapper.addClass('the_louvre_open');
     this.is_open = true;
     
     return this;
@@ -125,6 +131,7 @@ var TheLouvre = new Class({
       }.bind(this)
     );
 
+    this.show_zone_wrapper.removeClass('the_louvre_open');
     this.is_open = false;    
     
     return this;
