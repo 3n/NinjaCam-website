@@ -157,8 +157,8 @@ a {
   font-size:70%;
   text-shadow:0 -1px 0 black;
   text-align:center;
-  -webkit-transform: rotate(15deg); 
-  -moz-transform: rotate(15deg);
+  -webkit-transform: rotate(14deg); 
+  -moz-transform: rotate(14deg);
 
   -webkit-transition: -webkit-transform 0.1s ease-in-out;  
 }
