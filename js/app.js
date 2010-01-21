@@ -33,6 +33,9 @@ var TheLouvre = new Class({
     
     this.attach_events();
     
+    if ($defined(Fx.Slide))
+      this.the_slide = new Fx.Slide(this.show_zone);
+    
     if ($chk(this.options.iniitially_showing_index)){
       this.is_open = true;
       this.show(this.options.iniitially_showing_index);
@@ -68,9 +71,13 @@ var TheLouvre = new Class({
   open: function(){
     // attach key events
 
-    this.the_slide = this.the_slide || new Fx.Slide(this.show_zone);
-    this.the_slide.hide();
-    this.the_slide.slideIn();
+    if (this.the_slide){
+      this.the_slide.hide();
+      this.the_slide.slideIn();
+    } else
+      this.show_zone.setStyle('display','block');
+
+
     this.is_open = true;
     
     return this;
@@ -78,11 +85,14 @@ var TheLouvre = new Class({
   close: function(){
     // detach key events
 
-    this.the_slide = this.the_slide || new Fx.Slide(this.show_zone);
-    if (this.is_open)
-      this.the_slide.slideOut();
-    else
-      this.the_slide.hide();
+    if (this.the_slide){
+      if (this.is_open)
+        this.the_slide.slideOut();
+      else
+        this.the_slide.hide();
+    } else
+      this.show_zone.setStyle('display','none');
+
     this.is_open = false;    
     
     return this;
