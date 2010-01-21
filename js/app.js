@@ -7,6 +7,7 @@ var TheLouvre = new Class({
     show_zone_id : "the_louvre_show_zone",
     show_image_class   : "the_louvre_show_image",
     show_caption_class : "the_louvre_show_caption",    
+    active_art_class   : "the_louvre_showing",
     iniitially_showing_index: null,   
     show_toggle : true,
 
@@ -46,6 +47,9 @@ var TheLouvre = new Class({
     
     this.showing_index = index;
     this.options.update_show_zone.call(this, this.show_zone, this.the_art[this.showing_index], this.showing_index);
+
+    this.the_art.removeClass(this.options.active_art_class);
+    this.the_art[this.showing_index].addClass(this.options.active_art_class);
   }
 });
 
@@ -107,9 +111,13 @@ window.addEvent('domready', function(){
         $('twitter-and-flickr').fade('in');
         
         new TheLouvre($('twitter-and-flickr'), {
-          selector    : "div.thumbnail img",
-          get_caption : function(the_art){
-            return the_art.getParent().getParent().getFirst('p').get('text');
+          selector         : " .cell",
+          show_image_class : "the_louvre_show_image icon",          
+          get_img_src      : function(the_art){
+            return the_art.getFirst('.thumbnail').getFirst('img').get('src');
+          },
+          get_caption      : function(the_art){
+            return the_art.getFirst('p').get('text');
           }
         });
 		  }

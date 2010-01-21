@@ -321,6 +321,7 @@ a {
   width:38%;
   margin-left:2%;
   color:white;
+  font-size:18px;
 }
 
 
@@ -346,7 +347,7 @@ a {
   margin-left:-4px;
   -webkit-border-radius:10px;
 }
-.cell:hover .thumb-wrapper {
+.cell.the_louvre_showing .thumb-wrapper {
   border-top:1px solid #7AD1FF;
   margin-top:-1px;
   background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#0086CE));
