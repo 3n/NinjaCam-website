@@ -54,8 +54,13 @@ h1 {
 h2 {
   font-size:120%;
   font-weight:lighter;
-  color:#666;
+  color:#555;
   text-shadow: 0 1px 0 black;  
+
+  /*alt*/
+/*  color:#090909;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.13);  
+  font-weight:bold;  */
 }
 
 h3 { 
@@ -178,7 +183,6 @@ a {
 
 
 #ninjacam-app-overview {
-  margin-top:2px;
 }
 
 #icon-large {
@@ -210,7 +214,7 @@ a {
   
   padding:4px 10px;
   -webkit-border-radius:5px;
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0.05)), to(rgba(0,0,0,0.05)));
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0.08)), to(rgba(0,0,0,0.1)));
   border-top:1px solid rgba(255,255,255,0.2);
 }
   
