@@ -1,6 +1,4 @@
 Image expansion UX
-	like the tumblr theme used on lightboner, grid of images below single expanded image.
-	clicking any in grid makes it the big one
 	add controls and key nav for cycling through set of images.
 	show metadata off to the right of image
 	fancy animations prolly
