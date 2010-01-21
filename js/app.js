@@ -9,7 +9,8 @@ var TheLouvre = new Class({
     show_caption_class : "the_louvre_show_caption",    
     active_art_class   : "the_louvre_showing",
     iniitially_showing_index: null,   
-    show_toggle : true,
+    show_zone_display_style : 'block',
+    toggle : true,
 
     get_img_src : function(the_art){
       return the_art.get('src');
@@ -35,21 +36,40 @@ var TheLouvre = new Class({
     
     if ($chk(this.options.iniitially_expanded_index))
       this.show(this.options.iniitially_expanded_index);
+      
+    return this;      
   },
   
   attach_events: function(){
     this.the_art.each(function(art,i){
       art.addEvent(this.options.show_event, this.show.bind(this,i));
     }, this);
+    return this;    
   },
   
-  show: function(index){
-    
-    this.showing_index = index;
-    this.options.update_show_zone.call(this, this.show_zone, this.the_art[this.showing_index], this.showing_index);
+  show: function(index){    
+    this.show_zone.setStyle('display', this.options.show_zone_display_style);    
 
-    this.the_art.removeClass(this.options.active_art_class);
-    this.the_art[this.showing_index].addClass(this.options.active_art_class);
+    if (this.options.toggle && index === this.showing_index)
+      return this.hide();
+    
+    if ($defined(index)){
+      this.showing_index = index;
+      this.options.update_show_zone.call(this, this.show_zone, this.the_art[this.showing_index], this.showing_index);
+
+      this.the_art.removeClass(this.options.active_art_class);
+      this.the_art[this.showing_index].addClass(this.options.active_art_class);
+    }
+    
+    return this;
+  },
+  hide: function(){
+    // detach key events
+    // fancy slide effect yo
+    
+    this.show_zone.setStyle('display','none');
+    
+    return this;
   }
 });
 
