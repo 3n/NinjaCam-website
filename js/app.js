@@ -9,7 +9,6 @@ var TheLouvre = new Class({
     show_caption_class : "the_louvre_show_caption",    
     active_art_class   : "the_louvre_showing",
     iniitially_showing_index: null,   
-    show_zone_display_style : 'block',
     toggle : true,
 
     get_img_src : function(the_art){
@@ -48,11 +47,10 @@ var TheLouvre = new Class({
   },
   
   show: function(index){    
-    if (this.options.toggle && index === this.showing_index 
-                            && this.show_zone.getStyle('display') === this.options.show_zone_display_style)
-      return this.hide();
-
-    this.show_zone.setStyle('display', this.options.show_zone_display_style);    
+    if (this.options.toggle && index === this.showing_index && this.is_open)
+      return this.close();
+    if (!this.is_open)
+      this.open();
     
     if ($defined(index)){
       this.showing_index = index;
@@ -64,11 +62,23 @@ var TheLouvre = new Class({
     
     return this;
   },
-  hide: function(){
+  open: function(){
+    // attach key events
+    // fancy slide effect yo
+
+    this.the_slide = this.the_slide || new Fx.Slide(this.show_zone);
+    this.the_slide.hide();
+    this.the_slide.slideIn();
+    this.is_open = true;
+    
+    return this;
+  },
+  close: function(){
     // detach key events
     // fancy slide effect yo
-    
-    this.show_zone.setStyle('display','none');
+
+    this.the_slide.slideOut();
+    this.is_open = false;    
     
     return this;
   }
