@@ -152,7 +152,7 @@ var TheLouvre = new Class({
       'property' : 'margin-top',
       'duration' : 40,
       'link'     : 'chain'
-    }).start({'margin-top': top-10, 'margin-bottom': bottom + 10}).start({'margin-top': top, 'margin-bottom': bottom});
+    }).start({'margin-top': top - 5, 'margin-bottom': bottom + 5}).start({'margin-top': top, 'margin-bottom': bottom});
   }
 });
 
