@@ -10,6 +10,7 @@ var TheLouvre = new Class({
     active_art_class   : "the_louvre_showing",
     iniitially_showing_index: null,   
     toggle : true,
+    superfluous_effects: true,
 
     get_img_src : function(the_art){
       return the_art.get('src');
@@ -89,6 +90,9 @@ var TheLouvre = new Class({
         this.showing_index,
         this.options.update_show_zone.bind(this, [this.show_zone, this.the_art[this.showing_index], this.showing_index])
       );
+      
+      if (this.options.superfluous_effects && $defined(Fx.Morph))
+        this.superfluous_effects(index);
 
       this.the_art.removeClass(this.options.active_art_class);
       this.the_art[this.showing_index].addClass(this.options.active_art_class);
@@ -135,6 +139,17 @@ var TheLouvre = new Class({
     this.is_open = false;    
     
     return this;
+  },
+  
+  superfluous_effects: function(index){
+    var top    = this.the_art[index].getStyle('margin-top').toInt(),
+        bottom = this.the_art[index].getStyle('margin-bottom').toInt();
+        
+    new Fx.Morph(this.the_art[index], {
+      'property' : 'margin-top',
+      'duration' : 40,
+      'link'     : 'chain'
+    }).start({'margin-top': top-10, 'margin-bottom': bottom + 10}).start({'margin-top': top, 'margin-bottom': bottom});
   }
 });
 
