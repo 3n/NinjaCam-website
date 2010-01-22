@@ -150,7 +150,7 @@ var TheLouvre = new Class({
         
     new Fx.Morph(this.the_art[index], {
       'property' : 'margin-top',
-      'duration' : 40,
+      'duration' : 50,
       'link'     : 'chain'
     }).start({'margin-top': top - 5, 'margin-bottom': bottom + 5}).start({'margin-top': top, 'margin-bottom': bottom});
   }
