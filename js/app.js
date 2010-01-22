@@ -68,7 +68,8 @@ var TheLouvre = new Class({
   setup_effects: function(){
     if ($defined(Fx.Slide)){
       this.the_slide = new Fx.Slide(this.show_zone, {
-        onComplete: function(){
+        duration   : 300,
+        onComplete : function(){
           this.fireEvent(this.is_open ? 'open' : 'close');
         }.bind(this)
       });
@@ -76,8 +77,10 @@ var TheLouvre = new Class({
   },
   
   show: function(index){    
-    if (this.options.toggle && index === this.showing_index && this.is_open)
+    if (this.options.toggle && index === this.showing_index && this.is_open){
+      this.the_art[this.showing_index].removeClass(this.options.active_art_class);
       return this.close();
+    } 
     if (!this.is_open)
       this.open();
     
