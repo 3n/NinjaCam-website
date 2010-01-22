@@ -104,7 +104,7 @@ a {
   width:100%;
   position:absolute;
   top:0;
-  background: -webkit-gradient(radial, 50% -100, 100, 50% -100, 1400, from(rgba(255,255,255,0.15)), to(rgba(0,0,0,0)));
+  background: -webkit-gradient(radial, 50% -100, 100, 50% -100, 1200, from(rgba(255,255,255,0.13)), to(rgba(0,0,0,0)));
 }
 
 #spotlight {
