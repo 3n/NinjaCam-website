@@ -225,6 +225,7 @@ window.addEvent('domready', function(){
         user_name    : 'ninjacam',
 				show_twitpic : true,
 				shouldIncludeItem: function(item){
+				  console.log(item.text)
 				  return item.text.test(twitter_image_regex);
 				},
 				gen_html: function(item){				  

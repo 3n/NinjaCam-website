@@ -345,8 +345,8 @@ a {
 }
 .the_louvre_show_zone .the_louvre_show_caption {
   float:left;
-  width:38%;
-  margin-left:2%;
+  width:185px;
+  margin-left:14px;
   color:white;
   font-size:18px;
 }
