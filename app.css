@@ -326,24 +326,24 @@ a {
 
 
 
-#the_louvre_show_zone_wrapper {
+.the_louvre_show_zone_wrapper {
   margin:0 7px;
 }  
-  #the_louvre_show_zone_wrapper.the_louvre_open {
+  .the_louvre_show_zone_wrapper.the_louvre_open {
     border-bottom:1px solid #444;  
     margin-bottom:7px;
   }
   
-#the_louvre_show_zone {
+.the_louvre_show_zone {
   height:320px;
 }
-#the_louvre_show_zone .the_louvre_show_image {
+.the_louvre_show_zone .the_louvre_show_image {
   max-height:300px;
   max-width:60%;
   margin-left:1px;
   float:left;
 }
-#the_louvre_show_zone .the_louvre_show_caption {
+.the_louvre_show_zone .the_louvre_show_caption {
   float:left;
   width:38%;
   margin-left:2%;

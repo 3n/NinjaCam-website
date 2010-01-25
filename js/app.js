@@ -4,7 +4,8 @@ var TheLouvre = new Class({
   options: {
     selector     : "img",
     show_event   : "click",
-    show_zone_id : "the_louvre_show_zone",
+    show_zone_class   : "the_louvre_show_zone",
+    next_button_class : "the_louvre_next",
     show_image_class   : "the_louvre_show_image",
     show_caption_class : "the_louvre_show_caption",    
     active_art_class   : "the_louvre_showing",
@@ -54,8 +55,10 @@ var TheLouvre = new Class({
   },
   
   setup_show_zone: function(){
-    this.show_zone = this.options.show_zone_element || new Element('div', {'id': this.options.show_zone_id}).inject(this.element, 'top');
-    this.show_zone_wrapper = new Element('div', {id: this.options.show_zone_id + '_wrapper'}).wraps(this.show_zone);
+    this.show_zone = $(this.options.show_zone_element) || new Element('div', {'class': this.options.show_zone_class}).inject(this.element, 'top');
+    this.show_zone_wrapper = new Element('div', {'class': this.options.show_zone_class + '_wrapper'}).wraps(this.show_zone);
+    
+    this.next_button = $(this.options.next_button_element) || new Element('a', {'class': this.options.next_button_class}).inject(this.show_zone_wrapper);
   },
   
   attach_events: function(){
