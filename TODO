@@ -3,7 +3,7 @@ CODE:
 todo test each of the img services
 
 Image expansion UX
-	add controls and key nav for cycling through set of images.
+	scrolling up if the clicked image is too low?
 	
 get user names from RT (or check api response) and link them, as well as other metadata
 
