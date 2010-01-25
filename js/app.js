@@ -89,13 +89,14 @@ var TheLouvre = new Class({
   },
   attach_keyboard_events: function(){
     this.keyboard = new Keyboard({
+      preventDefault : true,
       events: {
-        'n' : this.next.bind(this),
-        'p' : this.prev.bind(this),
-        'j' : this.next.bind(this),
-        'k' : this.prev.bind(this),
-        'n' : this.next.bind(this),
-        'p' : this.prev.bind(this)
+        'down'  : this.next.bind(this),
+        'up'    : this.prev.bind(this),
+        'j'     : this.next.bind(this),
+        'k'     : this.prev.bind(this),
+        'right' : this.next.bind(this),  
+        'left'  : this.prev.bind(this)
       }
     });
   },
