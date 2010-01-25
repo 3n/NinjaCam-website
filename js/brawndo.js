@@ -5776,7 +5776,8 @@ Array.implement({
 	  }
 	},
 	cycle: function(index){
-		return this[index % this.length];
+	  var i = index % this.length;
+		return this[i >= 0 ? i : this.length + i];
 	},
 	reduce: function(fun, initial){
 		var len = this.length >>> 0;

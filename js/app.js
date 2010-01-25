@@ -2,13 +2,16 @@ var TheLouvre = new Class({
   Implements: [Options, Events],
   
   options: {
-    selector     : "img",
-    show_event   : "click",
-    show_zone_class   : "the_louvre_show_zone",
-    next_button_class : "the_louvre_next",
+    selector   : "img",
+    show_event : "click",
+    show_zone_class    : "the_louvre_show_zone",
+    next_button_class  : "the_louvre_next",
+    prev_button_class  : "the_louvre_prev",
     show_image_class   : "the_louvre_show_image",
     show_caption_class : "the_louvre_show_caption",    
     active_art_class   : "the_louvre_showing",
+    next_event         : "click",
+    prev_event         : "click",    
     iniitially_showing_index: null,   
     toggle : true,
     superfluous_effects: true,
@@ -58,13 +61,26 @@ var TheLouvre = new Class({
     this.show_zone = $(this.options.show_zone_element) || new Element('div', {'class': this.options.show_zone_class}).inject(this.element, 'top');
     this.show_zone_wrapper = new Element('div', {'class': this.options.show_zone_class + '_wrapper'}).wraps(this.show_zone);
     
-    this.next_button = $(this.options.next_button_element) || new Element('a', {'class': this.options.next_button_class}).inject(this.show_zone_wrapper);
+    this.show_zone_wrapper.adopt([
+      this.next_button = $(this.options.next_button_element) || new Element('a', {
+        'class': this.options.next_button_class,
+        'html'  : 'next'
+      }),
+      this.prev_button = $(this.options.prev_button_element) || new Element('a', {
+        'class' : this.options.prev_button_class,
+        'html'  : 'previous'
+      })
+    ]);
   },
   
   attach_events: function(){
     this.the_art.each(function(art,i){
       art.addEvent(this.options.show_event, this.show.bind(this,i));
     }, this);
+    
+    this.next_button.addEvent(this.options.next_event, this.next.bind(this));
+    this.prev_button.addEvent(this.options.prev_event, this.prev.bind(this));    
+    
     return this;    
   },
   
@@ -79,9 +95,11 @@ var TheLouvre = new Class({
     }
   },
   
-  show: function(index){    
+  show: function(index){ 
+    this.current_art = this.the_art.cycle(index);
+    
     if (this.options.toggle && index === this.showing_index && this.is_open){
-      this.the_art[this.showing_index].removeClass(this.options.active_art_class);
+      this.current_art.removeClass(this.options.active_art_class);
       return this.close();
     } 
     if (!this.is_open)
@@ -92,20 +110,27 @@ var TheLouvre = new Class({
       
       this.options.show_zone_transition(
         this.show_zone, 
-        this.the_art[this.showing_index], 
+        this.current_art, 
         this.showing_index,
-        this.options.update_show_zone.bind(this, [this.show_zone, this.the_art[this.showing_index], this.showing_index])
+        this.options.update_show_zone.bind(this, [this.show_zone, this.current_art, this.showing_index])
       );
       
       if (this.options.superfluous_effects && $defined(Fx.Morph))
-        this.superfluous_effects(index);
+        this.superfluous_effects(this.current_art);
 
       this.the_art.removeClass(this.options.active_art_class);
-      this.the_art[this.showing_index].addClass(this.options.active_art_class);
+      this.current_art.addClass(this.options.active_art_class);
     }
     
     return this;
   },
+  next: function(){
+    this.show(this.showing_index + 1);
+  },
+  prev: function(){
+    this.show(this.showing_index - 1);
+  },
+  
   open: function(){
     // attach key events
 
@@ -147,11 +172,11 @@ var TheLouvre = new Class({
     return this;
   },
   
-  superfluous_effects: function(index){
-    var top    = this.the_art[index].getStyle('margin-top').toInt(),
-        bottom = this.the_art[index].getStyle('margin-bottom').toInt();
+  superfluous_effects: function(art){
+    var top    = art.getStyle('margin-top').toInt(),
+        bottom = art.getStyle('margin-bottom').toInt();
         
-    new Fx.Morph(this.the_art[index], {
+    new Fx.Morph(art, {
       'property' : 'margin-top',
       'duration' : 50,
       'link'     : 'chain'
