@@ -91,8 +91,6 @@ var TheLouvre = new Class({
     this.keyboard = new Keyboard({
       preventDefault : true,
       events: {
-        'down'  : this.next.bind(this),
-        'up'    : this.prev.bind(this),
         'j'     : this.next.bind(this),
         'k'     : this.prev.bind(this),
         'right' : this.next.bind(this),  
