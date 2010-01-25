@@ -14,6 +14,7 @@ var TheLouvre = new Class({
     prev_event         : "click",    
     iniitially_showing_index: null,   
     toggle : true,
+    keyboard_nav : true,    
     superfluous_effects: true,
 
     get_img_src : function(the_art){
@@ -81,7 +82,22 @@ var TheLouvre = new Class({
     this.next_button.addEvent(this.options.next_event, this.next.bind(this));
     this.prev_button.addEvent(this.options.prev_event, this.prev.bind(this));    
     
+    if (this.options.keyboard_nav && $defined(Keyboard))
+      this.attach_keyboard_events();
+    
     return this;    
+  },
+  attach_keyboard_events: function(){
+    this.keyboard = new Keyboard({
+      events: {
+        'n' : this.next.bind(this),
+        'p' : this.prev.bind(this),
+        'j' : this.next.bind(this),
+        'k' : this.prev.bind(this),
+        'n' : this.next.bind(this),
+        'p' : this.prev.bind(this)
+      }
+    });
   },
   
   setup_effects: function(){
@@ -132,8 +148,6 @@ var TheLouvre = new Class({
   },
   
   open: function(){
-    // attach key events
-
     $try(
       this.options.custom_open,
       function(){
@@ -147,12 +161,11 @@ var TheLouvre = new Class({
 
     this.show_zone_wrapper.addClass('the_louvre_open');
     this.is_open = true;
+    this.keyboard.activate();
     
     return this;
   },
   close: function(){
-    // detach key events
-    
     $try(
       this.options.custom_close,
       function(){
@@ -167,7 +180,8 @@ var TheLouvre = new Class({
     );
 
     this.show_zone_wrapper.removeClass('the_louvre_open');
-    this.is_open = false;    
+    this.is_open = false;  
+    this.keyboard.deactivate();  
     
     return this;
   },
