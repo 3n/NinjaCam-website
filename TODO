@@ -4,8 +4,6 @@ todo test each of the img services
 
 Image expansion UX
 	add controls and key nav for cycling through set of images.
-	show metadata off to the right of image
-	fancy animations prolly
 	
 get user names from RT (or check api response) and link them, as well as other metadata
 
