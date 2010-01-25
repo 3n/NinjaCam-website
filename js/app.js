@@ -2,17 +2,24 @@ var TheLouvre = new Class({
   Implements: [Options, Events],
   
   options: {
-    selector   : "img",
-    show_event : "click",
-    next_event : "click",
-    prev_event : "click",    
+    selector    : "img",
+    
+    show_event  : "click",
+    next_event  : "click",
+    prev_event  : "click",    
+    close_event : "click",
     
     show_zone_class    : "the_louvre_show_zone",
     next_button_class  : "the_louvre_next",
+    close_button_class : "the_louvre_close",
     prev_button_class  : "the_louvre_prev",
     show_image_class   : "the_louvre_show_image",
     show_caption_class : "the_louvre_show_caption",    
     active_art_class   : "the_louvre_showing",
+    
+    next_button_html  : "next",
+    close_button_html : "close",
+    prev_button_html  : "previous",
     
     iniitially_showing_index : null,   
     toggle : true,
@@ -64,16 +71,14 @@ var TheLouvre = new Class({
     this.show_zone = $(this.options.show_zone_element) || new Element('div', {'class': this.options.show_zone_class}).inject(this.element, 'top');
     this.show_zone_wrapper = new Element('div', {'class': this.options.show_zone_class + '_wrapper'}).wraps(this.show_zone);
     
-    this.show_zone_wrapper.adopt([
-      this.next_button = $(this.options.next_button_element) || new Element('a', {
-        'class': this.options.next_button_class,
-        'html'  : 'next'
-      }),
-      this.prev_button = $(this.options.prev_button_element) || new Element('a', {
-        'class' : this.options.prev_button_class,
-        'html'  : 'previous'
-      })
-    ]);
+    this.show_zone_wrapper.adopt(      
+      ['next','prev','close'].map(function(button){
+        return this[button + "_button"] = $(this.options[button + "_button_element"]) || new Element('a', {
+          'class' : this.options[button + "_button_class"],
+          'html'  : this.options[button + "_button_html"]
+        });
+      }, this)
+    );
   },
   
   attach_events: function(){
@@ -83,6 +88,7 @@ var TheLouvre = new Class({
     
     this.next_button.addEvent(this.options.next_event, this.next.bind(this));
     this.prev_button.addEvent(this.options.prev_event, this.prev.bind(this));    
+    this.close_button.addEvent(this.options.close_event, this.close.bind(this));
     
     if (this.options.keyboard_nav && $defined(Keyboard))
       this.attach_keyboard_events();
