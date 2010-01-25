@@ -4,18 +4,20 @@ var TheLouvre = new Class({
   options: {
     selector   : "img",
     show_event : "click",
+    next_event : "click",
+    prev_event : "click",    
+    
     show_zone_class    : "the_louvre_show_zone",
     next_button_class  : "the_louvre_next",
     prev_button_class  : "the_louvre_prev",
     show_image_class   : "the_louvre_show_image",
     show_caption_class : "the_louvre_show_caption",    
     active_art_class   : "the_louvre_showing",
-    next_event         : "click",
-    prev_event         : "click",    
-    iniitially_showing_index: null,   
+    
+    iniitially_showing_index : null,   
     toggle : true,
     keyboard_nav : true,    
-    superfluous_effects: true,
+    superfluous_effects : true,
 
     get_img_src : function(the_art){
       return the_art.get('src');
