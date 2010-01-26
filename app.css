@@ -354,7 +354,7 @@ a {
 
 .the_louvre_controls {
   display:none;
-  padding: 4px 0 7px 0;
+  padding: 4px 0 7px 1px;
   border-top: 1px solid rgb(68, 68, 68);
 }
 .the_louvre_open .the_louvre_controls {
