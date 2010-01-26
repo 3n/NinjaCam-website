@@ -60,7 +60,7 @@ body {
 }
 
 h1 {  
-  font-size:200%;
+  font-size:210%;
   font-weight:bolder;
   text-shadow: 1px 1px 5px black;  
   font-weight:bold;  
@@ -70,20 +70,20 @@ h1 {
   background: -webkit-gradient(linear, 0% 35%, 0% 79%, from(#FAFAFA), to(#8C8C8C), color-stop(.4,#C9C9C9)), none;  
   -webkit-background-clip: text;
   color:transparent;
-}
-  h1:hover {
-    text-shadow: 0 0 100px white;
-  }
-  
+}  
   h1 .ninja {
+    margin-right:0.1em;    
+    letter-spacing:-1px;    
+    font-weight:normal;
     -webkit-text-fill-color:rgba(0,0,0,0.4);
     -webkit-text-stroke: 0.5px rgba(255,255,255,0.3);
-    margin-right:0.1em;
-    font-weight:lighter;
-    letter-spacing:-1px;
   }
   h1 .cam {
     -webkit-text-stroke: 1px rgba(255,255,255,0.5);
+  }
+  
+  h1:hover {
+    text-shadow: 0 0 100px white;
   }
 
 
@@ -153,7 +153,7 @@ a {
   }
   #header h2 {
     height:28px;
-    margin-top:13px;    
+    margin-top:16px;    
     text-transform:uppercase;
     text-shadow: 1px 1px 2px black;
     color:white;
