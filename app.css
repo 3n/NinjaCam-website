@@ -102,6 +102,7 @@ a {
 
 #glow {
   width:100%;
+  height:100%;  
   position:absolute;
   top:0;
   background: -webkit-gradient(radial, 50% -100, 100, 50% -100, 1200, from(rgba(255,255,255,0.13)), to(rgba(0,0,0,0)));
@@ -364,15 +365,15 @@ a {
 .the_louvre_button {
   margin-right:10px;
   color:white;
+  -webkit-transition: opacity 0.1s linear;
 }
-
-.the_louvre_disabled {
-  opacity:0.1;
-  cursor:default !important;
-}
-  .the_louvre_disabled:hover {
-    text-decoration:none !important;
+  .the_louvre_button.the_louvre_disabled {
+    opacity:0.4;
+    cursor:default !important;
   }
+    .the_louvre_disabled:hover {
+      text-decoration:none !important;
+    }
 
 
 
