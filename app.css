@@ -63,18 +63,29 @@ h1 {
   font-size:200%;
   font-weight:bolder;
   text-shadow: 1px 1px 5px black;  
-  -webkit-transition: text-shadow 0.3s ease-in-out;  
+  font-weight:bold;  
+  text-transform:uppercase;
   
-  /* alt */
-  font-weight:bold;
+  -webkit-transition: text-shadow 0.3s ease-in-out;
   background: -webkit-gradient(linear, 0% 35%, 0% 79%, from(#FAFAFA), to(#8C8C8C), color-stop(.4,#C9C9C9)), none;  
   -webkit-background-clip: text;
-  -webkit-text-stroke: 1px rgba(255,255,255,0.5);
   color:transparent;
 }
   h1:hover {
     text-shadow: 0 0 100px white;
   }
+  
+  h1 .ninja {
+    -webkit-text-fill-color:rgba(0,0,0,0.4);
+    -webkit-text-stroke: 0.5px rgba(255,255,255,0.3);
+    margin-right:0.1em;
+    font-weight:lighter;
+    letter-spacing:-1px;
+  }
+  h1 .cam {
+    -webkit-text-stroke: 1px rgba(255,255,255,0.5);
+  }
+
 
 h2 {
   font-size:120%;
