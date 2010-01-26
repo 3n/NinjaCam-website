@@ -22,7 +22,7 @@ provides: [MooTools, Native, Hash.base, Array.each, $util]
 
 var MooTools = {
 	'version': '1.2.5dev',
-	'build': '03c0d2318fcd8e77678111e58fd9ca6ad0b79cc6'
+	'build': 'de30da81f64ffd74ae477873f9aeaab46e342c7b'
 };
 
 var Native = function(options){
@@ -7328,3 +7328,19 @@ provides: [Keyboard]
 
 })();
 
+// from: http://davidwalsh.name/mootools-add-event
+
+Element.Events.click = { 
+	base:'click',
+	onAdd: function() {
+		if(this.setStyle) {
+			this.store('original-cursor',this.getStyle('cursor'));
+			this.setStyle('cursor','pointer');
+		}
+	},
+	onRemove: function() {
+		if(this.setStyle) {
+			this.setStyle('cursor',this.retrieve('original-cursor'));
+		}
+	}
+};

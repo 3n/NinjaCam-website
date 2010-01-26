@@ -354,7 +354,11 @@ a {
 
 .the_louvre_disabled {
   opacity:0.1;
+  cursor:default !important;
 }
+  .the_louvre_disabled:hover {
+    text-decoration:none !important;
+  }
 
 
 
