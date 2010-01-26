@@ -391,14 +391,21 @@ a {
 
 .cell .thumb-wrapper {
   height:121px;
-  width:122px;
+  width:121px;
   margin-left:-4px;
   -webkit-border-radius:10px;
 }
 .cell.the_louvre_showing .thumb-wrapper {
-  border-top:1px solid #7AD1FF;
-  margin-top:-1px;
-  background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#0086CE));
+  border-top: 1px solid #7AD1FF;
+  border-bottom:none !important;
+  border-right:none !important;
+  border-left:none !important;    
+  margin-top: -1px !important;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#0086CE));
 }
+  .cell:hover .thumb-wrapper {
+    border:1px solid #7AD1FF;
+    margin-top: -2px;    
+  }
 
 
