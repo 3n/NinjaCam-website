@@ -10,6 +10,7 @@ var TheLouvre = new Class({
     close_event : "click",
     
     show_zone_class    : "the_louvre_show_zone",
+    controls_class     : "the_louvre_controls",
     next_button_class  : "the_louvre_next the_louvre_button",
     close_button_class : "the_louvre_close the_louvre_button",
     prev_button_class  : "the_louvre_prev the_louvre_button",
@@ -73,8 +74,9 @@ var TheLouvre = new Class({
   setup_show_zone: function(){
     this.show_zone = $(this.options.show_zone_element) || new Element('div', {'class': this.options.show_zone_class}).inject(this.element, 'top');
     this.show_zone_wrapper = new Element('div', {'class': this.options.show_zone_class + '_wrapper'}).wraps(this.show_zone);
+    this.show_zone_controls = new Element('div', {'class': this.options.controls_class}).inject(this.show_zone_wrapper);    
     
-    this.show_zone_wrapper.adopt(      
+    this.show_zone_controls.adopt(      
       ['prev','next','close'].map(function(button){
         return this[button + "_button"] = $(this.options[button + "_button_element"]) || new Element('a', {
           'class' : this.options[button + "_button_class"],
@@ -209,7 +211,7 @@ var TheLouvre = new Class({
       }.bind(this)
     );
 
-    this.current_art.removeClass(this.options.active_art_class);
+    if (this.current_art) this.current_art.removeClass(this.options.active_art_class);
     this.show_zone_wrapper.removeClass(this.options.show_zone_open_class);
     this.is_open = false;  
     this.keyboard.deactivate();  

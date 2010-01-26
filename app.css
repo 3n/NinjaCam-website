@@ -352,11 +352,11 @@ a {
 }
 
 
-.the_louvre_button {
+.the_louvre_controls {
   display:none;
 }
-.the_louvre_open .the_louvre_button {
-  display:inline;
+.the_louvre_open .the_louvre_controls {
+  display:block;
 }
 
 .the_louvre_disabled {
