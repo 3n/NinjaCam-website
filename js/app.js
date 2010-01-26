@@ -251,9 +251,9 @@ window.addEvent('domready', function(){
         user_name    : 'ninjacam',
 				show_twitpic : true,
 				shouldIncludeItem: function(item){
-				  return item.text.test(twitter_image_regex);
+          return (item.text.test(twitter_image_regex)) && (!item.rt_from || item.from_user == "ninjacam");
 				},
-				gen_html: function(item){				  
+				gen_html: function(item){
 				  var url = item.text.match(twitter_image_regex)[0];
 
 				  if (url.test(/yfrog/))

@@ -22,7 +22,7 @@ provides: [MooTools, Native, Hash.base, Array.each, $util]
 
 var MooTools = {
 	'version': '1.2.5dev',
-	'build': 'de30da81f64ffd74ae477873f9aeaab46e342c7b'
+	'build': '086995fac54ef1ceab189cbe57ec8a09587a6c10'
 };
 
 var Native = function(options){
@@ -6744,18 +6744,24 @@ var Twitter = new Class({
   },
 
 	process_data: function(json){
-		this.db = json.results.map(function(json_item){
-			return this.options.shouldIncludeItem(json_item) ? {
-				title       : json_item.text,
-				created_on  : Date.parse(json_item.created_at),
-				source      : "http://www.twitter.com/" + json_item.from_user + "/status/" + json_item.id,
-				html        : this.options.gen_html(json_item),
-				is_new 			: this._item_is_new(json_item.created_at, this.options.site_name)
-			} : null
-	  }.bind(this)).flatten()
+		this.db = json.results.map(function(json_item){		  
+		  if (this.options.shouldIncludeItem(json_item)){
+  		  var rt_match = json_item.text.match(/RT\s+@(\w+):?/);
+		    var json_item = $merge(json_item, {
+  				title       : json_item.text,
+  				created_on  : Date.parse(json_item.created_at),
+  				source      : "http://www.twitter.com/" + json_item.from_user + "/status/" + json_item.id,
+  				is_new 			: this._item_is_new(json_item.created_at, this.options.site_name),
+  				rt_from     : (rt_match && rt_match.length > 1) ? rt_match[1] : null
+  			});  			  			
+  			json_item.html = this.options.gen_html(json_item);
+  			
+		    return json_item;
+		  }
+	  }.bind(this)).flatten();
 	
-		this.parent()
-		return this.db
+		this.parent();
+		return this.db;
 	},
 	
 	_to_cell: function(){			
@@ -6764,7 +6770,7 @@ var Twitter = new Class({
 			'custom_class' : 'text tweet ' + (this.is_new ? 'new' : ''),
 			'created_on'	 : this.created_on,
 			'source'			 : this.source
-		})
+		});
 	}
 });
 var MicroApp = new Class({
