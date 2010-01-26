@@ -63,7 +63,7 @@ h1 {
   font-size:210%;
   text-shadow: 1px 1px 5px black;  
   text-transform:uppercase;
-  font-weight:bold;
+/*  font-weight:bold;*/
 
   background: -webkit-gradient(linear, 0% 35%, 0% 79%, from(#FAFAFA), to(#A1A1A1), color-stop(.4,#C9C9C9)), none;
   -webkit-background-clip: text;
@@ -78,7 +78,7 @@ h1 {
     -webkit-transition: text-shadow 0.3s ease-in-out;    
   }
   h1 .cam {
-    -webkit-text-stroke: 1px rgba(255,255,255,0.4);
+    -webkit-text-stroke: 1px rgba(255,255,255,0.7);
   }
   
   h1:hover .ninja {
