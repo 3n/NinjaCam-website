@@ -74,7 +74,7 @@ var TheLouvre = new Class({
     this.show_zone_wrapper = new Element('div', {'class': this.options.show_zone_class + '_wrapper'}).wraps(this.show_zone);
     
     this.show_zone_wrapper.adopt(      
-      ['next','prev','close'].map(function(button){
+      ['prev','next','close'].map(function(button){
         return this[button + "_button"] = $(this.options[button + "_button_element"]) || new Element('a', {
           'class' : this.options[button + "_button_class"],
           'html'  : this.options[button + "_button_html"]
