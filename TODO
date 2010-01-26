@@ -11,6 +11,8 @@ change name of show_zone
 
 switch all events over to Delegation model
 
+use "tl_" as prefix for classes
+
 
 PHOTOSHOP:
 

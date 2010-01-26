@@ -352,7 +352,9 @@ a {
 }
 
 
-
+.the_louvre_disabled {
+  opacity:0.1;
+}
 
 
 

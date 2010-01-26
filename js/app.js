@@ -16,6 +16,7 @@ var TheLouvre = new Class({
     show_image_class   : "the_louvre_show_image",
     show_caption_class : "the_louvre_show_caption",    
     active_art_class   : "the_louvre_showing",
+    disabled_button_class : "the_louvre_disabled",
     
     next_button_html  : "next",
     close_button_html : "close",
@@ -25,6 +26,7 @@ var TheLouvre = new Class({
     toggle : true,
     keyboard_nav : true,    
     superfluous_effects : true,
+    cycle : false,
 
     get_img_src : function(the_art){
       return the_art.get('src');
@@ -119,9 +121,32 @@ var TheLouvre = new Class({
   },
   
   show: function(index){ 
-    this.current_art = this.the_art.cycle(index);
+    if (this.options.cycle)
+      this.current_art = this.the_art.cycle(index);
+    else {
+      var modified_index,
+          limited = index.limit(0, this.the_art.length - 1);
+      
+      if (index <= 0) 
+        this.prev_button.addClass(this.options.disabled_button_class);
+      else
+        this.prev_button.removeClass(this.options.disabled_button_class);
+
+      if (index >= this.the_art.length - 1) 
+        this.next_button.addClass(this.options.disabled_button_class);
+      else
+        this.next_button.removeClass(this.options.disabled_button_class);
+      
+      if (index !== limited){          
+        index = limited;        
+        modified_index = true;
+      } else
+        modified_index = false;        
+        
+      this.current_art = this.the_art[index];
+    }
     
-    if (this.options.toggle && index === this.showing_index && this.is_open){
+    if (this.options.toggle && !modified_index && index === this.showing_index && this.is_open){
       this.current_art.removeClass(this.options.active_art_class);
       return this.close();
     } 
@@ -225,7 +250,6 @@ window.addEvent('domready', function(){
         user_name    : 'ninjacam',
 				show_twitpic : true,
 				shouldIncludeItem: function(item){
-				  console.log(item.text)
 				  return item.text.test(twitter_image_regex);
 				},
 				gen_html: function(item){				  
