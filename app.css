@@ -352,6 +352,13 @@ a {
 }
 
 
+.the_louvre_button {
+  display:none;
+}
+.the_louvre_open .the_louvre_button {
+  display:inline;
+}
+
 .the_louvre_disabled {
   opacity:0.1;
   cursor:default !important;

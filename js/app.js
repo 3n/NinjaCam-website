@@ -10,13 +10,14 @@ var TheLouvre = new Class({
     close_event : "click",
     
     show_zone_class    : "the_louvre_show_zone",
-    next_button_class  : "the_louvre_next",
-    close_button_class : "the_louvre_close",
-    prev_button_class  : "the_louvre_prev",
+    next_button_class  : "the_louvre_next the_louvre_button",
+    close_button_class : "the_louvre_close the_louvre_button",
+    prev_button_class  : "the_louvre_prev the_louvre_button",
     show_image_class   : "the_louvre_show_image",
     show_caption_class : "the_louvre_show_caption",    
     active_art_class   : "the_louvre_showing",
     disabled_button_class : "the_louvre_disabled",
+    show_zone_open_class  : "the_louvre_open",    
     
     next_button_html  : "next",
     close_button_html : "close",
@@ -188,7 +189,7 @@ var TheLouvre = new Class({
       }.bind(this)
     );
 
-    this.show_zone_wrapper.addClass('the_louvre_open');
+    this.show_zone_wrapper.addClass(this.options.show_zone_open_class);
     this.is_open = true;
     this.keyboard.activate();
     
@@ -209,7 +210,7 @@ var TheLouvre = new Class({
     );
 
     this.current_art.removeClass(this.options.active_art_class);
-    this.show_zone_wrapper.removeClass('the_louvre_open');
+    this.show_zone_wrapper.removeClass(this.options.show_zone_open_class);
     this.is_open = false;  
     this.keyboard.deactivate();  
     
