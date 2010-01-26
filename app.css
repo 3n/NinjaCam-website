@@ -32,6 +32,11 @@ pre,code,kbd,samp,tt {font-family:monospace;*font-size:108%;line-height:99%;}
 
 @font-face {
   font-family: 'din';
+  src: url('DINPro-Black.otf') format('opentype');
+  font-weight:bolder;
+}
+@font-face {
+  font-family: 'din';
   src: url('DINPro-Bold.otf') format('opentype');
   font-weight:bold;
 }
@@ -39,11 +44,6 @@ pre,code,kbd,samp,tt {font-family:monospace;*font-size:108%;line-height:99%;}
   font-family: 'din';
   src: url('DINPro-Light.otf') format('opentype');
   font-weight:lighter;
-}
-@font-face {
-  font-family: 'din';
-  src: url('DINPro-Black.otf') format('opentype');
-  font-weight:bolder;
 }
 
 
@@ -63,6 +63,14 @@ h1 {
   font-size:200%;
   font-weight:bolder;
   text-shadow: 1px 1px 5px black;  
+  
+  /* alt */
+  text-shadow: none;
+  font-weight:bold;
+  background: -webkit-gradient(linear, 0% 35%, 0% 79%, from(#FAFAFA), to(#8C8C8C), color-stop(.4,#C9C9C9)), none;  
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.5);
+  color:transparent;
 }
 
 h2 {

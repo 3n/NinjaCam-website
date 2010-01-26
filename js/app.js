@@ -291,6 +291,7 @@ window.addEvent('domready', function(){
         new TheLouvre($('twitter-and-flickr'), {
           selector         : " .cell",
           show_image_class : "the_louvre_show_image icon",
+          close_button_html: "X",
           // initially_showing_index : 0,          
           get_img_src      : function(the_art){
             return the_art.getFirst('.thumbnail').getFirst('img').get('src');
