@@ -121,11 +121,12 @@ var TheLouvre = new Class({
   },
   
   show: function(index){ 
+    var modified_index = false;
+    
     if (this.options.cycle)
       this.current_art = this.the_art.cycle(index);
     else {
-      var modified_index,
-          limited = index.limit(0, this.the_art.length - 1);
+      var limited = index.limit(0, this.the_art.length - 1);
       
       if (index <= 0) 
         this.prev_button.addClass(this.options.disabled_button_class);
@@ -140,8 +141,7 @@ var TheLouvre = new Class({
       if (index !== limited){          
         index = limited;        
         modified_index = true;
-      } else
-        modified_index = false;        
+      }    
         
       this.current_art = this.the_art[index];
     }
