@@ -144,10 +144,9 @@ var TheLouvre = new Class({
       this.current_art = this.the_art[index];
     }
     
-    if (this.options.toggle && !modified_index && index === this.showing_index && this.is_open){
-      this.current_art.removeClass(this.options.active_art_class);
+    if (this.options.toggle && !modified_index && index === this.showing_index && this.is_open)
       return this.close();
-    } 
+      
     if (!this.is_open)
       this.open();
     
@@ -209,6 +208,7 @@ var TheLouvre = new Class({
       }.bind(this)
     );
 
+    this.current_art.removeClass(this.options.active_art_class);
     this.show_zone_wrapper.removeClass('the_louvre_open');
     this.is_open = false;  
     this.keyboard.deactivate();  
