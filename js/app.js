@@ -92,21 +92,19 @@ var TheLouvre = new Class({
     this.prev_button.addEvent(this.options.prev_event, this.prev.bind(this));    
     this.close_button.addEvent(this.options.close_event, this.close.bind(this));
     
-    if (this.options.keyboard_nav && $defined(Keyboard))
-      this.attach_keyboard_events();
+    if (this.options.keyboard_nav && $defined(Keyboard)){
+      this.keyboard = new Keyboard({
+        preventDefault : true,
+        events: {
+          'j'     : this.next.bind(this),
+          'k'     : this.prev.bind(this),
+          'right' : this.next.bind(this),  
+          'left'  : this.prev.bind(this)
+        }
+      });
+    }
     
     return this;    
-  },
-  attach_keyboard_events: function(){
-    this.keyboard = new Keyboard({
-      preventDefault : true,
-      events: {
-        'j'     : this.next.bind(this),
-        'k'     : this.prev.bind(this),
-        'right' : this.next.bind(this),  
-        'left'  : this.prev.bind(this)
-      }
-    });
   },
   
   setup_effects: function(){
