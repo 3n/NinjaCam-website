@@ -59,12 +59,11 @@ body {
   background-image: url('images/bg.png');
 }
 
-h1 {  
+h1 {
   font-size:210%;
-  font-weight:bolder;
   text-shadow: 1px 1px 5px black;  
-  font-weight:bold;  
   text-transform:uppercase;
+  font-weight:bold;
 
   background: -webkit-gradient(linear, 0% 35%, 0% 79%, from(#FAFAFA), to(#A1A1A1), color-stop(.4,#C9C9C9)), none;
   -webkit-background-clip: text;
@@ -90,7 +89,7 @@ h1 {
 h2 {
   font-size:120%;
   font-weight:lighter;
-  color:#555;
+  color:#4f4f4f;
   text-shadow: 0 2px 0 black;  
 
   /*alt*/
