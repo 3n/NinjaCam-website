@@ -249,7 +249,6 @@ window.addEvent('domready', function(){
 															extras  : 'date_taken,owner_name,tags' } } }), */
 		  new Twitter({
         user_name    : 'ninjacam',
-				show_twitpic : true,
 				shouldIncludeItem: function(item){
           return (item.text.test(twitter_image_regex)) && (!item.rt_from || item.from_user == "ninjacam");
 				},
