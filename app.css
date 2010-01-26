@@ -331,7 +331,7 @@ a {
 }  
   .the_louvre_show_zone_wrapper.the_louvre_open {
     border-bottom:1px solid #444;  
-    margin-bottom:7px;
+    margin-bottom:14px;
   }
   
 .the_louvre_show_zone {
@@ -354,9 +354,16 @@ a {
 
 .the_louvre_controls {
   display:none;
+  padding: 4px 0 7px 0;
+  border-top: 1px solid rgb(68, 68, 68);
 }
 .the_louvre_open .the_louvre_controls {
   display:block;
+}
+
+.the_louvre_button {
+  margin-right:10px;
+  color:white;
 }
 
 .the_louvre_disabled {
