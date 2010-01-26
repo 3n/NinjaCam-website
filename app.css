@@ -72,8 +72,8 @@ h2 {
   text-shadow: 0 1px 0 black;  
 
   /*alt*/
-/*  color:#090909;
-  text-shadow: 0 1px 0 rgba(255,255,255,0.13);  
+/*  color:#0c0c0c;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.1);  
   font-weight:bold;  */
 }
 
@@ -337,6 +337,7 @@ a {
   
 .the_louvre_show_zone {
   height:320px;
+  position:relative;
 }
 .the_louvre_show_zone .the_louvre_show_image {
   max-height:300px;
@@ -345,9 +346,9 @@ a {
   float:left;
 }
 .the_louvre_show_zone .the_louvre_show_caption {
-  float:left;
   width:185px;
-  margin-left:14px;
+  position:absolute;
+  right:0;
   color:white;
   font-size:18px;
 }
