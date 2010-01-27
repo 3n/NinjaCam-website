@@ -22,7 +22,7 @@ provides: [MooTools, Native, Hash.base, Array.each, $util]
 
 var MooTools = {
 	'version': '1.2.5dev',
-	'build': '086995fac54ef1ceab189cbe57ec8a09587a6c10'
+	'build': '0641afed9794838a5efb80f3a7e6f791b1e595af'
 };
 
 var Native = function(options){
@@ -6499,9 +6499,10 @@ var MicroAppView = new Class({
 		created_on		: new Date(1985,5,31),
 		source				: '#'
 	},
-	initialize: function(html, options){
+	initialize: function(html, options, data){ // todo move data to before options
 		this.setOptions(options)
 		this.html = html
+		this.data = data;
 		
 		this.update_element()
 		
@@ -6516,10 +6517,10 @@ var MicroAppView = new Class({
 		this.element.addClass(this.options.base_class)
 								.addClass(this.options.main_class)
 								.addClass(this.options.custom_class)
-
+		
 		if 			($type(this.html) === 'element') this.element.adopt(this.html)
 		else if ($type(this.html) === 'string')  this.element.set('html', this.html)
-
+		
 		if (!this.element.getElement('.'+this.options.new_class))
 			this.element.adopt(new Element('div', {
 				'class' : this.options.new_class, 
@@ -6530,6 +6531,9 @@ var MicroAppView = new Class({
 		this.element.store('source',  this.options.source)
 		this.element.store('title',   this.options.title)
 		this.element.store('created', this.options.created_on.timeDiffInWords())
+		
+		this.element.store('data', this.data);
+		this.data.element = this.element;
 
 		return this.element
 	},
@@ -6730,6 +6734,7 @@ var Twitter = new Class({
 		json_opts  : { data: {} },
 		web_source : "http://www.twitter.com",
 	 	initial_limit : 15,
+	 	extra_rt_info : true,
 	 	shouldIncludeItem: function(){ return true; },
 	 	gen_html: function(item){
 	 	  return item.text.make_urls_links().link_replies().link_hashcodes(); 
@@ -6744,10 +6749,11 @@ var Twitter = new Class({
   },
 
 	process_data: function(json){
-		this.db = json.results.map(function(json_item){		  
+		this.db = json.results.map(function(json_item, i){		  
 		  if (this.options.shouldIncludeItem(json_item)){
   		  var rt_match = json_item.text.match(/RT\s+@(\w+):?/);
 		    var json_item = $merge(json_item, {
+		      index       : i,
   				title       : json_item.text,
   				created_on  : Date.parse(json_item.created_at),
   				source      : "http://www.twitter.com/" + json_item.from_user + "/status/" + json_item.id,
@@ -6755,6 +6761,16 @@ var Twitter = new Class({
   				rt_from     : (rt_match && rt_match.length > 1) ? rt_match[1] : null
   			});  			  			
   			json_item.html = this.options.gen_html(json_item);
+  			
+  			if (this.options.extra_rt_info && json_item.rt_from)
+    			new Request.JSONP({
+            url  : "http://twitter.com/users/show.json",
+            data : { id: json_item.rt_from },
+            onSuccess: function(data){
+              json_item.rt_from_info = data;              
+              this.fireEvent('extraRTInfoRecieved', [json_item, this]);
+            }.bind(this)
+          }).send();
   			
 		    return json_item;
 		  }
@@ -6764,13 +6780,13 @@ var Twitter = new Class({
 		return this.db;
 	},
 	
-	_to_cell: function(){
+	_to_cell: function(){			
 		return new MicroAppView(this.html, { 
 			'main_class'	 : this.html > 90 ? 'double-wide' : 'single-wide',
 			'custom_class' : 'text tweet ' + (this.is_new ? 'new' : ''),
 			'created_on'	 : this.created_on,
 			'source'			 : this.source
-		});
+		}, this);
 	}
 });
 var MicroApp = new Class({

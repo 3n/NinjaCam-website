@@ -252,7 +252,7 @@ window.addEvent('domready', function(){
 				shouldIncludeItem: function(item){
           return (item.text.test(twitter_image_regex)) && (!item.rt_from || item.from_user == "ninjacam");
 				},
-				gen_html: function(item){ 
+				gen_html: function(item){
 				  var url = item.text.match(twitter_image_regex)[0];
 
 				  if (url.test(/yfrog/))
@@ -267,10 +267,13 @@ window.addEvent('domready', function(){
             url = "http://img.ly/show/thumb/" + url.match(/([^\/]+$)/)[0];
             
           var caption = item.text.replace(/http:\/\/[^\s]+|^RT|@[^\s]+/g,"").replace(/#ninjacam\s*$/g,"");
+          caption += "<img src='" + item.profile_image_url + "' class='tweet-user-image icon'/>";          
           caption += "<a class='tweet-user'>@" + $pick(item.rt_from, item.from_user) + "</a>";
-          caption += "<img src='" + item.profile_image_url + "' class='tweet-user-image icon'/>";
             
           return "<img src='" + url + "'/><p>" + caption + "</p>";
+				},
+				onExtraRTInfoRecieved: function(item){
+				  item.element.getElement('.tweet-user-image').set('src', item.rt_from_info.profile_image_url);
 				}
 			})
 		]],
