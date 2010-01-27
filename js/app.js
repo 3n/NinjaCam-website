@@ -268,7 +268,7 @@ window.addEvent('domready', function(){
             
           var tweet = item.text.replace(/http:\/\/[^\s]+|^RT|@[^\s]+/g,"").replace(/#ninjacam\s*$/g,""),
               user  = $pick(item.rt_from, item.from_user),
-              tweet_info = "<img src='" + item.profile_image_url + "' class='tweet-user-image icon'/>";
+              tweet_info = "<a target='_blank' href='http://www.twitter.com/" + user + "'><img src='" + item.profile_image_url + "' class='tweet-user-image icon'/></a>";
               tweet_info += "<a class='tweet-user' target='_blank' href='http://www.twitter.com/" + user + "'>@" + user + "</a>";
             
           return "<img src='" + url + "'/><div class='caption'><p>" + tweet + "</p><div>" + tweet_info + "</div></div>";
