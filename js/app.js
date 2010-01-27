@@ -252,7 +252,7 @@ window.addEvent('domready', function(){
 				shouldIncludeItem: function(item){
           return (item.text.test(twitter_image_regex)) && (!item.rt_from || item.from_user == "ninjacam");
 				},
-				gen_html: function(item){
+				gen_html: function(item){ 
 				  var url = item.text.match(twitter_image_regex)[0];
 
 				  if (url.test(/yfrog/))
@@ -266,7 +266,11 @@ window.addEvent('domready', function(){
           else if (url.test(/img.ly/))
             url = "http://img.ly/show/thumb/" + url.match(/([^\/]+$)/)[0];
             
-          return "<img src='" + url + "'/><p>" + item.text.replace(/http:\/\/[^\s]+|^RT|@[^\s]+/g,"").replace(/#ninjacam\s*$/g,"") + "</p>";
+          var caption = item.text.replace(/http:\/\/[^\s]+|^RT|@[^\s]+/g,"").replace(/#ninjacam\s*$/g,"");
+          caption += "<a class='tweet-user'>@" + $pick(item.rt_from, item.from_user) + "</a>";
+          caption += "<img src='" + item.profile_image_url + "' class='tweet-user-image icon'/>";
+            
+          return "<img src='" + url + "'/><p>" + caption + "</p>";
 				}
 			})
 		]],
@@ -296,7 +300,7 @@ window.addEvent('domready', function(){
             return the_art.getFirst('.thumbnail').getFirst('img').get('src');
           },
           get_caption      : function(the_art){
-            return the_art.getFirst('p').get('text');
+            return the_art.getFirst('p').get('html');
           }
         });
 		  }

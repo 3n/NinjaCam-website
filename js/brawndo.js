@@ -6516,10 +6516,10 @@ var MicroAppView = new Class({
 		this.element.addClass(this.options.base_class)
 								.addClass(this.options.main_class)
 								.addClass(this.options.custom_class)
-		
+
 		if 			($type(this.html) === 'element') this.element.adopt(this.html)
 		else if ($type(this.html) === 'string')  this.element.set('html', this.html)
-		
+
 		if (!this.element.getElement('.'+this.options.new_class))
 			this.element.adopt(new Element('div', {
 				'class' : this.options.new_class, 
@@ -6764,7 +6764,7 @@ var Twitter = new Class({
 		return this.db;
 	},
 	
-	_to_cell: function(){			
+	_to_cell: function(){
 		return new MicroAppView(this.html, { 
 			'main_class'	 : this.html > 90 ? 'double-wide' : 'single-wide',
 			'custom_class' : 'text tweet ' + (this.is_new ? 'new' : ''),
