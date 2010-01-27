@@ -325,14 +325,14 @@ a {
   min-width:114px;
 }
 
-.cell p {
+.cell .caption {
   display: none;
 }
 
 #twitter-and-flickr.captions-showing .cell {
   height : 210px;
 }
-#twitter-and-flickr.captions-showing .cell p {
+#twitter-and-flickr.captions-showing .cell .caption {
   margin-top:5px;
   padding-left:2px;
   font-size:80%;
@@ -372,6 +372,12 @@ a {
   right:0;
   color:white;
   font-size:18px;
+}
+
+.tweet-user-image {
+  width:40px;
+  height:40px;
+  float:left;
 }
 
 

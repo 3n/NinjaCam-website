@@ -39,7 +39,7 @@ var TheLouvre = new Class({
     update_show_zone: function(show_zone, the_art, index){
       show_zone.set('html','').adopt([
         new Element('img', {'class': this.options.show_image_class, 'src': this.options.get_img_src(the_art, index)}),
-        new Element('p',   {'class': this.options.show_caption_class, 'html': this.options.get_caption(the_art, index)})
+        new Element('div',   {'class': this.options.show_caption_class, 'html': this.options.get_caption(the_art, index)})
       ]);
     },
     show_zone_transition: function(show_zone, the_art, index, update_data){
@@ -266,11 +266,11 @@ window.addEvent('domready', function(){
           else if (url.test(/img.ly/))
             url = "http://img.ly/show/thumb/" + url.match(/([^\/]+$)/)[0];
             
-          var caption = item.text.replace(/http:\/\/[^\s]+|^RT|@[^\s]+/g,"").replace(/#ninjacam\s*$/g,"");
-          caption += "<img src='" + item.profile_image_url + "' class='tweet-user-image icon'/>";          
-          caption += "<a class='tweet-user'>@" + $pick(item.rt_from, item.from_user) + "</a>";
+          var tweet = item.text.replace(/http:\/\/[^\s]+|^RT|@[^\s]+/g,"").replace(/#ninjacam\s*$/g,"")
+              tweet_info = "<img src='" + item.profile_image_url + "' class='tweet-user-image icon'/>";
+              tweet_info += "<a class='tweet-user'>@" + $pick(item.rt_from, item.from_user) + "</a>";
             
-          return "<img src='" + url + "'/><p>" + caption + "</p>";
+          return "<img src='" + url + "'/><div class='caption'><p>" + tweet + "</p><div>" + tweet_info + "</div></div>";
 				},
 				onExtraRTInfoRecieved: function(item){
 				  item.element.getElement('.tweet-user-image').set('src', item.rt_from_info.profile_image_url);
@@ -303,7 +303,7 @@ window.addEvent('domready', function(){
             return the_art.getFirst('.thumbnail').getFirst('img').get('src');
           },
           get_caption      : function(the_art){
-            return the_art.getFirst('p').get('html');
+            return the_art.getFirst('.caption').get('html');
           }
         });
 		  }
