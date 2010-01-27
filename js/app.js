@@ -266,9 +266,10 @@ window.addEvent('domready', function(){
           else if (url.test(/img.ly/))
             url = "http://img.ly/show/thumb/" + url.match(/([^\/]+$)/)[0];
             
-          var tweet = item.text.replace(/http:\/\/[^\s]+|^RT|@[^\s]+/g,"").replace(/#ninjacam\s*$/g,"")
+          var tweet = item.text.replace(/http:\/\/[^\s]+|^RT|@[^\s]+/g,"").replace(/#ninjacam\s*$/g,""),
+              user  = $pick(item.rt_from, item.from_user),
               tweet_info = "<img src='" + item.profile_image_url + "' class='tweet-user-image icon'/>";
-              tweet_info += "<a class='tweet-user'>@" + $pick(item.rt_from, item.from_user) + "</a>";
+              tweet_info += "<a class='tweet-user' target='_blank' href='http://www.twitter.com/" + user + "'>@" + user + "</a>";
             
           return "<img src='" + url + "'/><div class='caption'><p>" + tweet + "</p><div>" + tweet_info + "</div></div>";
 				},
@@ -298,7 +299,7 @@ window.addEvent('domready', function(){
           selector         : " .cell",
           show_image_class : "the_louvre_show_image icon",
           close_button_html: "X",
-          // initially_showing_index : 0,          
+          // initially_showing_index : 0,
           get_img_src      : function(the_art){
             return the_art.getFirst('.thumbnail').getFirst('img').get('src');
           },
