@@ -144,11 +144,13 @@ a {
   margin-bottom:10px;
 }
   #header > * {
-    border-bottom:1px solid #555;
+    border-bottom:1px solid black;
+    -webkit-box-shadow: 0 1px 0 #404040;
     padding-bottom:2px;
   }
   #header h1 {
     border:none;
+    -webkit-box-shadow:none;
   }
   #header h2 {
     height:28px;
@@ -409,7 +411,7 @@ a {
   background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(rgba(0,0,0,0.3)), to(rgba(0,0,0,0.15)));  
   position:relative;
   -webkit-border-radius: 8px;
-  -webkit-box-shadow: 0 1px 1px rgba(255,255,255,0.1);
+  -webkit-box-shadow: 0 1px 1px rgba(255,255,255,0.1), 0 -1px 1px rgba(255,255,255,0.03);
   border:1px solid #090909;
   /* alt */
 /*  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0.08)), to(rgba(0,0,0,0.1)));  */
