@@ -386,9 +386,6 @@ a {
 }
 
 .dark .the_louvre_show_zone {
-/*  background:rgba(0,0,0,0.2);
-  border:1px solid rgba(0,0,0,0.3) !important;*/
-  
   background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(rgba(0,0,0,0.3)), to(rgba(0,0,0,0.15)));
   -webkit-box-shadow: 0 -1px 1px rgba(255,255,255,0.07);
   border-top:1px solid #090909 !important;
