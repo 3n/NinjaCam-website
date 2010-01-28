@@ -176,11 +176,12 @@ a {
   left:180px;
   top:-6px;
   -webkit-border-radius:40px;
+  -webkit-box-shadow: 0 2px 7px rgba(0,0,0,0.7);    
   color:white;
   font-weight:bold;
   font-size:70%;
   text-shadow:0 -1px 0 black;
-  text-align:center;
+  text-align:center;  
   -webkit-transform: rotate(14deg); 
   -moz-transform: rotate(14deg);
 
@@ -432,7 +433,8 @@ a {
 
 .the_louvre_controls {
   display:none;
-  padding: 5px 14px 10px 14px;
+/*  padding: 5px 14px 10px 14px;*/
+margin-bottom:14px;
   background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(rgba(0,0,0,0.3)), to(rgba(0,0,0,0.15)));  
   position:relative;
   -webkit-border-bottom-right-radius:8px;
@@ -448,9 +450,14 @@ a {
   
 .the_louvre_open .the_louvre_controls {
   display:block;
+  float:left;
+  width:496px;
 }
 
 .the_louvre_button {
+  padding:5px 8px 10px 8px;
+  display:block;
+  
   color:white;
   height:21px;
   -webkit-transition: opacity 0.1s linear;
@@ -465,12 +472,15 @@ a {
       text-decoration:none !important;
     }
 
+.the_louvre_prev {
+  float:left;
+}
 .the_louvre_next {
   float:right;
 }
 .the_louvre_close {
   position:absolute;
-  left:50%;
+  left:45%;
 }
 
 
