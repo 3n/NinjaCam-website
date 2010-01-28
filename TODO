@@ -13,6 +13,9 @@ use "tl_" as prefix for classes
 
 onFailure cases for everything
 
+add initial_pages: and page() to Twitter (hard). Make it so you can pull in another set of 
+tweets/images and dynamically add them to TheLouvre.
+
 
 PHOTOSHOP:
 
