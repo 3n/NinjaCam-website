@@ -406,11 +406,13 @@ a {
 .the_louvre_controls {
   display:none;
   padding: 5px 14px 10px 14px;
-  background:rgba(0,0,0,0.2);
+  background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(rgba(0,0,0,0.3)), to(rgba(0,0,0,0.15)));  
   position:relative;
   -webkit-border-radius: 8px;
   -webkit-box-shadow: 0 1px 1px rgba(255,255,255,0.1);
   border:1px solid #090909;
+  /* alt */
+/*  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0.08)), to(rgba(0,0,0,0.1)));  */
 }
 .the_louvre_open .the_louvre_controls {
   display:block;
