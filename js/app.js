@@ -303,7 +303,7 @@ window.addEvent('domready', function(){
         new TheLouvre($('twitter-and-flickr'), {
           selector         : " .cell",
           show_image_class : "the_louvre_show_image icon",
-          close_button_html: "⇪",
+          close_button_html: "⇧",
           next_button_html: "&gt;",
           prev_button_html: "&lt;",
           // initially_showing_index : 0,
