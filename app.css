@@ -235,6 +235,7 @@ a {
   cursor:pointer; 
   margin-top:16px;
   float:left;
+  color:white;
 }
 #buy-now-wrapper {
   border:1px solid rgba(0,0,0,0.7);
