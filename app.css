@@ -352,7 +352,7 @@ a {
   margin:0 7px;
 }  
   .the_louvre_show_zone_wrapper.the_louvre_open {
-    border-bottom:1px solid #444;  
+/*    border-bottom:1px solid #444;  */
     margin-bottom:14px;
   }
   
@@ -408,13 +408,13 @@ a {
   display:none;
   padding: 4px 0 7px 1px;
   border-top: 1px solid rgb(68, 68, 68);
+  position:relative;
 }
 .the_louvre_open .the_louvre_controls {
   display:block;
 }
 
 .the_louvre_button {
-  margin-right:10px;
   color:white;
   -webkit-transition: opacity 0.1s linear;
 }
@@ -426,6 +426,14 @@ a {
       text-decoration:none !important;
     }
 
+.the_louvre_next {
+  position:absolute;
+  right:0;
+}
+.the_louvre_close {
+  position:absolute;
+  left:50%;
+}
 
 
 
