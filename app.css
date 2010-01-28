@@ -386,7 +386,7 @@ a {
 
 .the_louvre_show_caption > div {
   margin:8px 0 0 0;
-  font-size:14px;
+  font-size:16px;
 }
 
 .the_louvre_show_caption a.tweet-user {
@@ -405,9 +405,12 @@ a {
 
 .the_louvre_controls {
   display:none;
-  padding: 4px 0 7px 1px;
-  border-top: 1px solid #555;
+  padding: 5px 14px 10px 14px;
+  background:rgba(0,0,0,0.2);
   position:relative;
+  -webkit-border-radius: 8px;
+  -webkit-box-shadow: 0 1px 1px rgba(255,255,255,0.1);
+  border:1px solid #090909;
 }
 .the_louvre_open .the_louvre_controls {
   display:block;
@@ -426,8 +429,7 @@ a {
     }
 
 .the_louvre_next {
-  position:absolute;
-  right:0;
+  float:right;
 }
 .the_louvre_close {
   position:absolute;
