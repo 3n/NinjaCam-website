@@ -364,7 +364,7 @@ a {
   position:relative;
 }
 .the_louvre_show_zone .the_louvre_show_image {
-  max-height:300px;
+  max-height:320px;
   max-width:58%;
   margin-left:1px;
   float:left;
@@ -448,7 +448,10 @@ a {
 
 .the_louvre_button {
   color:white;
+  height:21px;
   -webkit-transition: opacity 0.1s linear;
+  text-shadow: 0 -1px 1px black;
+  font-weight:bold;
 }
   .the_louvre_button.the_louvre_disabled {
     opacity:0.4;
@@ -467,8 +470,6 @@ a {
 }
 
 
-
-/* non-layout styles */
 .icon {
   -webkit-border-radius:8px;  
   -webkit-box-shadow: 0 2px 7px rgba(0,0,0,0.7);  
