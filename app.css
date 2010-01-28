@@ -353,6 +353,7 @@ a {
 
 .the_louvre_show_zone_wrapper {
   margin:0 7px;
+  -webkit-transition: margin-bottom 0.1s linear;
 }  
   .the_louvre_show_zone_wrapper.the_louvre_open {
     margin-bottom:14px;
@@ -439,8 +440,9 @@ a {
   border:1px solid #090909;
 }
   .dark .the_louvre_controls {
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0.08)), to(rgba(0,0,0,0.1)));
-    -webkit-box-shadow: 0 1px 1px rgba(255,255,255,0.1);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0.06)), to(rgba(0,0,0,0.1)));
+    -webkit-box-shadow: 0 1px 1px rgba(255,255,255,0.1), 0 -1px 0 #090909;
+    border-top-color:rgba(255,255,255,0.2);
   }
   
 .the_louvre_open .the_louvre_controls {
