@@ -481,8 +481,9 @@ a {
     }
 
 .the_louvre_next, .the_louvre_prev {
-  font-size:25px;
-  line-height:20px;
+  font-size:20px;
+  line-height:23px;
+  font-family:"Georgia";
 }
 .the_louvre_prev {
   float:left;
@@ -499,6 +500,7 @@ a {
   left:43%;
   border-left-width: 1px;
   border-right-width: 1px;    
+  line-height:24px;
 }
 
 
