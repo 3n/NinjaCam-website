@@ -271,9 +271,9 @@ window.addEvent('domready', function(){
               user  = $pick(item.rt_from, item.from_user),
               date  = "<span class='tweet-date'>" + Date.parse(item.created_at).timeDiffInWords() + "</span>",
               tweet_icon = "<a target='_blank' href='http://www.twitter.com/" + user + "'><img src='" + item.profile_image_url + "' class='tweet-user-image icon'/></a>",
-              tweet_user = "&mdash;<a class='tweet-user' target='_blank' href='http://www.twitter.com/" + user + "'>@" + user + "</a>";
+              tweet_user = "<a class='tweet-user' target='_blank' href='http://www.twitter.com/" + user + "'>@" + user + "</a>";
             
-          return "<img src='" + url + "'/><div class='caption'>" + date + "<p>" + tweet + "</p><div>" + tweet_user + tweet_icon + "</div></div>";
+          return "<img src='" + url + "'/><div class='caption'>" + date + "<p>" + tweet + "</p><div>" + tweet_icon + tweet_user + "</div></div>";
 				},
 				onExtraRTInfoRecieved: function(item){
 				  item.element.getElement('.tweet-user-image').set('src', item.rt_from_info.profile_image_url);

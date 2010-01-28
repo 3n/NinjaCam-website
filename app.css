@@ -374,14 +374,6 @@ a {
   font-size:18px;
 }
 
-.the_louvre_show_caption > div {
-  margin:5px 0 0 0;
-  font-size:14px;
-}
-
-.the_louvre_show_caption a.tweet-user {
-  margin-left:4px;
-}
 
 .the_louvre_show_caption .tweet-date {
   font-size:12px;
@@ -393,12 +385,22 @@ a {
   text-shadow: 0 -1px 0 black;
 }
 
+.the_louvre_show_caption > div {
+  margin:8px 0 0 0;
+  font-size:14px;
+}
+
+.the_louvre_show_caption a.tweet-user {
+  margin: 5px 0 0 10px;
+  display:block;
+  float:left;
+}
+
 .the_louvre_show_caption .tweet-user-image {
   width:30px;
   height:30px;
-/*  float:right;*/
-  -webkit-border-radius: 0 !important;
-  border:1px solid #aaa !important;
+  -webkit-border-radius: 4px !important;
+  float:left;
 }
 
 
