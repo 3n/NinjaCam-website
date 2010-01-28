@@ -248,12 +248,14 @@ window.addEvent('domready', function(){
 															media   : 'photos',
 															extras  : 'date_taken,owner_name,tags' } } }), */
 		  new Twitter({
-        user_name    : 'ninjacam',
+        // user_name    : 'ninjacam',
+        json_opts: { data : { q : 'ninjacam' }},
 				shouldIncludeItem: function(item){
-          return (item.text.test(twitter_image_regex)) && (!item.rt_from || item.from_user == "ninjacam");
+          var is_rt = item.text.match("RT @");
+          // return (item.text.test(twitter_image_regex)) && (!is_rt || item.from_user == "ninjacam");
+          return item.text.test(twitter_image_regex) && !is_rt;
 				},
 				gen_html: function(item){
-          console.log(item.text, item)
 				  var url = item.text.match(twitter_image_regex)[0];
 
 				  if (url.test(/yfrog/))
