@@ -433,8 +433,7 @@ a {
 
 .the_louvre_controls {
   display:none;
-/*  padding: 5px 14px 10px 14px;*/
-margin-bottom:14px;
+  margin-bottom:14px;
   background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(rgba(0,0,0,0.3)), to(rgba(0,0,0,0.15)));  
   position:relative;
   -webkit-border-bottom-right-radius:8px;
@@ -455,32 +454,51 @@ margin-bottom:14px;
 }
 
 .the_louvre_button {
-  padding:5px 8px 10px 8px;
-  display:block;
-  
+  padding:5px 14px 10px 14px;
+  display:block;  
   color:white;
   height:21px;
-  -webkit-transition: opacity 0.1s linear;
+  -webkit-transition-property: opacity,background;
+  -webkit-transition-duration: 0.2s;
+  -webkit-transition-timing-function: linear;  
   text-shadow: 0 -1px 1px black;
   font-weight:bold;
+  margin-top:-1px;
+  -webkit-box-shadow: 0 0 2px black;
+  border: 0 solid rgba(255,255,255,0.05);
 }
+  .the_louvre_button:hover {
+    text-decoration:none;
+    background: rgba(255,255,255,0.1);
+  }
   .the_louvre_button.the_louvre_disabled {
     opacity:0.4;
     cursor:default !important;
+    background:none !important;
   }
     .the_louvre_disabled:hover {
       text-decoration:none !important;
     }
 
+.the_louvre_next, .the_louvre_prev {
+  font-size:25px;
+  line-height:20px;
+}
 .the_louvre_prev {
   float:left;
+  -webkit-border-bottom-left-radius:8px;
+  border-right-width:1px;  
 }
 .the_louvre_next {
   float:right;
+  -webkit-border-bottom-right-radius:8px;  
+  border-left-width: 1px;
 }
 .the_louvre_close {
   position:absolute;
-  left:45%;
+  left:43%;
+  border-left-width: 1px;
+  border-right-width: 1px;    
 }
 
 
