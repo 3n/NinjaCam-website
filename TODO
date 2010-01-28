@@ -3,9 +3,7 @@ CODE:
 todo test each of the img services
 
 Image expansion UX
-	scrolling up if the clicked image is too low?
-	
-get user names from RT (or check api response) and link them, as well as other metadata
+	scrolling up if the clicked image is too low? or maybe make the show zone fixed.
 
 change name of show_zone
 
@@ -14,6 +12,7 @@ switch all events over to Delegation model
 use "tl_" as prefix for classes
 
 onFailure cases for everything
+
 
 PHOTOSHOP:
 
@@ -31,3 +30,6 @@ add note about what image shortening services are supported
 feature list below buy now button
 
 callout and link to follow twitter.com/ninjacam
+
+a video demo (show with d90) showing off the stances and telling people to turn the sound off
+probably in the style of a silent film with titles between scenes?
