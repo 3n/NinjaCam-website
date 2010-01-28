@@ -371,10 +371,32 @@ a {
 .the_louvre_show_zone .the_louvre_show_caption {
   width:185px;
   position:absolute;
-  right:0;
+  right:9px;
   color:white;
   font-size:18px;
 }
+
+.the_louvre_show_zone {
+  background: rgba(255,255,255,0.02);
+  padding:8px;
+  -webkit-border-top-right-radius:8px;
+  -webkit-border-top-left-radius:8px;
+  border:1px solid rgba(255,255,255,0.03) !important;
+}
+
+.dark .the_louvre_show_zone {
+/*  background:rgba(0,0,0,0.2);
+  border:1px solid rgba(0,0,0,0.3) !important;*/
+  
+  background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(rgba(0,0,0,0.3)), to(rgba(0,0,0,0.15)));
+  -webkit-box-shadow: 0 -1px 1px rgba(255,255,255,0.07);
+  border-top:1px solid #090909 !important;
+  border-left:1px solid #090909 !important;
+  border-right:1px solid #090909 !important;
+}
+  .the_louvre_show_zone_wrapper.the_louvre_open > div {
+    overflow:visible !important;
+  }
 
 
 .the_louvre_show_caption .tweet-date {
@@ -411,12 +433,16 @@ a {
   padding: 5px 14px 10px 14px;
   background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(rgba(0,0,0,0.3)), to(rgba(0,0,0,0.15)));  
   position:relative;
-  -webkit-border-radius: 8px;
+  -webkit-border-bottom-right-radius:8px;
+  -webkit-border-bottom-left-radius:8px;
   -webkit-box-shadow: 0 1px 1px rgba(255,255,255,0.1), 0 -1px 1px rgba(255,255,255,0.03);
   border:1px solid #090909;
-  /* alt */
-/*  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0.08)), to(rgba(0,0,0,0.1)));  */
 }
+  .dark .the_louvre_controls {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0.08)), to(rgba(0,0,0,0.1)));
+    -webkit-box-shadow: 0 1px 1px rgba(255,255,255,0.1);
+  }
+  
 .the_louvre_open .the_louvre_controls {
   display:block;
 }
