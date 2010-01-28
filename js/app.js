@@ -253,6 +253,7 @@ window.addEvent('domready', function(){
           return (item.text.test(twitter_image_regex)) && (!item.rt_from || item.from_user == "ninjacam");
 				},
 				gen_html: function(item){
+          console.log(item.text, item)
 				  var url = item.text.match(twitter_image_regex)[0];
 
 				  if (url.test(/yfrog/))
@@ -268,10 +269,11 @@ window.addEvent('domready', function(){
             
           var tweet = item.text.replace(/http:\/\/[^\s]+|^RT|@[^\s]+/g,"").replace(/#ninjacam\s*$/g,""),
               user  = $pick(item.rt_from, item.from_user),
-              tweet_info = "<a target='_blank' href='http://www.twitter.com/" + user + "'><img src='" + item.profile_image_url + "' class='tweet-user-image icon'/></a>";
-              tweet_info += "<a class='tweet-user' target='_blank' href='http://www.twitter.com/" + user + "'>@" + user + "</a>";
+              date  = "<span class='tweet-date'>" + Date.parse(item.created_at).timeDiffInWords() + "</span>",
+              tweet_icon = "<a target='_blank' href='http://www.twitter.com/" + user + "'><img src='" + item.profile_image_url + "' class='tweet-user-image icon'/></a>",
+              tweet_user = "&mdash;<a class='tweet-user' target='_blank' href='http://www.twitter.com/" + user + "'>@" + user + "</a>";
             
-          return "<img src='" + url + "'/><div class='caption'><p>" + tweet + "</p><div>" + tweet_info + "</div></div>";
+          return "<img src='" + url + "'/><div class='caption'>" + date + "<p>" + tweet + "</p><div>" + tweet_user + tweet_icon + "</div></div>";
 				},
 				onExtraRTInfoRecieved: function(item){
 				  item.element.getElement('.tweet-user-image').set('src', item.rt_from_info.profile_image_url);

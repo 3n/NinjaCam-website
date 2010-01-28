@@ -53,7 +53,7 @@ html {
 
 body {
   font-family: "din", 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color:white;
+  color:#aaa;
   font-size:100%;
   background-color:#111;
   background-image: url('images/bg.png');
@@ -104,11 +104,11 @@ h3 {
   line-height:1.5em;
   font-size:120%;
   text-shadow:0 0 5px #00A5FF;
+  color:white;
 }
 
 p {
   font-weight:lighter;
-  color:#aaa;
   font-size:90%;
   line-height:1.4em;
 }
@@ -374,10 +374,31 @@ a {
   font-size:18px;
 }
 
-.tweet-user-image {
-  width:40px;
-  height:40px;
-  float:left;
+.the_louvre_show_caption > div {
+  margin:5px 0 0 0;
+  font-size:14px;
+}
+
+.the_louvre_show_caption a.tweet-user {
+  margin-left:4px;
+}
+
+.the_louvre_show_caption .tweet-date {
+  font-size:12px;
+  text-transform:uppercase;
+  color:#666;
+  margin-bottom:5px;
+  display:block;  
+  font-weight:lighter;
+  text-shadow: 0 -1px 0 black;
+}
+
+.the_louvre_show_caption .tweet-user-image {
+  width:30px;
+  height:30px;
+/*  float:right;*/
+  -webkit-border-radius: 0 !important;
+  border:1px solid #aaa !important;
 }
 
 
