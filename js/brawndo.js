@@ -22,7 +22,7 @@ provides: [MooTools, Native, Hash.base, Array.each, $util]
 
 var MooTools = {
 	'version': '1.2.5dev',
-	'build': '99ddf65d3b4700574362869349a330c559138a95'
+	'build': '249b2865bd7acef8645f8984e87b9083eee03f39'
 };
 
 var Native = function(options){
@@ -6614,7 +6614,8 @@ var MicroAppModel = new Class({
 		  var req = new Request.JSONP($merge({
   		    url: this.options.json_url, 
   		    abortAfter : 1000, 
-  		    retries : 0
+  		    retries : 0,
+  		    timeout : 5000
 		    }, this.options.json_opts) 
 			);
 			

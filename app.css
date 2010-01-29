@@ -316,11 +316,11 @@ a {
 	}
 }
 
-#loading { 
+#loading, #failed { 
   display:none; 
   z-index:100;
 }
-#twitter-and-flickr.loading #loading {
+#twitter-and-flickr.loading #loading, #twitter-and-flickr.failed #failed {
   margin:100px auto;
   height:90px;
   width:100px;
@@ -330,9 +330,6 @@ a {
   position:relative;
   background:rgba(0,0,0,0.2);
   -webkit-border-radius: 8px;
-}
-
-#loading span {
   font-weight:bold;
   font-size:16px;
   color:white;

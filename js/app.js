@@ -316,7 +316,10 @@ window.addEvent('domready', function(){
         initial_limit: 32,		    
         // user_name    : 'ninjacam',
         json_opts: { 
-          data : { q : 'tweetphoto' }
+          data : { q : 'tweetphoto' },
+          onFailure: function(){
+            $('twitter-and-flickr').removeClass('loading').addClass('failed');
+          }
         },
 				shouldIncludeItem: function(item){
           var is_rt = item.text.match("RT @");
