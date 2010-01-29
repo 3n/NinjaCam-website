@@ -15,6 +15,8 @@ move all the image service stuff into Twitter.js
 
 investigate the thumbnail()-while-in-thumbnail problem (causing bad proportions on big images once loaded)
 
+make it so the glossy shit on the photo icons only shows up when the photo is loaded.
+
 
 
 PHOTOSHOP:
