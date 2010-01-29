@@ -354,6 +354,8 @@ a {
 
 .the_louvre_show_zone_wrapper {
   margin:0 7px;
+  z-index:10;
+  float:left;
   -webkit-transition: margin-bottom 0.1s linear;
 }  
   .the_louvre_show_zone_wrapper.the_louvre_open {
@@ -433,7 +435,6 @@ a {
 
 .the_louvre_controls {
   display:none;
-  margin-bottom:14px;
   background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(rgba(0,0,0,0.3)), to(rgba(0,0,0,0.15)));  
   position:relative;
   -webkit-border-bottom-right-radius:8px;

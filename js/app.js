@@ -109,7 +109,9 @@ var TheLouvre = new Class({
           'j'     : this.next.bind(this),
           'k'     : this.prev.bind(this),
           'right' : this.next.bind(this),  
-          'left'  : this.prev.bind(this)
+          'left'  : this.prev.bind(this),
+          'f':this.pin_show_zone.bind(this),
+          'g':this.unpin_show_zone.bind(this)          
         }
       });
     }
@@ -236,6 +238,30 @@ var TheLouvre = new Class({
       'duration' : 50,
       'link'     : 'chain'
     }).start({'margin-top': top - 5, 'margin-bottom': bottom + 5}).start({'margin-top': top, 'margin-bottom': bottom});
+  },
+  
+  pin_show_zone: function(){
+    if (this.is_pinned) return this;
+    
+    this.filler = new Element('div', {
+      styles: { 
+        height : this.show_zone_wrapper.getHeight(),
+        margin : this.show_zone_wrapper.getStyle('margin')
+      }
+    }).inject(this.show_zone_wrapper, 'after');
+    this.show_zone_wrapper.setStyle('position','fixed');
+    this.is_pinned = true;
+    
+    return this;
+  },
+  unpin_show_zone: function(){
+    if (!this.is_pinned) return this;
+    
+    this.filler.destroy();
+    this.show_zone_wrapper.setStyles({ 'position':'static', 'top':0 });
+    this.is_pinned = false;   
+    
+    return this; 
   }
 });
 
@@ -256,9 +282,9 @@ window.addEvent('domready', function(){
 															media   : 'photos',
 															extras  : 'date_taken,owner_name,tags' } } }), */
 		  new Twitter({
-        initial_limit: 30,		    
+        initial_limit: 32,		    
         // user_name    : 'ninjacam',
-        json_opts: { data : { q : 'ninjacam' }},
+        json_opts: { data : { q : 'tweetphoto' }},
 				shouldIncludeItem: function(item){
           var is_rt = item.text.match("RT @");
           // return (item.text.test(twitter_image_regex)) && (!is_rt || item.from_user == "ninjacam");
