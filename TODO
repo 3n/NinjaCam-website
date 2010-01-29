@@ -13,6 +13,8 @@ onFailure cases for everything: photo loading, jsonp etc
 
 move all the image service stuff into Twitter.js
 
+investigate the thumbnail()-while-in-thumbnail problem (causing bad proportions on big images once loaded)
+
 
 
 PHOTOSHOP:
