@@ -315,7 +315,11 @@ window.addEvent('domready', function(){
 		  new Twitter({
         initial_limit: 32,		    
         // user_name    : 'ninjacam',
-        json_opts: { data : { q : 'tweetphoto' }},
+        json_opts: { 
+          data : { q : 'tweetphoto' },
+          onRequest: function(){ console.log('start') },
+          onComplete: function(){ console.log('complete') }
+        },
 				shouldIncludeItem: function(item){
           var is_rt = item.text.match("RT @");
           // return (item.text.test(twitter_image_regex)) && (!is_rt || item.from_user == "ninjacam");
