@@ -322,9 +322,9 @@ a {
 }
 #twitter-and-flickr.loading #loading, #twitter-and-flickr.failed #failed {
   margin:100px auto;
-  height:90px;
-  width:100px;
-  padding-top:10px;
+  height:96px;
+  width:120px;
+  padding:14px;
   text-align:center;
   display:block;
   position:relative;
@@ -334,13 +334,16 @@ a {
   font-size:16px;
   color:white;
 }
+  #failed {
+    height:auto !important;
+  }
 
 #loading #spinner-fg, #loading #spinner-bg {
   height:50px;
   width:50px;  
   position:absolute;
-  left:25%;
-  top:35%;
+  left:32%;
+  top:37%;
   background-position:center center;  
 }
 #loading #spinner-fg {
