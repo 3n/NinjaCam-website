@@ -127,7 +127,7 @@ var TheLouvre = new Class({
       window.addEvent('scroll', function(){
         if (this.show_zone_wrapper.getTop() < window.getScrollTop())
           this.pin_show_zone();
-        else if (window.getScrollTop() < this.original_show_zone_top)
+        if (window.getScrollTop() < this.original_show_zone_top)
           this.unpin_show_zone();
       }.bind(this));
     }
