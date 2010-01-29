@@ -148,6 +148,10 @@ var TheLouvre = new Class({
     }
   },
   
+  remove_art: function(art){
+    this.the_art.erase(art);
+  },
+  
   show: function(index){ 
     var modified_index = false;
     
@@ -311,7 +315,7 @@ window.addEvent('domready', function(){
 		  new Twitter({
         initial_limit: 32,		    
         // user_name    : 'ninjacam',
-        json_opts: { data : { q : 'tweetphoto' }},
+        json_opts: { data : { q : 'twitgoo' }},
 				shouldIncludeItem: function(item){
           var is_rt = item.text.match("RT @");
           // return (item.text.test(twitter_image_regex)) && (!is_rt || item.from_user == "ninjacam");
@@ -352,10 +356,18 @@ window.addEvent('domready', function(){
 		{
 		  onHtmlUpdated: function(){ 
 		    $('twitter-and-flickr').getChildren('div.cell').each(function(cell){
-          // onerror for images here
+		      var img_elem = cell.getFirst();
 		      
-          cell.getFirst().thumbnail(114,114,'thumbnail icon');
+          img_elem.thumbnail(114,114,'thumbnail icon');
           new Element('div', {'class': 'thumb-wrapper'}).inject(cell, 'top');          
+          
+          img_elem.addEvent('error', function(){
+            try {
+              var cell = this.getParent().getParent();
+              the_louvre.remove_art(cell);
+              cell.destroy();
+            }catch(e){}
+          });
           
           // turn thumbnail urls into full size for the various services
           cell.getFirst('.thumbnail').getFirst('img').mod('src', function(old_src){
@@ -368,7 +380,7 @@ window.addEvent('domready', function(){
 		    
         $('twitter-and-flickr').fade('in');
         
-        new TheLouvre($('twitter-and-flickr'), {
+        the_louvre = new TheLouvre($('twitter-and-flickr'), {
           selector         : " .cell",
           show_image_class : "the_louvre_show_image icon",
           close_button_html: "⇧",

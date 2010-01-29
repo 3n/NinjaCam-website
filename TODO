@@ -1,8 +1,5 @@
 CODE:
 
-Image expansion UX
-	scrolling up if the clicked image is too low? or maybe make the show zone fixed.
-
 change name of show_zone
 
 switch all events over to Delegation model
