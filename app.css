@@ -306,10 +306,58 @@ a {
 /*  visibility:hidden;
   opacity:0;*/
 }
-  #twitter-and-flickr.loading {
-    background:red;
-    height:100px;
-  }
+
+@-webkit-keyframes spinnerRotate {
+	from {
+		-webkit-transform:rotate(0deg);
+	}
+	to {
+		-webkit-transform:rotate(360deg);
+	}
+}
+
+#loading { 
+  display:none; 
+  z-index:100;
+}
+#twitter-and-flickr.loading #loading {
+  margin:100px auto;
+  height:90px;
+  width:100px;
+  padding-top:10px;
+  text-align:center;
+  display:block;
+  position:relative;
+  background:rgba(0,0,0,0.2);
+  -webkit-border-radius: 8px;
+}
+
+#loading span {
+  font-weight:bold;
+  font-size:16px;
+  color:white;
+}
+
+#loading #spinner-fg, #loading #spinner-bg {
+  height:50px;
+  width:50px;  
+  position:absolute;
+  left:25%;
+  top:35%;
+  background-position:center center;  
+}
+#loading #spinner-fg {
+  background-image: url('images/spinner-fg.png');
+  background-repeat: no-repeat;  
+}
+#loading #spinner-bg {
+  background-image: url('images/spinner-bg.png');
+  background-repeat: no-repeat;
+  -webkit-animation-name: spinnerRotate;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+}
 
 .new-icon {
   display:none;

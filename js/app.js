@@ -316,7 +316,7 @@ window.addEvent('domready', function(){
         initial_limit: 32,		    
         // user_name    : 'ninjacam',
         json_opts: { 
-          data : { q : 'tweetphoto' }
+          data : { qq : 'tweetphoto' }
         },
 				shouldIncludeItem: function(item){
           var is_rt = item.text.match("RT @");
