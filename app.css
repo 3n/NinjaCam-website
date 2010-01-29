@@ -409,6 +409,7 @@ a {
   z-index:10;
   float:left;
   -webkit-transition: margin-bottom 0.1s linear;
+  width:498px;  
 }  
   .the_louvre_show_zone_wrapper.the_louvre_open {
     margin-bottom:14px;
@@ -418,7 +419,6 @@ a {
     background:rgba(0,0,0,0.9);
     -webkit-box-shadow: 0 0 20px black;
     top:14px;
-    width:498px;
   }
   
 .the_louvre_show_zone {
