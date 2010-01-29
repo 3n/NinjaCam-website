@@ -258,26 +258,31 @@ window.addEvent('domready', function(){
           return item.text.test(twitter_image_regex) && !is_rt;
 				},
 				gen_html: function(item){
-				  var url = item.text.match(twitter_image_regex)[0];
+				  var img_url = item.text.match(twitter_image_regex)[0],
+				      src = img_url,
+				      tweet_url = item.source;
 
-				  if (url.test(/yfrog/))
-            url += ".th.jpg";
-				  else if (url.test(/twitpic/))
-            url = "http://twitpic.com/show/thumb/" + url.match(/([^\/]+$)/)[0];
-          else if (url.test(/twitgoo/))
-            url = "http://twitgoo.com/show/thumb/" + url.match(/([^\/]+$)/)[0];
-          else if (url.test(/tweetphoto/))
-            url = "http://TweetPhotoAPI.com/api/TPAPI.svc/imagefromurl?size=big&url=http://tweetphoto.com/" + url.match(/([^\/]+$)/)[0];            
-          else if (url.test(/img.ly/))
-            url = "http://img.ly/show/thumb/" + url.match(/([^\/]+$)/)[0];
+				  if (img_url.test(/yfrog/))
+            src += ".th.jpg";
+				  else if (img_url.test(/twitpic/))
+            src = "http://twitpic.com/show/thumb/" + img_url.match(/([^\/]+$)/)[0];
+          else if (img_url.test(/twitgoo/))
+            src = "http://twitgoo.com/show/thumb/" + img_url.match(/([^\/]+$)/)[0];
+          else if (img_url.test(/tweetphoto/))
+            src = "http://TweetPhotoAPI.com/api/TPAPI.svc/imagefromurl?size=big&url=http://tweetphoto.com/" + img_url.match(/([^\/]+$)/)[0];            
+          else if (img_url.test(/img.ly/))
+            src = "http://img.ly/show/thumb/" + img_url.match(/([^\/]+$)/)[0];
             
           var tweet = item.text.replace(/http:\/\/[^\s]+|^RT|@[^\s]+/g,"").replace(/#ninjacam\s*$/g,""),
               user  = $pick(item.rt_from, item.from_user),
-              date  = "<span class='tweet-date'>" + Date.parse(item.created_at).timeDiffInWords() + "</span>",
+              date  = "<a href='" + tweet_url + "' class='tweet-date'>" + Date.parse(item.created_at).timeDiffInWords() + "</a>",
               tweet_icon = "<a target='_blank' href='http://www.twitter.com/" + user + "'><img src='" + item.profile_image_url + "' class='tweet-user-image icon'/></a>",
               tweet_user = "<a class='tweet-user' target='_blank' href='http://www.twitter.com/" + user + "'>@" + user + "</a>";
             
-          return "<img src='" + url + "'/><div class='caption'>" + date + "<p class='tweet-text'>" + tweet + "</p><div>" + tweet_icon + tweet_user + "</div></div>";
+          return "<img src='" + src + "'/>"
+                 + "<div class='caption'>" 
+                   + date + "<p class='tweet-text'>" + tweet 
+                 + "</p><div>" + tweet_icon + tweet_user + "</div></div>";
 				},
 				onExtraRTInfoRecieved: function(item){
 				  item.element.getElement('.tweet-user-image').set('src', item.rt_from_info.profile_image_url);
@@ -287,6 +292,8 @@ window.addEvent('domready', function(){
 		{
 		  onHtmlUpdated: function(){ 
 		    $('twitter-and-flickr').getChildren('div.cell').each(function(cell){
+          // onerror for images here
+		      
           cell.getFirst().thumbnail(114,114,'thumbnail icon');
           new Element('div', {'class': 'thumb-wrapper'}).inject(cell, 'top');          
           
@@ -307,7 +314,7 @@ window.addEvent('domready', function(){
           close_button_html: "⇧",
           next_button_html: "&gt;",
           prev_button_html: "&lt;",
-          // initially_showing_index : 0,
+          // initially_showing_index : 0, // todo fix
           get_img_src      : function(the_art){
             return the_art.getFirst('.thumbnail').getFirst('img').get('src');
           },
