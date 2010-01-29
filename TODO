@@ -1,12 +1,8 @@
 CODE:
 
-change name of show_zone
+change name of show_zone to showcase
 
 switch all events over to Delegation model
-
-use "tl_" as prefix for classes
-
-onFailure cases for everything: photo loading, jsonp etc
 
 move all the image service stuff into Twitter.js
 
