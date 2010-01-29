@@ -111,8 +111,7 @@ var TheLouvre = new Class({
           'k'     : this.prev.bind(this),
           'right' : this.next.bind(this),  
           'left'  : this.prev.bind(this),
-          'f':this.pin_show_zone.bind(this),
-          'g':this.unpin_show_zone.bind(this)          
+          'p'     : this.toggle_pin_show_zone.bind(this)
         }
       });
     }
@@ -265,6 +264,10 @@ var TheLouvre = new Class({
     this.is_pinned = false;   
     
     return this; 
+  },
+  toggle_pin_show_zone: function(){
+    this.is_pinned ? this.unpin_show_zone() : this.pin_show_zone();
+    return this;
   }
 });
 
