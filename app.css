@@ -361,6 +361,10 @@ a {
   .the_louvre_show_zone_wrapper.the_louvre_open {
     margin-bottom:14px;
   }
+  .the_louvre_show_zone_wrapper.the_louvre_pinned {
+    -webkit-border-radius: 8px;
+    background:rgba(0,0,0,0.9);
+  }
   
 .the_louvre_show_zone {
   height:320px;

@@ -18,7 +18,8 @@ var TheLouvre = new Class({
     show_caption_class : "the_louvre_show_caption",    
     active_art_class   : "the_louvre_showing",
     disabled_button_class : "the_louvre_disabled",
-    show_zone_open_class  : "the_louvre_open",    
+    show_zone_open_class  : "the_louvre_open",   
+    pinned_class       : "the_louvre_pinned", 
     
     next_button_html  : "next",
     close_button_html : "close",
@@ -249,7 +250,8 @@ var TheLouvre = new Class({
         margin : this.show_zone_wrapper.getStyle('margin')
       }
     }).inject(this.show_zone_wrapper, 'after');
-    this.show_zone_wrapper.setStyle('position','fixed');
+    this.show_zone_wrapper.setStyle('position','fixed')
+                          .addClass(this.options.pinned_class);
     this.is_pinned = true;
     
     return this;
@@ -258,7 +260,8 @@ var TheLouvre = new Class({
     if (!this.is_pinned) return this;
     
     this.filler.destroy();
-    this.show_zone_wrapper.setStyles({ 'position':'static', 'top':0 });
+    this.show_zone_wrapper.setStyles({ 'position':'static', 'top':0 })
+                          .removeClass(this.options.pinned_class);
     this.is_pinned = false;   
     
     return this; 
