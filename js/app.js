@@ -50,6 +50,8 @@ var TheLouvre = new Class({
       var href = this.options.get_img_href(the_art, index);
       if (href)
         new Element('a', {href: href}).wraps(show_zone.getFirst('img'));
+        
+      this.fireEvent('showZoneUpdated', [this.show_zone, this]);
     },
     show_zone_transition: function(show_zone, the_art, index, update_data){
       show_zone.set('tween', {
@@ -93,6 +95,9 @@ var TheLouvre = new Class({
         });
       }, this)
     );
+    
+    this.fireEvent('showZoneCreated', [this.show_zone, this]);
+    return this;
   },
   
   attach_events: function(){
@@ -195,10 +200,10 @@ var TheLouvre = new Class({
     return this;
   },
   next: function(){
-    this.show(this.showing_index + 1);
+    return this.show(this.showing_index + 1);
   },
   prev: function(){
-    this.show(this.showing_index - 1);
+    return this.show(this.showing_index - 1);
   },
   
   open: function(){
@@ -216,6 +221,7 @@ var TheLouvre = new Class({
     this.is_open = true;
     this.keyboard.activate();
     
+    this.fireEvent('showZoneOpened', [this.show_zone, this]);
     return this;
   },
   close: function(){
@@ -238,6 +244,7 @@ var TheLouvre = new Class({
     this.keyboard.deactivate();  
     this.unpin_show_zone();
     
+    this.fireEvent('showZoneClosed', [this.show_zone, this]);
     return this;
   },
   
@@ -265,6 +272,7 @@ var TheLouvre = new Class({
                           .addClass(this.options.pinned_class);
     this.is_pinned = true;
     
+    this.fireEvent('showZonePinned', [this.show_zone, this]);
     return this;
   },
   unpin_show_zone: function(){
@@ -275,6 +283,7 @@ var TheLouvre = new Class({
                           .removeClass(this.options.pinned_class);
     this.is_pinned = false;   
     
+    this.fireEvent('showZoneUnPinned', [this.show_zone, this]);
     return this; 
   },
   toggle_pin_show_zone: function(){
@@ -324,7 +333,7 @@ window.addEvent('domready', function(){
           else if (img_url.test(/img.ly/))
             src = "http://img.ly/show/thumb/" + img_url.match(/([^\/]+$)/)[0];
             
-          var tweet = item.text.replace(/http:\/\/[^\s]+|^RT|@[^\s]+/g,"").replace(/#ninjacam\s*$/g,""),
+          var tweet = item.text.replace(/http:\/\/[^\s]+|^RT\s@[^\s]+/g,"").replace(/#ninjacam\s*$/g,""),
               user  = $pick(item.rt_from, item.from_user),
               date  = "<a href='" + tweet_url + "' class='tweet-date'>" + Date.parse(item.created_at).timeDiffInWords() + "</a>",
               tweet_icon = "<a target='_blank' href='http://www.twitter.com/" + user + "'><img src='" + item.profile_image_url + "' class='tweet-user-image icon'/></a>",
