@@ -111,6 +111,7 @@ p {
   font-weight:lighter;
   font-size:90%;
   line-height:1.4em;
+  word-wrap:break-word;  
 }
 
 a {
@@ -342,8 +343,7 @@ a {
   font-size:80%;
   line-height:1.2em;
   color:#888;
-  font-weight:lighter;
-  word-wrap:break-word;
+  font-weight:lighter;  
   display:block;
   font-style:italic;    
 }
