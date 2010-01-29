@@ -33,6 +33,9 @@ var TheLouvre = new Class({
     get_img_src : function(the_art){
       return the_art.get('src');
     },
+    get_img_href : function(the_art){
+      return null;
+    },
     get_caption : function(the_art){
       return "";
     },
@@ -41,6 +44,10 @@ var TheLouvre = new Class({
         new Element('img', {'class': this.options.show_image_class, 'src': this.options.get_img_src(the_art, index)}),
         new Element('div',   {'class': this.options.show_caption_class, 'html': this.options.get_caption(the_art, index)})
       ]);
+      
+      var href = this.options.get_img_href(the_art, index);
+      if (href)
+        new Element('a', {href: href}).wraps(show_zone.getFirst('img'));
     },
     show_zone_transition: function(show_zone, the_art, index, update_data){
       show_zone.set('tween', {
@@ -315,11 +322,14 @@ window.addEvent('domready', function(){
           next_button_html: "&gt;",
           prev_button_html: "&lt;",
           // initially_showing_index : 0, // todo fix
-          get_img_src      : function(the_art){
+          get_img_src : function(the_art){
             return the_art.getFirst('.thumbnail').getFirst('img').get('src');
           },
-          get_caption      : function(the_art){
+          get_caption : function(the_art){
             return the_art.getFirst('.caption').get('html');
+          },
+          get_img_href : function(the_art, i){            
+            return the_art.retrieve('data').text.match(twitter_image_regex)[0];
           }
         });
 		  }
