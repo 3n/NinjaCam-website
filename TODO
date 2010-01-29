@@ -1,7 +1,5 @@
 CODE:
 
-todo test each of the img services
-
 Image expansion UX
 	scrolling up if the clicked image is too low? or maybe make the show zone fixed.
 
