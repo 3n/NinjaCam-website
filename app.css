@@ -364,6 +364,9 @@ a {
   .the_louvre_show_zone_wrapper.the_louvre_pinned {
     -webkit-border-radius: 8px;
     background:rgba(0,0,0,0.9);
+    -webkit-box-shadow: 0 0 20px black;
+    top:14px;
+    width:498px;
   }
   
 .the_louvre_show_zone {
