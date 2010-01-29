@@ -316,9 +316,7 @@ window.addEvent('domready', function(){
         initial_limit: 32,		    
         // user_name    : 'ninjacam',
         json_opts: { 
-          data : { q : 'tweetphoto' },
-          onRequest: function(){ console.log('start') },
-          onComplete: function(){ console.log('complete') }
+          data : { q : 'tweetphoto' }
         },
 				shouldIncludeItem: function(item){
           var is_rt = item.text.match("RT @");
@@ -359,7 +357,7 @@ window.addEvent('domready', function(){
 		]],
 		{
 		  onHtmlUpdated: function(){ 
-		    $('twitter-and-flickr').getChildren('div.cell').each(function(cell){
+		    $('twitter-and-flickr').removeClass('loading').getChildren('div.cell').each(function(cell){
 		      var img_elem = cell.getFirst();
 		      
           img_elem.thumbnail(114,114,'thumbnail icon');

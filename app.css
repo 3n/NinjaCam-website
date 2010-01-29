@@ -303,9 +303,13 @@ a {
 	display:inline;
 	float:left;
 	
-	visibility:hidden;
-	opacity:0;
+/*  visibility:hidden;
+  opacity:0;*/
 }
+  #twitter-and-flickr.loading {
+    background:red;
+    height:100px;
+  }
 
 .new-icon {
   display:none;
