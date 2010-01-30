@@ -313,10 +313,10 @@ window.addEvent('domready', function(){
 															media   : 'photos',
 															extras  : 'date_taken,owner_name,tags' } } }), */
 		  new Twitter({
-        initial_limit: 32,		    
+        initial_limit: 69,		    
         // user_name    : 'ninjacam',
         json_opts: { 
-          data : { q : 'ninjacam' },
+          data : { q : 'yfrog' },
           onFailure: function(){
             $('twitter-and-flickr').removeClass('loading').addClass('failed');
           }
@@ -375,12 +375,14 @@ window.addEvent('domready', function(){
           });
           
           // turn thumbnail urls into full size for the various services
+          (function(){
           cell.getFirst('.thumbnail').getFirst('img').mod('src', function(old_src){
             return old_src.replace(".th.jpg", ":iphone")
                           .replace("http://twitgoo.com/show/thumb/", "http://twitgoo.com/show/img/")            
                           .replace("http://twitpic.com/show/thumb/", "http://twitpic.com/show/large/")
                           .replace("http://img.ly/show/thumb/", "http://img.ly/show/full/");
           });
+          }).delay(1000);
 		    });
 		    
         $('twitter-and-flickr').fade('in');
