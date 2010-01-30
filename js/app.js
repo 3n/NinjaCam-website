@@ -149,7 +149,7 @@ var TheLouvre = new Class({
   },
   
   remove_art: function(art){
-    this.the_art.erase(art);
+    this.the_art.erase(art);    
   },
   
   show: function(index){ 
@@ -376,13 +376,22 @@ window.addEvent('domready', function(){
             }catch(e){}
           });
           
+          img_elem.addEvent('load', function(){
+            this.mod('src', function(old_src){
+              return old_src.replace(".th.jpg", ":iphone")
+                            .replace("http://twitgoo.com/show/thumb/", "http://twitgoo.com/show/img/")            
+                            .replace("http://twitpic.com/show/thumb/", "http://twitpic.com/show/large/")
+                            .replace("http://img.ly/show/thumb/", "http://img.ly/show/full/");
+            });
+          })
+          
           // turn thumbnail urls into full size for the various services
-          cell.getFirst('.thumbnail').getFirst('img').mod('src', function(old_src){
-            return old_src.replace(".th.jpg", ":iphone")
-                          .replace("http://twitgoo.com/show/thumb/", "http://twitgoo.com/show/img/")            
-                          .replace("http://twitpic.com/show/thumb/", "http://twitpic.com/show/large/")
-                          .replace("http://img.ly/show/thumb/", "http://img.ly/show/full/");
-          });
+          // cell.getFirst('.thumbnail').getFirst('img').mod('src', function(old_src){
+          //   return old_src.replace(".th.jpg", ":iphone")
+          //                 .replace("http://twitgoo.com/show/thumb/", "http://twitgoo.com/show/img/")            
+          //                 .replace("http://twitpic.com/show/thumb/", "http://twitpic.com/show/large/")
+          //                 .replace("http://img.ly/show/thumb/", "http://img.ly/show/full/");
+          // });
 		    });
 		    
         $('twitter-and-flickr').fade('in');
