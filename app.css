@@ -337,6 +337,9 @@ a {
   #failed {
     height:auto !important;
   }
+  #loading {
+    font-family:"Helvetica","Arial";
+  }
 
 #loading #spinner-fg, #loading #spinner-bg {
   height:50px;
