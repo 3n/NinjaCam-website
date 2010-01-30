@@ -416,8 +416,9 @@ a {
   }
   .the_louvre_show_zone_wrapper.the_louvre_pinned {
     -webkit-border-radius: 8px;
-    background:rgba(0,0,0,0.9);
-    -webkit-box-shadow: 0 0 20px black;
+/*    background:rgba(0,0,0,0.9);*/
+    background:black;
+/*    -webkit-box-shadow: 0 0 20px black;*/
     top:14px;
   }
   
@@ -566,7 +567,8 @@ a {
 
 .icon {
   -webkit-border-radius:8px;  
-  -webkit-box-shadow: 0 0 1px white, 0 2px 7px rgba(0,0,0,0.5);  
+/*  -webkit-box-shadow: 0 0 1px white, 0 2px 7px rgba(0,0,0,0.5);  */
+  -webkit-box-shadow: 0 2px 7px rgba(0,0,0,0.5);  
   border-top:1px solid rgba(255,255,255,0.5);
 }
 
