@@ -149,7 +149,8 @@ var TheLouvre = new Class({
   },
   
   remove_art: function(art){
-    this.the_art.erase(art);    
+    if ($type(art) === 'number') art = this.the_art[art];
+    this.the_art[this.the_art.indexOf(art)] = null;
   },
   
   show: function(index){ 
@@ -204,9 +205,17 @@ var TheLouvre = new Class({
     return this;
   },
   next: function(){
+    if (this.showing_index < (this.the_art.length - 1) 
+        && !(this.the_art[this.showing_index + 1] && this.the_art[this.showing_index + 1].getParent()))
+          return this.next(++this.showing_index);
+        
     return this.show(this.showing_index + 1);
   },
   prev: function(){
+    if (this.showing_index > 0 
+        && !(this.the_art[this.showing_index - 1] && this.the_art[this.showing_index - 1].getParent()))
+          return this.prev(--this.showing_index);
+    
     return this.show(this.showing_index - 1);
   },
   
@@ -370,9 +379,7 @@ window.addEvent('domready', function(){
           
           img_elem.addEvent('error', function(){
             try {
-              var cell = this.getParent().getParent();
-              the_louvre.remove_art(cell);
-              cell.destroy();
+              this.getParent().getParent().destroy();
             }catch(e){}
           });
           
@@ -383,15 +390,7 @@ window.addEvent('domready', function(){
                             .replace("http://twitpic.com/show/thumb/", "http://twitpic.com/show/large/")
                             .replace("http://img.ly/show/thumb/", "http://img.ly/show/full/");
             });
-          })
-          
-          // turn thumbnail urls into full size for the various services
-          // cell.getFirst('.thumbnail').getFirst('img').mod('src', function(old_src){
-          //   return old_src.replace(".th.jpg", ":iphone")
-          //                 .replace("http://twitgoo.com/show/thumb/", "http://twitgoo.com/show/img/")            
-          //                 .replace("http://twitpic.com/show/thumb/", "http://twitpic.com/show/large/")
-          //                 .replace("http://img.ly/show/thumb/", "http://img.ly/show/full/");
-          // });
+          });
 		    });
 		    
         $('twitter-and-flickr').fade('in');
