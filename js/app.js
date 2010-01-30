@@ -348,10 +348,12 @@ window.addEvent('domready', function(){
               tweet_icon = "<a target='_blank' href='http://www.twitter.com/" + user + "'><img src='" + item.profile_image_url + "' class='tweet-user-image icon'/></a>",
               tweet_user = "<a class='tweet-user' target='_blank' href='http://www.twitter.com/" + user + "'>@" + user + "</a>";
             
-          return "<img src='" + src + "'/>"
+          return   "<img src='" + src + "'/>"
                  + "<div class='caption'>" 
-                   + date + "<p class='tweet-text'>" + tweet 
-                 + "</p><div>" + tweet_icon + tweet_user + "</div></div>";
+                    + date 
+                    + "<p class='tweet-text'>" + tweet + "</p>" 
+                    + "<div>" + tweet_icon + tweet_user + "</div>" 
+                 + "</div>";
 				},
 				onExtraRTInfoRecieved: function(item){
 				  item.element.getElement('.tweet-user-image').set('src', item.rt_from_info.profile_image_url);
