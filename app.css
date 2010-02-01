@@ -53,8 +53,8 @@ html {
 
 body {
   font-family: "din", 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color:#aaa;
-  font-size:100%;
+  color:#ccc;
+  font-size:16px;
   background-color:#111;
   background-image: url('images/bg.png');
 }
@@ -434,6 +434,7 @@ a {
   max-width:58%;
   margin-left:1px;
   float:left;
+  -webkit-box-shadow: 0 0 1px white, 0 2px 7px rgba(0,0,0,0.5);    
 }
 .the_louvre_show_zone .the_louvre_show_caption {
   width:185px;
