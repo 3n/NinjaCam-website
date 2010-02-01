@@ -10,6 +10,7 @@ investigate the thumbnail()-while-in-thumbnail problem (causing bad proportions 
 
 make it so the glossy shit on the photo icons only shows up when the photo is loaded.
 
+make max-height of shown image be based off of user's screen height.
 
 
 PHOTOSHOP:
