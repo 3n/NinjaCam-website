@@ -6744,6 +6744,7 @@ var Twitter = new Class({
 		web_source : "http://www.twitter.com",
 	 	initial_limit : 15,
 	 	extra_rt_info : true,
+	 	link_twitter_items : true,
 	 	shouldIncludeItem: function(){ return true; },
 	 	gen_html: function(item){
 	 	  return item.text.make_urls_links().link_replies().link_hashcodes(); 
@@ -6771,6 +6772,9 @@ var Twitter = new Class({
   				rt_from     : (rt_match && rt_match.length > 1) ? rt_match[1] : null
   			});  			  			
   			json_item.html = this.options.gen_html(json_item);
+  			
+  			if (this.options.link_twitter_items)
+  			  json_item.html = json_item.html.link_hashcodes().link_replies();
   			
   			if (this.options.extra_rt_info && json_item.rt_from)
     			new Request.JSONP({
