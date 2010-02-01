@@ -426,11 +426,11 @@ a {
   }
   
 .the_louvre_show_zone {
-  height:320px;
+  height:300px;
   position:relative;
 }
 .the_louvre_show_zone .the_louvre_show_image {
-  max-height:320px;
+  max-height:300px;
   max-width:58%;
   margin-left:1px;
   float:left;
