@@ -320,6 +320,10 @@ ul li {
   background-color:rgba(0,0,0,0.3);
   -webkit-border-radius: 8px;
 }
+  #watch-video:hover {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#0086CE));
+    border-color:#00A5FF !important;
+  }
 
 #features {
   margin-top:14px;
