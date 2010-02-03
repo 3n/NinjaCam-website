@@ -314,13 +314,11 @@ ul li {
 #watch-video {
   margin-top:6px;
   background:black;
-  width:231px;
-  height:130px;
+  width:219px;
+  height:121px;
+  padding:6px;
   background-color:rgba(0,0,0,0.3);
-  background-image:url('images/watch_video.png');
-  background-repeat:no-repeat;
-  background-position: 6px 6px;
-  -webkit-border-radius: 3px;
+  -webkit-border-radius: 8px;
 }
 
 #features {
