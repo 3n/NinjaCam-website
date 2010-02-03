@@ -258,11 +258,15 @@ ul li {
 }
 
 #buy-wrapper { 
+  display:block;
   cursor:pointer; 
   margin-top:16px;
   float:left;
   color:white;
 }
+  #buy-wrapper:hover {
+    text-decoration:none;
+  }
 #buy-now-wrapper {
   border:1px solid rgba(0,0,0,0.7);
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.1);
