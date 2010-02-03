@@ -132,20 +132,25 @@ a {
   a:hover {
     text-decoration:underline;
   }
-  
-ul {
-  clear:both;
-}
 
 ul li {
   font-size:14px;
   padding:5px 0 10px 0;
   border-bottom:1px dashed #2f2f2f;
 }
+
+.clear { clear:both; }
   
   
-  
-  
+
+.indented {
+  -webkit-box-shadow: 0 1px 1px rgba(255,255,255,0.1), 0 -1px 1px rgba(255,255,255,0.03);
+  border-top:2px solid rgba(0,0,0,0.1);
+  border-top:1px solid #090909 !important;
+  border-left:1px solid #090909 !important;
+  border-right:1px solid #090909 !important;
+}
+
   
 
 #glow {
@@ -257,7 +262,6 @@ ul li {
   margin-top:16px;
   float:left;
   color:white;
-  clear:both;
 }
 #buy-now-wrapper {
   border:1px solid rgba(0,0,0,0.7);
@@ -265,8 +269,8 @@ ul li {
   -webkit-border-radius:5px;  
   height:52px;
   float:left;
-  width:155px;
-  margin: 0 0px 10px 10px;  
+  width:164px;
+  margin: 0 0px 10px 16px;  
 }
 #buy-now {
   font-weight:bold !important;
@@ -275,7 +279,7 @@ ul li {
   height:43px;
   line-height:0.9em;
   
-  padding:4px 10px;
+  padding:4px 14px 4px 15px;
   -webkit-border-radius:5px;
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0.08)), to(rgba(0,0,0,0.1)));
   border-top:1px solid rgba(255,255,255,0.2);
@@ -307,11 +311,21 @@ ul li {
   background-position:-24px;
 }
 
-
-#features {
-  margin-top:110px;
+#watch-video {
+  margin-top:6px;
+  background:black;
+  width:231px;
+  height:130px;
+  background-color:rgba(0,0,0,0.3);
+  background-image:url('images/watch_video.png');
+  background-repeat:no-repeat;
+  background-position: 6px 6px;
+  -webkit-border-radius: 3px;
 }
 
+#features {
+  margin-top:14px;
+}
 
 #iphone {
   opacity: 0.0;
