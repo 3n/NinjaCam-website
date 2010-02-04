@@ -472,14 +472,17 @@ ul li {
   left:-24px;
   top:8px;
   overflow:hidden;
-  background-image: url('images/eye.png');
-  background-repeat: no-repeat;
-  background-position: 21px 0;
   border:none;  
-  -webkit-transition: background-position 0.2s ease-out;
 }
-  #eye:hover {
-    background-position:0 0;
+  #eye img {
+    margin-left:21px;
+    -webkit-transition-property: margin-left,-webkit-transform;
+    -webkit-transition-duration: 0.2s;
+    -webkit-transition-timing-function: ease-out;
+  }
+  #eye img:hover {
+    margin-left:0;
+    -webkit-transform: rotate(-180deg); 
   }
 
 
