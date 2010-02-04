@@ -355,6 +355,11 @@ ul li {
   width:640px;
   float:left;
 }
+  #video-wrapper a {
+    float:right;
+    color:white;
+    font-weight:bold;
+  }
 
 #features {
   margin-top:14px;

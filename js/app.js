@@ -12,6 +12,7 @@ var setup_video_hud = function(){
   });
 	
 	$('video-wrapper').addEvent('click', function(e){ e.stop(); });
+	$('video-wrapper').getFirst('a').addEvent('click', hide_video_hud);
 	$('watch-video').addEvent('click', show_video_hud);	
 	$('video-hud').addEvent('click', hide_video_hud);
 };
