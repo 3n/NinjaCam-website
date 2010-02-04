@@ -415,4 +415,8 @@ window.addEvent('domready', function(){
 		  }
 		}
 	).to_html();
+	
+	$('video-wrapper').addEvent('click', function(e){ e.stop(); });
+	$('watch-video').addEvent('click', function(){ $('video-hud').setStyle('display','block'); });	
+	$('video-hud').addEvent('click', function(){ this.setStyle('display','none'); });
 });
