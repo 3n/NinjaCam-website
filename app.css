@@ -489,7 +489,7 @@ ul li {
   border:none;  
 }
   #eye img {
-    margin-left:21px;
+    margin-left:19px;
     -webkit-transition-property: margin-left,-webkit-transform;
     -webkit-transition-duration: 0.2s;
     -webkit-transition-timing-function: ease-out;
