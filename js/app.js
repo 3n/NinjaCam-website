@@ -1,3 +1,21 @@
+G = {};
+
+var setup_video_hud = function(){
+  var show_video_hud = function(){ $('video-hud').setStyle('display','block'); G.keyboard.activate(); };
+	var hide_video_hud = function(){ $('video-hud').setStyle('display','none');  G.keyboard.deactivate(); };
+	
+  G.keyboard = new Keyboard({
+    preventDefault : true,
+    events: {
+      'esc' : hide_video_hud
+    }
+  });
+	
+	$('video-wrapper').addEvent('click', function(e){ e.stop(); });
+	$('watch-video').addEvent('click', show_video_hud);	
+	$('video-hud').addEvent('click', hide_video_hud);
+};
+
 window.addEvent('domready', function(){
   // supported: twitpic, yfrog, twitgoo, tweetphoto, img.ly
   // not:       mobypicture
@@ -109,7 +127,5 @@ window.addEvent('domready', function(){
 		}
 	).to_html();
 	
-	$('video-wrapper').addEvent('click', function(e){ e.stop(); });
-	$('watch-video').addEvent('click', function(){ $('video-hud').setStyle('display','block'); });	
-	$('video-hud').addEvent('click', function(){ this.setStyle('display','none'); });
+  setup_video_hud();
 });
