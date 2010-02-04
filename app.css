@@ -490,7 +490,8 @@ ul li {
     -webkit-transition-property: margin-left,-webkit-transform;
     -webkit-transition-duration: 0.2s;
     -webkit-transition-timing-function: ease-out;
-    
+  }
+  #eye.spinning {
     -webkit-animation-name: spinnerRotate;
   	-webkit-animation-duration: 15s;
   	-webkit-animation-iteration-count: infinite;
