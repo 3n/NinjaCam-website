@@ -12,9 +12,6 @@ make it so the glossy shit on the photo icons only shows up when the photo is lo
 
 make max-height of shown image be based off of user's screen height.
 
-auto play video
-
-
 
 PHOTOSHOP:
 
@@ -31,8 +28,6 @@ CONTENT:
 add note about what image shortening services are supported, as well as "contest rules" etc. Need a modal/flyout box for this extra info.
 
 FOOTER:
-	callout and link to follow twitter.com/ninjacam
-	link to get satisfaction
 	an email address
 
 try to make vertical grid match between photos and right column blocks
