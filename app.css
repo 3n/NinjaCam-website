@@ -151,7 +151,10 @@ ul li {
   border-right:1px solid #090909 !important;
 }
 
-  
+.dark-text {
+  color:#666;
+}  
+
 
 #glow {
   width:100%;
@@ -195,7 +198,7 @@ ul li {
   
 #footer {
   float:left;
-  margin-top:14px;
+  margin-top:60px;
   padding:8px 0 50px 0;
   clear:both;
   border-top:1px solid #333;
