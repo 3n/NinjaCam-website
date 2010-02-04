@@ -469,12 +469,12 @@ ul li {
   width:30px;
   height:30px;
   position:absolute;
-  left:-23px;
+  left:-24px;
   top:8px;
   overflow:hidden;
   background-image: url('images/eye.png');
   background-repeat: no-repeat;
-  background-position: 22px 0;
+  background-position: 21px 0;
   border:none;  
   -webkit-transition: background-position 0.2s ease-out;
 }
