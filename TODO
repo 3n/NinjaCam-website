@@ -2,8 +2,6 @@ CODE:
 
 change name of show_zone to showcase
 
-switch all events over to Delegation model
-
 move all the image service stuff into Twitter.js
 
 investigate the thumbnail()-while-in-thumbnail problem (causing bad proportions on big images once loaded)

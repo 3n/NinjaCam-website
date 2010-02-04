@@ -22,7 +22,7 @@ provides: [MooTools, Native, Hash.base, Array.each, $util]
 
 var MooTools = {
 	'version': '1.2.5dev',
-	'build': '249b2865bd7acef8645f8984e87b9083eee03f39'
+	'build': 'da9d55edea6933a7d6f126bc05529f848e53f7fe'
 };
 
 var Native = function(options){
@@ -6928,160 +6928,6 @@ var MicroApp = new Class({
 /*
 ---
 
-script: Fx.Slide.js
-
-description: Effect to slide an element in and out of view.
-
-license: MIT-style license
-
-authors:
-- Valerio Proietti
-
-requires:
-- core:1.2.4/Fx Element.Style
-- /MooTools.More
-
-provides: [Fx.Slide]
-
-...
-*/
-
-Fx.Slide = new Class({
-
-	Extends: Fx,
-
-	options: {
-		mode: 'vertical',
-		hideOverflow: true
-	},
-
-	initialize: function(element, options){
-		this.addEvent('complete', function(){
-			this.open = (this.wrapper['offset' + this.layout.capitalize()] != 0);
-			if (this.open && Browser.Engine.webkit419) this.element.dispose().inject(this.wrapper);
-		}, true);
-		this.element = this.subject = document.id(element);
-		this.parent(options);
-		var wrapper = this.element.retrieve('wrapper');
-		var styles = this.element.getStyles('margin', 'position', 'overflow');
-		if (this.options.hideOverflow) styles = $extend(styles, {overflow: 'hidden'});
-		this.wrapper = wrapper || new Element('div', {
-			styles: styles
-		}).wraps(this.element);
-		this.element.store('wrapper', this.wrapper).setStyle('margin', 0);
-		this.now = [];
-		this.open = true;
-	},
-
-	vertical: function(){
-		this.margin = 'margin-top';
-		this.layout = 'height';
-		this.offset = this.element.offsetHeight;
-	},
-
-	horizontal: function(){
-		this.margin = 'margin-left';
-		this.layout = 'width';
-		this.offset = this.element.offsetWidth;
-	},
-
-	set: function(now){
-		this.element.setStyle(this.margin, now[0]);
-		this.wrapper.setStyle(this.layout, now[1]);
-		return this;
-	},
-
-	compute: function(from, to, delta){
-		return [0, 1].map(function(i){
-			return Fx.compute(from[i], to[i], delta);
-		});
-	},
-
-	start: function(how, mode){
-		if (!this.check(how, mode)) return this;
-		this[mode || this.options.mode]();
-		var margin = this.element.getStyle(this.margin).toInt();
-		var layout = this.wrapper.getStyle(this.layout).toInt();
-		var caseIn = [[margin, layout], [0, this.offset]];
-		var caseOut = [[margin, layout], [-this.offset, 0]];
-		var start;
-		switch (how){
-			case 'in': start = caseIn; break;
-			case 'out': start = caseOut; break;
-			case 'toggle': start = (layout == 0) ? caseIn : caseOut;
-		}
-		return this.parent(start[0], start[1]);
-	},
-
-	slideIn: function(mode){
-		return this.start('in', mode);
-	},
-
-	slideOut: function(mode){
-		return this.start('out', mode);
-	},
-
-	hide: function(mode){
-		this[mode || this.options.mode]();
-		this.open = false;
-		return this.set([-this.offset, 0]);
-	},
-
-	show: function(mode){
-		this[mode || this.options.mode]();
-		this.open = true;
-		return this.set([0, this.offset]);
-	},
-
-	toggle: function(mode){
-		return this.start('toggle', mode);
-	}
-
-});
-
-Element.Properties.slide = {
-
-	set: function(options){
-		var slide = this.retrieve('slide');
-		if (slide) slide.cancel();
-		return this.eliminate('slide').store('slide:options', $extend({link: 'cancel'}, options));
-	},
-
-	get: function(options){
-		if (options || !this.retrieve('slide')){
-			if (options || !this.retrieve('slide:options')) this.set('slide', options);
-			this.store('slide', new Fx.Slide(this, this.retrieve('slide:options')));
-		}
-		return this.retrieve('slide');
-	}
-
-};
-
-Element.implement({
-
-	slide: function(how, mode){
-		how = how || 'toggle';
-		var slide = this.get('slide'), toggle;
-		switch (how){
-			case 'hide': slide.hide(mode); break;
-			case 'show': slide.show(mode); break;
-			case 'toggle':
-				var flag = this.retrieve('slide:flag', slide.open);
-				slide[flag ? 'slideOut' : 'slideIn'](mode);
-				this.store('slide:flag', !flag);
-				toggle = true;
-			break;
-			default: slide.start(how, mode);
-		}
-		if (!toggle) this.eliminate('slide:flag');
-		return this;
-	}
-
-});
-
-/*
----
-
 script: Fx.Morph.js
 
 description: Formerly Fx.Styles, effect to transition any number of CSS properties for an element using an object of rules, or CSS based selector rules.
@@ -7158,6 +7004,128 @@ Element.implement({
 
 });
 
+// from: http://davidwalsh.name/mootools-add-event
+
+Element.Events.click = { 
+	base:'click',
+	onAdd: function() {
+		if(this.setStyle) {
+			this.store('original-cursor',this.getStyle('cursor'));
+			this.setStyle('cursor','pointer');
+		}
+	},
+	onRemove: function() {
+		if(this.setStyle) {
+			this.setStyle('cursor',this.retrieve('original-cursor'));
+		}
+	}
+};
+/*
+---
+
+script: Element.Delegation.js
+
+description: Extends the Element native object to include the delegate method for more efficient event management.
+
+credits:
+- "Event checking based on the work of Daniel Steigerwald. License: MIT-style license.	Copyright: Copyright (c) 2008 Daniel Steigerwald, daniel.steigerwald.cz"
+
+license: MIT-style license
+
+authors:
+- Aaron Newton
+- Daniel Steigerwald
+
+requires:
+- core:1.2.4/Element.Event
+- core:1.2.4/Selectors
+- /MooTools.More
+
+provides: [Element.Delegation]
+
+...
+*/
+(function(){
+	
+	var match = /(.*?):relay\(([^)]+)\)$/,
+		combinators = /[+>~\s]/,
+		splitType = function(type){
+			var bits = type.match(match);
+			return !bits ? {event: type} : {
+				event: bits[1],
+				selector: bits[2]
+			};
+		},
+		check = function(e, selector){
+			var t = e.target;
+			if (combinators.test(selector = selector.trim())){
+				var els = this.getElements(selector);
+				for (var i = els.length; i--; ){
+					var el = els[i];
+					if (t == el || el.hasChild(t)) return el;
+				}
+			} else {
+				for ( ; t && t != this; t = t.parentNode){
+					if (Element.match(t, selector)) return document.id(t);
+				}
+			}
+			return null;
+		};
+
+	var oldAddEvent = Element.prototype.addEvent,
+		oldRemoveEvent = Element.prototype.removeEvent;
+		
+	Element.implement({
+
+		addEvent: function(type, fn){
+			var splitted = splitType(type);
+			if (splitted.selector){
+				var monitors = this.retrieve('$moo:delegateMonitors', {});
+				if (!monitors[type]){
+					var monitor = function(e){
+						var el = check.call(this, e, splitted.selector);
+						if (el) this.fireEvent(type, [e, el], 0, el);
+					}.bind(this);
+					monitors[type] = monitor;
+					oldAddEvent.call(this, splitted.event, monitor);
+				}
+			}
+			return oldAddEvent.apply(this, arguments);
+		},
+
+		removeEvent: function(type, fn){
+			var splitted = splitType(type);
+			if (splitted.selector){
+				var events = this.retrieve('events');
+				if (!events || !events[type] || (fn && !events[type].keys.contains(fn))) return this;
+
+				if (fn) oldRemoveEvent.apply(this, [type, fn]);
+				else oldRemoveEvent.apply(this, type);
+
+				events = this.retrieve('events');
+				if (events && events[type] && events[type].length == 0){
+					var monitors = this.retrieve('$moo:delegateMonitors', {});
+					oldRemoveEvent.apply(this, [splitted.event, monitors[type]]);
+					delete monitors[type];
+				}
+				return this;
+			}
+
+			return oldRemoveEvent.apply(this, arguments);
+		},
+
+		fireEvent: function(type, args, delay, bind){
+			var events = this.retrieve('events');
+			if (!events || !events[type]) return this;
+			events[type].keys.each(function(fn){
+				fn.create({bind: bind || this, delay: delay, arguments: args})();
+			}, this);
+			return this;
+		}
+
+	});
+
+})();
 /*
 ---
 
@@ -7364,125 +7332,475 @@ provides: [Keyboard]
 
 })();
 
-// from: http://davidwalsh.name/mootools-add-event
-
-Element.Events.click = { 
-	base:'click',
-	onAdd: function() {
-		if(this.setStyle) {
-			this.store('original-cursor',this.getStyle('cursor'));
-			this.setStyle('cursor','pointer');
-		}
-	},
-	onRemove: function() {
-		if(this.setStyle) {
-			this.setStyle('cursor',this.retrieve('original-cursor'));
-		}
-	}
-};
 /*
 ---
 
-script: Element.Delegation.js
+script: Fx.Slide.js
 
-description: Extends the Element native object to include the delegate method for more efficient event management.
-
-credits:
-- "Event checking based on the work of Daniel Steigerwald. License: MIT-style license.	Copyright: Copyright (c) 2008 Daniel Steigerwald, daniel.steigerwald.cz"
+description: Effect to slide an element in and out of view.
 
 license: MIT-style license
 
 authors:
-- Aaron Newton
-- Daniel Steigerwald
+- Valerio Proietti
 
 requires:
-- core:1.2.4/Element.Event
-- core:1.2.4/Selectors
+- core:1.2.4/Fx Element.Style
 - /MooTools.More
 
-provides: [Element.Delegation]
+provides: [Fx.Slide]
 
 ...
 */
-(function(){
-	
-	var match = /(.*?):relay\(([^)]+)\)$/,
-		combinators = /[+>~\s]/,
-		splitType = function(type){
-			var bits = type.match(match);
-			return !bits ? {event: type} : {
-				event: bits[1],
-				selector: bits[2]
-			};
-		},
-		check = function(e, selector){
-			var t = e.target;
-			if (combinators.test(selector = selector.trim())){
-				var els = this.getElements(selector);
-				for (var i = els.length; i--; ){
-					var el = els[i];
-					if (t == el || el.hasChild(t)) return el;
-				}
-			} else {
-				for ( ; t && t != this; t = t.parentNode){
-					if (Element.match(t, selector)) return document.id(t);
-				}
-			}
-			return null;
-		};
 
-	var oldAddEvent = Element.prototype.addEvent,
-		oldRemoveEvent = Element.prototype.removeEvent;
-		
-	Element.implement({
+Fx.Slide = new Class({
 
-		addEvent: function(type, fn){
-			var splitted = splitType(type);
-			if (splitted.selector){
-				var monitors = this.retrieve('$moo:delegateMonitors', {});
-				if (!monitors[type]){
-					var monitor = function(e){
-						var el = check.call(this, e, splitted.selector);
-						if (el) this.fireEvent(type, [e, el], 0, el);
-					}.bind(this);
-					monitors[type] = monitor;
-					oldAddEvent.call(this, splitted.event, monitor);
-				}
-			}
-			return oldAddEvent.apply(this, arguments);
-		},
+	Extends: Fx,
 
-		removeEvent: function(type, fn){
-			var splitted = splitType(type);
-			if (splitted.selector){
-				var events = this.retrieve('events');
-				if (!events || !events[type] || (fn && !events[type].keys.contains(fn))) return this;
+	options: {
+		mode: 'vertical',
+		hideOverflow: true
+	},
 
-				if (fn) oldRemoveEvent.apply(this, [type, fn]);
-				else oldRemoveEvent.apply(this, type);
+	initialize: function(element, options){
+		this.addEvent('complete', function(){
+			this.open = (this.wrapper['offset' + this.layout.capitalize()] != 0);
+			if (this.open && Browser.Engine.webkit419) this.element.dispose().inject(this.wrapper);
+		}, true);
+		this.element = this.subject = document.id(element);
+		this.parent(options);
+		var wrapper = this.element.retrieve('wrapper');
+		var styles = this.element.getStyles('margin', 'position', 'overflow');
+		if (this.options.hideOverflow) styles = $extend(styles, {overflow: 'hidden'});
+		this.wrapper = wrapper || new Element('div', {
+			styles: styles
+		}).wraps(this.element);
+		this.element.store('wrapper', this.wrapper).setStyle('margin', 0);
+		this.now = [];
+		this.open = true;
+	},
 
-				events = this.retrieve('events');
-				if (events && events[type] && events[type].length == 0){
-					var monitors = this.retrieve('$moo:delegateMonitors', {});
-					oldRemoveEvent.apply(this, [splitted.event, monitors[type]]);
-					delete monitors[type];
-				}
-				return this;
-			}
+	vertical: function(){
+		this.margin = 'margin-top';
+		this.layout = 'height';
+		this.offset = this.element.offsetHeight;
+	},
 
-			return oldRemoveEvent.apply(this, arguments);
-		},
+	horizontal: function(){
+		this.margin = 'margin-left';
+		this.layout = 'width';
+		this.offset = this.element.offsetWidth;
+	},
 
-		fireEvent: function(type, args, delay, bind){
-			var events = this.retrieve('events');
-			if (!events || !events[type]) return this;
-			events[type].keys.each(function(fn){
-				fn.create({bind: bind || this, delay: delay, arguments: args})();
-			}, this);
-			return this;
+	set: function(now){
+		this.element.setStyle(this.margin, now[0]);
+		this.wrapper.setStyle(this.layout, now[1]);
+		return this;
+	},
+
+	compute: function(from, to, delta){
+		return [0, 1].map(function(i){
+			return Fx.compute(from[i], to[i], delta);
+		});
+	},
+
+	start: function(how, mode){
+		if (!this.check(how, mode)) return this;
+		this[mode || this.options.mode]();
+		var margin = this.element.getStyle(this.margin).toInt();
+		var layout = this.wrapper.getStyle(this.layout).toInt();
+		var caseIn = [[margin, layout], [0, this.offset]];
+		var caseOut = [[margin, layout], [-this.offset, 0]];
+		var start;
+		switch (how){
+			case 'in': start = caseIn; break;
+			case 'out': start = caseOut; break;
+			case 'toggle': start = (layout == 0) ? caseIn : caseOut;
 		}
+		return this.parent(start[0], start[1]);
+	},
 
-	});
+	slideIn: function(mode){
+		return this.start('in', mode);
+	},
 
-})();
+	slideOut: function(mode){
+		return this.start('out', mode);
+	},
+
+	hide: function(mode){
+		this[mode || this.options.mode]();
+		this.open = false;
+		return this.set([-this.offset, 0]);
+	},
+
+	show: function(mode){
+		this[mode || this.options.mode]();
+		this.open = true;
+		return this.set([0, this.offset]);
+	},
+
+	toggle: function(mode){
+		return this.start('toggle', mode);
+	}
+
+});
+
+Element.Properties.slide = {
+
+	set: function(options){
+		var slide = this.retrieve('slide');
+		if (slide) slide.cancel();
+		return this.eliminate('slide').store('slide:options', $extend({link: 'cancel'}, options));
+	},
+
+	get: function(options){
+		if (options || !this.retrieve('slide')){
+			if (options || !this.retrieve('slide:options')) this.set('slide', options);
+			this.store('slide', new Fx.Slide(this, this.retrieve('slide:options')));
+		}
+		return this.retrieve('slide');
+	}
+
+};
+
+Element.implement({
+
+	slide: function(how, mode){
+		how = how || 'toggle';
+		var slide = this.get('slide'), toggle;
+		switch (how){
+			case 'hide': slide.hide(mode); break;
+			case 'show': slide.show(mode); break;
+			case 'toggle':
+				var flag = this.retrieve('slide:flag', slide.open);
+				slide[flag ? 'slideOut' : 'slideIn'](mode);
+				this.store('slide:flag', !flag);
+				toggle = true;
+			break;
+			default: slide.start(how, mode);
+		}
+		if (!toggle) this.eliminate('slide:flag');
+		return this;
+	}
+
+});
+
+var TheLouvre = new Class({
+  Implements: [Options, Events],
+  
+  options: {
+    selector    : "img",
+    
+    show_event  : "click",
+    next_event  : "click",
+    prev_event  : "click",    
+    close_event : "click",
+    
+    show_zone_class    : "the_louvre_show_zone",
+    controls_class     : "the_louvre_controls",
+    next_button_class  : "the_louvre_next the_louvre_button",
+    close_button_class : "the_louvre_close the_louvre_button",
+    prev_button_class  : "the_louvre_prev the_louvre_button",
+    show_image_class   : "the_louvre_show_image",
+    show_caption_class : "the_louvre_show_caption",    
+    active_art_class   : "the_louvre_showing",
+    disabled_button_class : "the_louvre_disabled",
+    show_zone_open_class  : "the_louvre_open",   
+    pinned_class       : "the_louvre_pinned", 
+    
+    next_button_html  : "next",
+    close_button_html : "close",
+    prev_button_html  : "previous",
+    
+    initially_showing_index : null,   
+    toggle       : true,
+    keyboard_nav : true,    
+    superfluous_effects : true,
+    cycle    : false,
+    auto_pin : true,
+    use_delegation : true,
+
+    get_img_src : function(the_art){
+      return the_art.get('src');
+    },
+    get_img_href : function(the_art){
+      return null;
+    },
+    get_caption : function(the_art){
+      return "";
+    },
+    update_show_zone: function(show_zone, the_art, index){
+      show_zone.set('html','').adopt([
+        new Element('img', {'class': this.options.show_image_class, 'src': this.options.get_img_src(the_art, index)}),
+        new Element('div',   {'class': this.options.show_caption_class, 'html': this.options.get_caption(the_art, index)})
+      ]);
+      
+      var href = this.options.get_img_href(the_art, index);
+      if (href)
+        new Element('a', {href: href}).wraps(show_zone.getFirst('img'));
+        
+      this.fireEvent('showZoneUpdated', [this.show_zone, this]);
+    },
+    show_zone_transition: function(show_zone, the_art, index, update_data){
+      show_zone.set('tween', {
+        duration: 50,
+        onComplete: function(){
+          update_data(); 
+          show_zone.set('tween', {duration: 80}).fade('in');
+        }
+      }).fade('out');
+    }
+  },
+  
+  initialize: function(elem, options){
+    this.setOptions(options);
+    this.element = elem;
+    this.the_art = this.element.getElements(this.options.selector);
+    
+    this.setup_show_zone();
+    this.attach_events();
+    this.setup_effects();
+    
+    if ($chk(this.options.initially_showing_index)){
+      this.is_open = true;
+      this.show(this.options.initially_showing_index);
+    } else
+      this.close();
+      
+    return this;      
+  },
+  
+  setup_show_zone: function(){
+    this.show_zone = $(this.options.show_zone_element) || new Element('div', {'class': this.options.show_zone_class}).inject(this.element, 'top');
+    this.show_zone_wrapper = new Element('div', {'class': this.options.show_zone_class + '_wrapper'}).wraps(this.show_zone);
+    this.show_zone_controls = new Element('div', {'class': this.options.controls_class}).inject(this.show_zone_wrapper);    
+    
+    this.show_zone_controls.adopt(      
+      ['prev','next','close'].map(function(button){
+        return this[button + "_button"] = $(this.options[button + "_button_element"]) || new Element('a', {
+          'class' : this.options[button + "_button_class"],
+          'html'  : this.options[button + "_button_html"]
+        });
+      }, this)
+    );
+    
+    this.fireEvent('showZoneCreated', [this.show_zone, this]);
+    return this;
+  },
+  
+  attach_events: function(){
+    if (this.options.use_delegation){
+      this.the_art.each(function(art,i){
+        art.store('the-louvre-index',i);
+      });
+      var thiz = this;
+      this.element.addEvent(this.options.show_event + ":relay(" + this.options.selector + ")", function(){
+        thiz.show(this.retrieve('the-louvre-index'));
+      });
+    } else {
+      this.the_art.each(function(art,i){
+        art.addEvent(this.options.show_event, this.show.bind(this,i));
+      }, this);
+    }
+    
+    this.next_button.addEvent(this.options.next_event, this.next.bind(this));
+    this.prev_button.addEvent(this.options.prev_event, this.prev.bind(this));    
+    this.close_button.addEvent(this.options.close_event, this.close.bind(this));
+    
+    if (this.options.keyboard_nav && $defined(Keyboard)){
+      this.keyboard = new Keyboard({
+        preventDefault : true,
+        events: {
+          'j'     : this.next.bind(this),
+          'k'     : this.prev.bind(this),
+          'right' : this.next.bind(this),  
+          'left'  : this.prev.bind(this),
+          'p'     : this.toggle_pin_show_zone.bind(this)
+        }
+      });
+    }
+    
+    if (this.options.auto_pin){
+      this.original_show_zone_top = this.show_zone_wrapper.getTop();
+      window.addEvent('scroll', function(){
+        if (this.show_zone_wrapper.getTop() < window.getScrollTop())
+          this.pin_show_zone();
+        if (window.getScrollTop() < this.original_show_zone_top)
+          this.unpin_show_zone();
+      }.bind(this));
+    }
+    
+    return this;    
+  },
+  
+  setup_effects: function(){
+    if ($defined(Fx.Slide)){
+      this.the_slide = new Fx.Slide(this.show_zone, {
+        duration   : 300,
+        onComplete : function(){
+          this.fireEvent(this.is_open ? 'open' : 'close');
+          if (this.is_open)
+            this.show_zone_wrapper.addClass(this.options.show_zone_open_class);
+        }.bind(this)
+      });
+    }
+  },
+  
+  remove_art: function(art){
+    if ($type(art) === 'number') art = this.the_art[art];
+    this.the_art[this.the_art.indexOf(art)] = null;
+  },
+  
+  show: function(index){ 
+    var modified_index = false;
+    
+    if (this.options.cycle)
+      this.current_art = this.the_art.cycle(index);
+    else {
+      var limited = index.limit(0, this.the_art.length - 1);
+      
+      if (index <= 0) 
+        this.prev_button.addClass(this.options.disabled_button_class);
+      else
+        this.prev_button.removeClass(this.options.disabled_button_class);
+
+      if (index >= this.the_art.length - 1) 
+        this.next_button.addClass(this.options.disabled_button_class);
+      else
+        this.next_button.removeClass(this.options.disabled_button_class);
+      
+      if (index !== limited){          
+        index = limited;        
+        modified_index = true;
+      }    
+        
+      this.current_art = this.the_art[index];
+    }
+    
+    if (this.options.toggle && !modified_index && index === this.showing_index && this.is_open)
+      return this.close();
+      
+    if (!this.is_open)
+      this.open();
+    
+    if ($defined(index)){
+      this.showing_index = index;
+      
+      this.options.show_zone_transition(
+        this.show_zone, 
+        this.current_art, 
+        this.showing_index,
+        this.options.update_show_zone.bind(this, [this.show_zone, this.current_art, this.showing_index])
+      );
+      
+      if (this.options.superfluous_effects && $defined(Fx.Morph))
+        this.superfluous_effects(this.current_art);
+
+      this.the_art.removeClass(this.options.active_art_class);
+      this.current_art.addClass(this.options.active_art_class);
+    }
+    
+    return this;
+  },
+  next: function(){
+    if (this.showing_index < (this.the_art.length - 1) 
+        && !(this.the_art[this.showing_index + 1] && this.the_art[this.showing_index + 1].getParent()))
+          return this.next(++this.showing_index);
+        
+    return this.show(this.showing_index + 1);
+  },
+  prev: function(){
+    if (this.showing_index > 0 
+        && !(this.the_art[this.showing_index - 1] && this.the_art[this.showing_index - 1].getParent()))
+          return this.prev(--this.showing_index);
+    
+    return this.show(this.showing_index - 1);
+  },
+  
+  open: function(){
+    $try(
+      this.options.custom_open,
+      function(){
+        if (this.the_slide){
+          this.the_slide.hide();
+          this.the_slide.slideIn();
+        } else
+          this.show_zone.setStyle('display','block');
+      }.bind(this)
+    );
+
+    this.is_open = true;
+    this.keyboard.activate();
+    
+    this.fireEvent('showZoneOpened', [this.show_zone, this]);
+    return this;
+  },
+  close: function(){
+    $try(
+      this.options.custom_close,
+      function(){
+        if (this.the_slide){
+          if (this.is_open)
+            this.the_slide.slideOut();
+          else
+            this.the_slide.hide();
+        } else
+          this.show_zone.setStyle('display','none');
+      }.bind(this)
+    );
+
+    if (this.current_art) this.current_art.removeClass(this.options.active_art_class);
+    this.is_open = false;  
+    this.show_zone_wrapper.removeClass(this.options.show_zone_open_class);    
+    this.keyboard.deactivate();  
+    this.unpin_show_zone();
+    
+    this.fireEvent('showZoneClosed', [this.show_zone, this]);
+    return this;
+  },
+  
+  superfluous_effects: function(art){
+    var top    = art.getStyle('margin-top').toInt(),
+        bottom = art.getStyle('margin-bottom').toInt();
+        
+    new Fx.Morph(art, {
+      'property' : 'margin-top',
+      'duration' : 50,
+      'link'     : 'chain'
+    }).start({'margin-top': top - 5, 'margin-bottom': bottom + 5}).start({'margin-top': top, 'margin-bottom': bottom});
+  },
+  
+  pin_show_zone: function(){
+    if (this.is_pinned) return this;
+    
+    this.filler = new Element('div', {
+      styles: { 
+        height : this.show_zone_wrapper.getHeight(),
+        margin : this.show_zone_wrapper.getStyle('margin')
+      }
+    }).inject(this.show_zone_wrapper, 'after');
+    this.show_zone_wrapper.setStyle('position','fixed')
+                          .addClass(this.options.pinned_class);
+    this.is_pinned = true;
+    
+    this.fireEvent('showZonePinned', [this.show_zone, this]);
+    return this;
+  },
+  unpin_show_zone: function(){
+    if (!this.is_pinned) return this;
+    
+    this.filler.destroy();
+    this.show_zone_wrapper.setStyle('position','static')
+                          .removeClass(this.options.pinned_class);
+    this.is_pinned = false;   
+    
+    this.fireEvent('showZoneUnPinned', [this.show_zone, this]);
+    return this; 
+  },
+  toggle_pin_show_zone: function(){
+    this.is_pinned ? this.unpin_show_zone() : this.pin_show_zone();
+    return this;
+  }
+});
+
