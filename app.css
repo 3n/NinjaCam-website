@@ -735,5 +735,9 @@ ul li {
     border:1px solid #7AD1FF;
     margin-top: -2px;    
   }
+  .crap-browser .thumb-wrapper {
+    margin-top:0 !important;
+    border:none !important;
+  }
 
 
