@@ -44,7 +44,7 @@ window.addEvent('domready', function(){
         initial_limit: 32,		    
         // user_name    : 'ninjacam',
         json_opts: { 
-          data : { q : 'tweetphoto' },
+          data : { q : 'twitpic' },
           onFailure: function(){
             $('twitter-and-flickr').removeClass('loading').addClass('failed');
           }
@@ -92,23 +92,32 @@ window.addEvent('domready', function(){
 		  onHtmlUpdated: function(){ 
 		    $('twitter-and-flickr').removeClass('loading').getChildren('div.cell').each(function(cell){
 		      var img_elem = cell.getFirst();
-		      
-          img_elem.thumbnail(114,114,'thumbnail icon');
-          new Element('div', {'class': 'thumb-wrapper'}).inject(cell, 'top');          
+          
+          img_elem.setStyle('visibility','hidden');
           
           img_elem.addEvent('error', function(){
             try {
-              this.getParent().getParent().destroy();
+              var tmp = this.getParent();
+              if (tmp.hasClass('cell'))
+                tmp.destroy();
+              else
+                tmp.getParent().destroy();
             }catch(e){}
           });
           
           img_elem.addEvent('load', function(){
+            this.setStyle('visibility','visible').thumbnail(114,114,'thumbnail icon');
+            new Element('div', {'class': 'thumb-wrapper'}).inject(cell, 'top');
+            this.removeEvents('load');
+
+            (function(){
             this.mod('src', function(old_src){
               return old_src.replace(".th.jpg", ":iphone")
                             .replace("http://twitgoo.com/show/thumb/", "http://twitgoo.com/show/img/")            
                             .replace("http://twitpic.com/show/thumb/", "http://twitpic.com/show/large/")
                             .replace("http://img.ly/show/thumb/", "http://img.ly/show/full/");
             });
+            }).delay(100, this);
           });
 		    });
 		    
