@@ -19,6 +19,7 @@ var setup_video_hud = function(){
 
 var add_browser_classes = function(){
   if (!Browser.Engine.webkit) $(document.body).addClass('crap-browser');
+  if (navigator.userAgent.test('Chrome')) $(document.body).addClass('chrome');
   if (Browser.Engine.gecko) $(document.body).addClass('moz');
 };
 

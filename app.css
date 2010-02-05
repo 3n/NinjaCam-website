@@ -85,11 +85,12 @@ h1 {
     text-shadow: 0 0 100px white;
   }
   
-  .crap-browser h1 {
+  .crap-browser h1, .chrome h1 {
     text-shadow: none;
     background: url('images/NINJACAM.png');
     text-indent: -5000px;
   }
+  
 
 
 h2 {
