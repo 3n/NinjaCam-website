@@ -197,6 +197,7 @@ ul li {
     color:#00A5FF;    
     border-bottom:1px solid black;
     -webkit-box-shadow: 0 1px 0 #404040;
+    -moz-box-shadow: #404040 0 1px 0;
   }
   
 #footer {
@@ -206,6 +207,7 @@ ul li {
   clear:both;
   border-top:1px solid #333;
   -webkit-box-shadow: 0 -1px 0 black;
+  -moz-box-shadow: black 0 -1px 0;  
 }
 
 #new {
