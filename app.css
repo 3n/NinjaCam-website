@@ -706,7 +706,7 @@ ul li {
   .icon-extra {
     -webkit-box-shadow: 0 0 1px white, 0 2px 7px rgba(0,0,0,0.5);
   }
-  .non-webkit .icon {
+  .crap-browser .icon {
     border:none !important;
   }
 

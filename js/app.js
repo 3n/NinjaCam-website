@@ -18,7 +18,7 @@ var setup_video_hud = function(){
 };
 
 var add_browser_classes = function(){
-  if (!Browser.Engine.webkit) $(document.body).addClass('non-webkit');
+  if (!Browser.Engine.webkit) $(document.body).addClass('crap-browser');
   if (Browser.Engine.gecko) $(document.body).addClass('moz');
 };
 
