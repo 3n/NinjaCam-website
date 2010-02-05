@@ -106,7 +106,8 @@ window.addEvent('domready', function(){
           });
           
           img_elem.addEvent('load', function(){
-            this.setStyle('visibility','visible').thumbnail(114,114,'thumbnail icon');
+            this.thumbnail(114,114,'thumbnail icon');
+            this.setStyle('visibility','visible');
             new Element('div', {'class': 'thumb-wrapper'}).inject(cell, 'top');
             this.removeEvents('load');
 
