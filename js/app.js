@@ -52,7 +52,7 @@ window.addEvent('domready', function(){
 				shouldIncludeItem: function(item){
           var is_rt = item.text.match("RT @");
           // return (item.text.test(twitter_image_regex)) && (!is_rt || item.from_user == "ninjacam");
-          return item.text.test(twitter_image_regex) && !is_rt;
+          return item.text.test(twitter_image_regex) && !is_rt && !item.text.test(".gif");
 				},
 				gen_html: function(item){
 				  var img_url = item.text.match(twitter_image_regex)[0],

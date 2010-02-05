@@ -87,6 +87,11 @@ h1 {
   h1:hover .ninja {
     text-shadow: 0 0 100px white;
   }
+  
+  .crap-browser h1 {
+    text-shadow: none;
+    background: url('images/NINJACAM.png');
+  }
 
 
 h2 {
