@@ -698,14 +698,16 @@ ul li {
 
 .icon {
   -webkit-border-radius:8px;  
-  -moz-border-radius:8px;    
+  -moz-border-radius:0;    
   -webkit-box-shadow: 0 2px 7px rgba(0,0,0,0.5);
   -webkit-box-shadow: rgba(0,0,0,0.5) 0 2px 7px;    
   border-top:1px solid rgba(255,255,255,0.5);
 }
   .icon-extra {
-    -webkit-box-shadow: 0 0 1px white, 0 2px 7px rgba(0,0,0,0.5);  
-    -moz-box-shadow: white 0 0 1px, rgba(0,0,0,0.5) 0 2px 7px;  
+    -webkit-box-shadow: 0 0 1px white, 0 2px 7px rgba(0,0,0,0.5);
+  }
+  .non-webkit .icon {
+    border:none !important;
   }
 
 .cell .thumbnail {
@@ -717,7 +719,7 @@ ul li {
   width:121px;
   margin-left:-4px;
   -webkit-border-radius:10px;
-  -moz-border-radius:10px;  
+  -moz-border-radius:0;  
   overflow:hidden;
 }
 .cell.the_louvre_showing .thumb-wrapper {

@@ -17,7 +17,14 @@ var setup_video_hud = function(){
 	$('video-hud').addEvent('click', hide_video_hud);
 };
 
+var add_browser_classes = function(){
+  if (!Browser.Engine.webkit) $(document.body).addClass('non-webkit');
+  if (Browser.Engine.gecko) $(document.body).addClass('moz');
+};
+
 window.addEvent('domready', function(){
+  add_browser_classes();
+  
   // supported: twitpic, yfrog, twitgoo, tweetphoto, img.ly
   // not:       mobypicture
   var twitter_image_regex = new RegExp(/(\w+:\/\/(yfrog|twitpic|twitgoo|tweetphoto|img)+\.[A-Za-z0-9-_:;\(\)%&\?\/.=]+)/);
