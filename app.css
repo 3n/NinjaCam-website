@@ -33,15 +33,15 @@ pre,code,kbd,samp,tt {font-family:monospace;*font-size:108%;line-height:99%;}
 
 @font-face {
 	font-family: 'd';
-	src: url('dr.eot');
-	src: local('DINPro-Regular'), url('dr.woff') format('woff'), url('dr.otf') format('opentype'), url('dr.svg#DINPro-Regular') format('svg');
+	src: url('d/dr.eot');
+  src: local('DINPro-Regular'), url('d/dr.woff') format('woff'), url('d/dr.otf') format('opentype'), url('d/dr.svg#DINPro-Regular') format('svg');
 	font-weight:normal;
 }
 
 @font-face {
 	font-family: 'd';
-	src: url('db.eot');
-	src: local('DINPro-Bold'), url('db.woff') format('woff'), url('db.otf') format('opentype'), url('db.svg#DINPro-Bold') format('svg');
+	src: url('d/db.eot');
+	src: local('DINPro-Bold'), url('d/db.woff') format('woff'), url('d/db.otf') format('opentype'), url('d/db.svg#DINPro-Bold') format('svg');
 	font-weight:bold;
 }
 
