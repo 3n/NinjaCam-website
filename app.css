@@ -91,6 +91,7 @@ h1 {
   .crap-browser h1 {
     text-shadow: none;
     background: url('images/NINJACAM.png');
+    text-indent: -5000px;
   }
 
 
