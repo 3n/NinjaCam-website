@@ -218,11 +218,14 @@ ul li {
   padding-top:10px;
   background-color:#F72F3C;
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FF525D), to(#AA272F));
+  background: -moz-linear-gradient(19% 75% 90deg, #AA272F, #FF525D);
   position:absolute;
   left:180px;
   top:-6px;
   -webkit-border-radius:40px;
+  -moz-border-radius:40px;  
   -webkit-box-shadow: 0 2px 7px rgba(0,0,0,0.7);    
+  -moz-box-shadow: rgba(0,0,0,0.7) 0 2px 7px;
   color:white;
   font-size:70%;
   text-shadow:0 -1px 0 black;
@@ -285,7 +288,9 @@ ul li {
 #buy-now-wrapper {
   border:1px solid rgba(0,0,0,0.7);
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.1);
-  -webkit-border-radius:5px;  
+  -moz-box-shadow: rgba(255,255,255,0.1) 0 1px 0;  
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;  
   height:52px;
   float:left;
   width:164px;
@@ -300,7 +305,9 @@ ul li {
   
   padding:4px 14px 4px 15px;
   -webkit-border-radius:5px;
+  -moz-border-radius:5px;
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0.08)), to(rgba(0,0,0,0.1)));
+  background: -moz-linear-gradient(19% 75% 90deg, rgba(0,0,0,0.1), rgba(255,255,255,0.08));  
   border-top:1px solid rgba(255,255,255,0.2);
 }
   
@@ -319,12 +326,14 @@ ul li {
 
 #buy-wrapper:hover #buy-now {
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#016296));
+  background: -moz-linear-gradient(19% 75% 90deg, #016296, #00A5FF);    
   border-top:1px solid rgba(255,255,255,0.8);    
   text-shadow: 0 1px 0 rgba(255,255,255,0.5);
   color:#00324D;    
 }
 #buy-wrapper:hover #icon-large {
   -webkit-box-shadow: 0 0 20px #00A5FF;
+  -moz-box-shadow: #00A5FF 0 0 20px;  
 }
 #buy-wrapper:hover #iphone-icon {
   background-position:-24px;
@@ -338,9 +347,11 @@ ul li {
   padding:6px;
   background-color:rgba(0,0,0,0.3);
   -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
 }
   #watch-video:hover {
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#0086CE));
+    background: -moz-linear-gradient(19% 75% 90deg, #0086CE, #00A5FF);        
     border-color:#00A5FF !important;
   }
   
@@ -410,6 +421,7 @@ ul li {
   position:relative;
   background:rgba(0,0,0,0.2);
   -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;  
   font-weight:bold;
   font-size:16px;
   color:white;
@@ -523,6 +535,7 @@ ul li {
   }
   .the_louvre_show_zone_wrapper.the_louvre_pinned {
     -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
 /*    background:rgba(0,0,0,0.9);*/
     background:black;
 /*    -webkit-box-shadow: 0 0 20px black;*/
@@ -538,7 +551,8 @@ ul li {
   max-width:58%;
   margin-left:1px;
   float:left;
-  -webkit-box-shadow: 0 0 1px white, 0 2px 7px rgba(0,0,0,0.5);    
+  -webkit-box-shadow: 0 0 1px white, 0 2px 7px rgba(0,0,0,0.5);
+  -moz-box-shadow: white 0 0 1px, rgba(0,0,0,0.5) 0 2px 7px;    
 }
 .the_louvre_show_zone .the_louvre_show_caption {
   width:185px;
@@ -553,12 +567,15 @@ ul li {
   padding:8px;
   -webkit-border-top-right-radius:8px;
   -webkit-border-top-left-radius:8px;
+  -moz-border-radius:8px;
   border:1px solid rgba(255,255,255,0.03) !important;
 }
 
 .dark .the_louvre_show_zone {
   background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(rgba(0,0,0,0.3)), to(rgba(0,0,0,0.15)));
+  background: -moz-linear-gradient(19% 75% 90deg, rgba(0,0,0,0.15), rgba(0,0,0,0.3));
   -webkit-box-shadow: 0 -1px 1px rgba(255,255,255,0.07);
+  -moz-box-shadow: rgba(255,255,255,0.07) 0 -1px 1px;
   border-top:1px solid #090909 !important;
   border-left:1px solid #090909 !important;
   border-right:1px solid #090909 !important;
@@ -596,6 +613,7 @@ ul li {
   width:30px;
   height:30px;
   -webkit-border-radius: 4px !important;
+  -moz-border-radius: 4px !important;  
   float:left;
 }
 
@@ -603,15 +621,20 @@ ul li {
 .the_louvre_controls {
   display:none;
   background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(rgba(0,0,0,0.3)), to(rgba(0,0,0,0.15)));  
+  background: -moz-linear-gradient(19% 75% 90deg, rgba(0,0,0,0.15), rgba(0,0,0,0.3));
   position:relative;
   -webkit-border-bottom-right-radius:8px;
   -webkit-border-bottom-left-radius:8px;
+  -moz-border-radius:8px;
   -webkit-box-shadow: 0 1px 1px rgba(255,255,255,0.1), 0 -1px 1px rgba(255,255,255,0.03);
+  -moz-box-shadow: rgba(255,255,255,0.1) 0 1px 1px, rgba(255,255,255,0.03) 0 -1px 1px;
   border:1px solid #090909;
 }
   .dark .the_louvre_controls {
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0.06)), to(rgba(0,0,0,0.1)));
+    background: -moz-linear-gradient(19% 75% 90deg, rgba(0,0,0,0.1), rgba(255,255,255,0.06));
     -webkit-box-shadow: 0 1px 1px rgba(255,255,255,0.1), 0 -1px 0 #090909;
+    -moz-box-shadow: rgba(255,255,255,0.1) 0 1px 1px, #090909 0 -1px 0;
     border-top-color:rgba(255,255,255,0.2);
   }
   
@@ -633,6 +656,7 @@ ul li {
   font-weight:bold;
   margin-top:-1px;
   -webkit-box-shadow: 0 0 2px black;
+  -moz-box-shadow: black 0 0 2px;  
   border: 0 solid rgba(255,255,255,0.05);
 }
   .the_louvre_button:hover {
@@ -674,11 +698,14 @@ ul li {
 
 .icon {
   -webkit-border-radius:8px;  
-  -webkit-box-shadow: 0 2px 7px rgba(0,0,0,0.5);  
+  -moz-border-radius:8px;    
+  -webkit-box-shadow: 0 2px 7px rgba(0,0,0,0.5);
+  -webkit-box-shadow: rgba(0,0,0,0.5) 0 2px 7px;    
   border-top:1px solid rgba(255,255,255,0.5);
 }
   .icon-extra {
     -webkit-box-shadow: 0 0 1px white, 0 2px 7px rgba(0,0,0,0.5);  
+    -moz-box-shadow: white 0 0 1px, rgba(0,0,0,0.5) 0 2px 7px;  
   }
 
 .cell .thumbnail {
@@ -690,6 +717,8 @@ ul li {
   width:121px;
   margin-left:-4px;
   -webkit-border-radius:10px;
+  -moz-border-radius:10px;  
+  overflow:hidden;
 }
 .cell.the_louvre_showing .thumb-wrapper {
   border-top: 1px solid #7AD1FF;
@@ -698,6 +727,7 @@ ul li {
   border-left:none !important;    
   margin-top: -1px !important;
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#0086CE));
+  background: -moz-linear-gradient(19% 75% 90deg, to(#0086CE), from(#00A5FF));  
 }
   .cell:hover .thumb-wrapper {
     border:1px solid #7AD1FF;
