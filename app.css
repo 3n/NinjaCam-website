@@ -164,7 +164,7 @@ ul li {
   position:absolute;
   top:0;
   background: -webkit-gradient(radial, 50% -100, 100, 50% -100, 1200, from(rgba(255,255,255,0.13)), to(rgba(0,0,0,0)));
-  background-image: -moz-radial-gradient(top 0deg, circle farthest-side, rgba(255,255,255,0.13) 0%, rgba(0,0,0,0) 100%);
+  background-image: -moz-radial-gradient(top 0deg, circle farthest-side, rgba(255,255,255,0.19) 0%, rgba(0,0,0,0) 120%);
 }
 
 #spotlight {
