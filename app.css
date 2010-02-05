@@ -41,12 +41,12 @@ pre,code,kbd,samp,tt {font-family:monospace;*font-size:108%;line-height:99%;}
 }*/
 @font-face {
   font-family: 'din';
-  src: url('DINPro-Regular.otf') format('opentype');
+  src: url('dr.otf') format('opentype');
   font-weight:normal;
 }
 @font-face {
   font-family: 'din';
-  src: url('DINPro-Bold.otf') format('opentype');
+  src: url('db.otf') format('opentype');
   font-weight:bold;
 }
 
