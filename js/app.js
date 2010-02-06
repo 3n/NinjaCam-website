@@ -1,8 +1,37 @@
-G = {};
+G = {
+  trackEvent : function(category, action, label, value){    
+    if (typeof(pageTracker) == "object") pageTracker._trackEvent(category, action, label, value);
+    else if(typeof(_gaq) == "object") _gaq.push(['_trackEvent', category, action, label, value]);
+  }
+};
+
+window.addEvent('domready', function() { G.dom_ready = true; });
+
+window.onerror = function(msg, url, linenumber){   
+	var handle_error = function(msg, url, linenumber) {
+		G.trackEvent(
+      "Error",
+      msg,
+      navigator.userAgent,
+      linenumber
+    );		
+	};
+
+	if (GLOBALZ.dom_ready) handle_error(msg, url, linenumber);
+	else									 window.addEvent('domready', handle_error.bind(window, [msg, url, linenumber]));
+};
 
 var setup_video_hud = function(){
-  var show_video_hud = function(){ $('video-hud').setStyle('display','block'); G.keyboard.activate(); };
-	var hide_video_hud = function(){ $('video-hud').setStyle('display','none');  G.keyboard.deactivate(); };
+  var show_video_hud = function(){ 
+    $('video-hud').setStyle('display','block'); 
+    G.keyboard.activate();
+    G.trackEvent("Video", "shown");
+  };
+	var hide_video_hud = function(){ 
+	  $('video-hud').setStyle('display','none');  
+	  G.keyboard.deactivate(); 
+	  G.trackEvent("Video", "hidden");
+	};
 	
   G.keyboard = new Keyboard({
     preventDefault : true,
