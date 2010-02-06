@@ -282,6 +282,9 @@ ul li {
 #recent-contributers a {
   display:block;
 }
+#recent-contributers span {
+  text-transform:uppercase;
+}
 
 #icon-large {
   width:52px;
