@@ -44,8 +44,10 @@ G = {
         G.trackEvent("Click", id, 'buy');
       });
     });
-    $('twitter-follow').addEvent('click', function(){
-      G.trackEvent("Click", 'twitter-follow', 'social');
+    ['twitter-follow-1','twitter-follow-2'].each(function(id){
+      $(id).addEvent('click', function(){
+        G.trackEvent("Click", this.get('id'), 'social');
+      });
     });
   }
   
