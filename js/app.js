@@ -1,9 +1,59 @@
 G = {
+
+  twitter_image_regex : new RegExp(/(\w+:\/\/(yfrog|twitpic|twitgoo|tweetphoto|img)+\.[A-Za-z0-9-_:;\(\)%&\?\/.=]+)/),
+  
   trackEvent : function(category, action, label, value){    
     if (typeof(pageTracker) == "object") pageTracker._trackEvent(category, action, label, value);
     else if(typeof(_gaq) == "object") _gaq.push(['_trackEvent', category, action, label, value]);
+  },
+  
+  setup_video_hud : function(){
+    var show_video_hud = function(){ 
+      $('video-hud').setStyle('display','block'); 
+      G.keyboard.activate();
+      G.trackEvent("Video", "shown");
+    };
+  	var hide_video_hud = function(){ 
+  	  $('video-hud').setStyle('display','none');  
+  	  G.keyboard.deactivate(); 
+  	  G.trackEvent("Video", "hidden");
+  	};
+
+    G.keyboard = new Keyboard({
+      preventDefault : true,
+      events: {
+        'esc' : hide_video_hud
+      }
+    });
+
+  	$('video-wrapper').addEvent('click', function(e){ e.stop(); });
+  	$('video-wrapper').getFirst('a').addEvent('click', hide_video_hud);
+  	$('watch-video').addEvent('click', show_video_hud);	
+  	$('video-hud').addEvent('click', hide_video_hud);
+  },
+  
+  add_browser_classes : function(){
+    if (!Browser.Engine.webkit) $(document.body).addClass('crap-browser');
+    if (navigator.userAgent.test('Chrome')) $(document.body).addClass('chrome');
+    if (Browser.Engine.gecko) $(document.body).addClass('moz');
+  },
+  
+  add_tracking : function(){
+    ['buy-wrapper', 'new', 'on-iphone'].each(function(id){
+      $(id).addEvent('click', function(){
+        G.trackEvent("Click", id, 'buy');
+      });
+    });
+    $('twitter-follow').addEvent('click', function(){
+      G.trackEvent("Click", 'twitter-follow', 'social');
+    });
   }
+  
 };
+
+
+
+
 
 window.addEvent('domready', function() { G.dom_ready = true; });
 
@@ -21,43 +71,20 @@ window.onerror = function(msg, url, linenumber){
 	else									 window.addEvent('domready', handle_error.bind(window, [msg, url, linenumber]));
 };
 
-var setup_video_hud = function(){
-  var show_video_hud = function(){ 
-    $('video-hud').setStyle('display','block'); 
-    G.keyboard.activate();
-    G.trackEvent("Video", "shown");
-  };
-	var hide_video_hud = function(){ 
-	  $('video-hud').setStyle('display','none');  
-	  G.keyboard.deactivate(); 
-	  G.trackEvent("Video", "hidden");
-	};
-	
-  G.keyboard = new Keyboard({
-    preventDefault : true,
-    events: {
-      'esc' : hide_video_hud
-    }
-  });
-	
-	$('video-wrapper').addEvent('click', function(e){ e.stop(); });
-	$('video-wrapper').getFirst('a').addEvent('click', hide_video_hud);
-	$('watch-video').addEvent('click', show_video_hud);	
-	$('video-hud').addEvent('click', hide_video_hud);
-};
 
-var add_browser_classes = function(){
-  if (!Browser.Engine.webkit) $(document.body).addClass('crap-browser');
-  if (navigator.userAgent.test('Chrome')) $(document.body).addClass('chrome');
-  if (Browser.Engine.gecko) $(document.body).addClass('moz');
-};
+
+
 
 window.addEvent('domready', function(){
-  add_browser_classes();
+  G.add_browser_classes();
+  
+  (function(){
+    G.setup_video_hud();
+    G.add_tracking();
+  }).delay(1000);
   
   // supported: twitpic, yfrog, twitgoo, tweetphoto, img.ly
   // not:       mobypicture
-  var twitter_image_regex = new RegExp(/(\w+:\/\/(yfrog|twitpic|twitgoo|tweetphoto|img)+\.[A-Za-z0-9-_:;\(\)%&\?\/.=]+)/);
   
 	new MicroApp('twitter-and-flickr', [
 		[ /*new Flickr({ 
@@ -82,11 +109,11 @@ window.addEvent('domready', function(){
         },
 				shouldIncludeItem: function(item){
           var is_rt = item.text.match("RT @");
-          // return (item.text.test(twitter_image_regex)) && (!is_rt || item.from_user == "ninjacam");
-          return item.text.test(twitter_image_regex) && !is_rt;
+          // return (item.text.test(G.twitter_image_regex)) && (!is_rt || item.from_user == "ninjacam");
+          return item.text.test(G.twitter_image_regex) && !is_rt;
 				},
 				gen_html: function(item){
-				  var img_url = item.text.match(twitter_image_regex)[0],
+				  var img_url = item.text.match(G.twitter_image_regex)[0],
 				      src = img_url,
 				      tweet_url = item.source;
 
@@ -179,12 +206,10 @@ window.addEvent('domready', function(){
             return the_art.getFirst('.caption').get('html');
           },
           get_img_href : function(the_art, i){            
-            return the_art.retrieve('data').text.match(twitter_image_regex)[0];
+            return the_art.retrieve('data').text.match(G.twitter_image_regex)[0];
           }
         });
 		  }
 		}
 	).to_html();
-	
-  setup_video_hud();
 });
