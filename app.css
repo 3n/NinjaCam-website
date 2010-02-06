@@ -241,7 +241,7 @@ ul li {
 }
   #new:hover {
     -webkit-transform: translateY(-3px);
-    -webkit-transform: scale(10);
+    -webkit-transform: scale(1.4);
   }
   
 #sub-header { 
