@@ -34,6 +34,7 @@ G = {
   
   add_browser_classes : function(){
     if (!Browser.Engine.webkit) $(document.body).addClass('crap-browser');
+    else                        $(document.body).addClass('webkit');
     if (navigator.userAgent.test('Chrome')) $(document.body).addClass('chrome');
     if (Browser.Engine.gecko) $(document.body).addClass('moz');
   },

@@ -241,9 +241,12 @@ ul li {
 }
   #new:hover {
     -webkit-transform: translateY(-3px);
-    -webkit-transform: scale(1.4);
+    -webkit-transform: scale(1.6);
     -moz-transform: translateY(-3px);
-    -moz-transform: scale(1.4);    
+    -moz-transform: scale(1.6);        
+  }
+  .webkit #new:hover {
+    text-decoration:none;
   }
   
 #sub-header { 
