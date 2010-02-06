@@ -150,7 +150,7 @@ window.addEvent('domready', function(){
 		]],
 		{
 		  onHtmlUpdated: function(){ 
-		    $('twitter-and-flickr').removeClass('loading').getChildren('div.cell').each(function(cell){
+		    $('twitter-and-flickr').removeClass('loading').getChildren('div.cell').each(function(cell,i){          
 		      var img_elem = cell.getFirst();
           
           cell.setStyle('visibility','hidden');
@@ -190,6 +190,15 @@ window.addEvent('domready', function(){
             // });
             // }).delay(100, this);
           }.bind(img_elem));
+          
+          if (i < 5)
+            $("recent-contributers").grab(
+              new Element('a', {
+                html: "@" + cell.retrieve('data').from_user,
+                href: "http://www.twitter.com/" + cell.retrieve('data').from_user,
+                target: "_blank"
+              })
+            );
 		    });
 		    
         $('twitter-and-flickr').fade('in');

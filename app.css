@@ -273,6 +273,13 @@ ul li {
   }*/
 
 
+#recent-contributers {
+  margin-top:8px;
+}
+#recent-contributers a {
+  display:block;
+}
+
 #icon-large {
   width:52px;
   float:left;
