@@ -77,6 +77,7 @@ window.addEvent('domready', function(){
           data : { q : 'twitpic' },
           onFailure: function(){
             $('twitter-and-flickr').removeClass('loading').addClass('failed');
+            G.trackEvent("Twitter", "failed");
           }
         },
 				shouldIncludeItem: function(item){
