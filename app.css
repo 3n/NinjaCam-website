@@ -711,7 +711,8 @@ ul li {
     -webkit-box-shadow: 0 0 1px white, 0 2px 7px rgba(0,0,0,0.5);
   }
   .crap-browser .icon {
-    border:none !important;
+    border-top: none !important;
+    padding-top:1px;
   }
 
 .cell .thumbnail {
@@ -732,16 +733,14 @@ ul li {
   border-right:none !important;
   border-left:none !important;    
   margin-top: -1px !important;
+  background: #00A5FF;
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#0086CE));
-  background: -moz-linear-gradient(19% 75% 90deg, to(#0086CE), from(#00A5FF));  
+  background: -moz-linear-gradient(19% 75% 90deg, #0086CE, #00A5FF);  
 }
-  .cell:hover .thumb-wrapper {
-    border:1px solid #7AD1FF;
-    margin-top: -2px;    
-  }
-  .crap-browser .thumb-wrapper {
-    margin-top:0 !important;
-    border:none !important;
-  }
+  
+.cell:hover .thumb-wrapper {
+  border:1px solid #7AD1FF;
+  margin-top: -2px;    
+}
 
 
