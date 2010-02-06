@@ -196,7 +196,7 @@ window.addEvent('domready', function(){
         
         the_louvre = new TheLouvre($('twitter-and-flickr'), {
           selector         : " .cell",
-          show_image_class : "the_louvre_show_image icon",
+          show_image_class : "the_louvre_show_image icon icon-extra",
           close_button_html: "⇧",
           next_button_html: "&gt;",
           prev_button_html: "&lt;",
