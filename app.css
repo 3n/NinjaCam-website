@@ -94,8 +94,16 @@ h1 {
 
 
 h2 {
-  font-size:120%;
-  color:#4f4f4f;
+  font-size:120%;  
+  text-transform:uppercase;
+  text-shadow: 1px 1px 2px black !important;    
+  color:#00A5FF;    
+  border-bottom:1px solid black;
+  -webkit-box-shadow: 0 1px 0 #404040;
+  -moz-box-shadow: #404040 0 1px 0;
+  
+  height:28px;
+  margin-top:16px;
       
   /*alt*/
 /*  color:#0c0c0c;
@@ -193,16 +201,6 @@ ul li {
     border:none;
     -webkit-box-shadow:none;
   }
-  #header h2 {
-    height:28px;
-    margin-top:16px;    
-    text-transform:uppercase;
-    text-shadow: 1px 1px 2px black;    
-    color:#00A5FF;    
-    border-bottom:1px solid black;
-    -webkit-box-shadow: 0 1px 0 #404040;
-    -moz-box-shadow: #404040 0 1px 0;
-  }
   
 #footer {
   float:left;
@@ -250,11 +248,13 @@ ul li {
   }
   
 #sub-header { 
-/*  margin-bottom:14px; */
-/*  font-style:italic;    */
+  text-shadow: 0 2px 0 black;  
+  font-size:120%;
+  color:#4f4f4f;
 }
 
 #ninjacam-concept-overview p {
+  margin-bottom:14px;
 /*  padding:3px 8px 7px 8px;
   width:151px;
   margin-left:-8px;
