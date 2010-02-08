@@ -34,6 +34,7 @@ G = {
   
   add_browser_classes : function(){
     if (!Browser.Engine.webkit) $(document.body).addClass('crap-browser');
+    else                        $(document.body).addClass('webkit');
     if (navigator.userAgent.test('Chrome')) $(document.body).addClass('chrome');
     if (Browser.Engine.gecko) $(document.body).addClass('moz');
   },
@@ -150,7 +151,7 @@ window.addEvent('domready', function(){
 		]],
 		{
 		  onHtmlUpdated: function(){ 
-		    $('twitter-and-flickr').removeClass('loading').getChildren('div.cell').each(function(cell){
+		    $('twitter-and-flickr').removeClass('loading').getChildren('div.cell').each(function(cell,i){          
 		      var img_elem = cell.getFirst();
           
           cell.setStyle('visibility','hidden');
@@ -190,13 +191,22 @@ window.addEvent('domready', function(){
             // });
             // }).delay(100, this);
           }.bind(img_elem));
+          
+          if (i < 5)
+            $("recent-contributers").grab(
+              new Element('a', {
+                html: "@" + cell.retrieve('data').from_user,
+                href: "http://www.twitter.com/" + cell.retrieve('data').from_user,
+                target: "_blank"
+              })
+            );
 		    });
 		    
         $('twitter-and-flickr').fade('in');
         
         the_louvre = new TheLouvre($('twitter-and-flickr'), {
           selector         : " .cell",
-          show_image_class : "the_louvre_show_image icon",
+          show_image_class : "the_louvre_show_image icon icon-extra",
           close_button_html: "⇧",
           next_button_html: "&gt;",
           prev_button_html: "&lt;",

@@ -10,13 +10,10 @@ make it so the glossy shit on the photo icons only shows up when the photo is lo
 
 make max-height of shown image be based off of user's screen height.
 
-add events to things like clicking itunes links, opening show zone, key controls to analytics
+flush out browser stuff to include available features and older versions of browsers
 
-make sure headers and such are all in order. ie8 is saying compatability mode...
+add twitter geolocation stuff into metadata
 
-add "recent contributors list on the left"
-
-fix the non-webkit bounce margin problem and add a border to current art
 
 
 PHOTOSHOP:
@@ -30,3 +27,12 @@ spruce up the favicon
 CONTENT:
 
 try to make vertical grid match between photos and right column blocks
+
+
+
+
+BEFORE "LAUNCH"
+
+compress all assets on gh-pages branch
+update flickr video and embed on media page
+post a bunch of #ninjacam on twitter and update search in app.js
