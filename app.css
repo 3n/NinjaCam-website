@@ -767,10 +767,7 @@ ul li {
 
 
 #media-overview img {
+  margin-right:14px;
   max-width:100px;
   max-height:100px;
 }
-  #media-overview img:hover {
-    max-width:1000px;
-    max-height:1000px;
-  }
