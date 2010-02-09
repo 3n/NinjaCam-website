@@ -332,6 +332,7 @@ ul li {
   padding:4px 14px 4px 15px;
   -webkit-border-radius:5px;
   -moz-border-radius:5px;
+  background-color:#111;
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0.08)), to(rgba(0,0,0,0.1)));
   background: -moz-linear-gradient(19% 75% 90deg, rgba(0,0,0,0.1), rgba(255,255,255,0.08));  
   border-top:1px solid rgba(255,255,255,0.2);
@@ -351,6 +352,7 @@ ul li {
 }
 
 #buy-wrapper:hover #buy-now {
+  background-color:#00A5FF;
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#016296));
   background: -moz-linear-gradient(19% 75% 90deg, #016296, #00A5FF);    
   border-top:1px solid rgba(255,255,255,0.8);    
@@ -376,6 +378,7 @@ ul li {
   -moz-border-radius: 8px;
 }
   #watch-video:hover {
+    background-color:#00A5FF;
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#0086CE));
     background: -moz-linear-gradient(19% 75% 90deg, #0086CE, #00A5FF);        
     border-color:#00A5FF !important;
@@ -596,6 +599,7 @@ ul li {
 }
 
 .dark .the_louvre_show_zone {
+  background-color:#191919;
   background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(rgba(0,0,0,0.3)), to(rgba(0,0,0,0.15)));
   background: -moz-linear-gradient(19% 75% 90deg, rgba(0,0,0,0.15), rgba(0,0,0,0.3));
   -webkit-box-shadow: 0 -1px 1px rgba(255,255,255,0.07);
@@ -655,6 +659,7 @@ ul li {
   border:1px solid #090909;
 }
   .dark .the_louvre_controls {
+      background-color: #333;
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0.06)), to(rgba(0,0,0,0.1)));
     background: -moz-linear-gradient(19% 75% 90deg, rgba(0,0,0,0.1), rgba(255,255,255,0.06));
     -webkit-box-shadow: 0 1px 1px rgba(255,255,255,0.1), 0 -1px 0 #090909;
