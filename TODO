@@ -33,4 +33,5 @@ BEFORE "LAUNCH"
 
 compress all assets on gh-pages branch
 update flickr video and embed on media page
-post a bunch of #ninjacam on twitter and update search in app.js
+post a bunch of #ninjacam on twitter
+add secret code to activate tweetphoto | yfrog etc search
