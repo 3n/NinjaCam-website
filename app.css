@@ -136,6 +136,7 @@ p {
   font-size:90%;
   line-height:1.4em;
   word-wrap:break-word;  
+  text-shadow: black 1px 1px 2px;
 }
 
 a {
