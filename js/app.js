@@ -84,6 +84,8 @@ window.addEvent('domready', function(){
   (function(){
     G.setup_video_hud();
     G.add_tracking();
+    $('logo').addEvent('mouseover', function(){ $('eye').addClass('hover'); });
+    $('logo').addEvent('mouseout',  function(){ $('eye').removeClass('hover'); });    
   }).delay(1000);
   
   // supported: twitpic, yfrog, twitgoo, tweetphoto, img.ly
