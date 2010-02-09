@@ -103,9 +103,10 @@ window.addEvent('domready', function(){
 															media   : 'photos',
 															extras  : 'date_taken,owner_name,tags' } } }), */
 		  new Twitter({
-        initial_limit: 32,		    
+        initial_limit: 36,		    
         // user_name    : 'ninjacam',
         json_opts: { 
+          rpp  : 50,
           data : { q : 'ninjacam' },
           onFailure: function(){
             $('twitter-and-flickr').removeClass('loading').addClass('failed');
