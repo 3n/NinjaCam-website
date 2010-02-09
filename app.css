@@ -771,3 +771,12 @@ ul li {
   max-width:100px;
   max-height:100px;
 }
+
+#embed-code {
+  border:none;
+  background:#111;
+  color:white;
+  width:498px;
+  height:100px;
+  margin-bottom:50px;
+}
