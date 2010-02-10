@@ -70,7 +70,11 @@ G = {
 };
 
 
-
+MicroAppModel.implement({
+	_item_is_new: function(creation_date, name){
+		return Date.parse(creation_date) > Date.parse(G.grid_latest.get('twitter'));
+	}
+});
 
 
 window.addEvent('domready', function() { G.dom_ready = true; });
@@ -95,6 +99,9 @@ window.onerror = function(msg, url, linenumber){
 
 window.addEvent('domready', function(){
   G.add_browser_classes();
+  
+  if (!$defined(Cookie.read('grid_latest'))) $(document.body).addClass('all-new');
+	G.grid_latest = new Hash.Cookie('grid_latest', {duration:100, path: '/'});
   
   (function(){
     G.setup_video_hud();
@@ -255,5 +262,11 @@ window.addEvent('domready', function(){
         });
 		  }
 		}
-	).to_html();
+	).addEvent('modelInit', function(m){
+			m.addEvent('dataReady', function(mm){
+			  G.t = mm;
+			  G.grid_latest.set( 'twitter', mm.db[0].created_on.toString());
+			});
+	})
+  .to_html();
 });

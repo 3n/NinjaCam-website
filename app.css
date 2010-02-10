@@ -485,6 +485,10 @@ ul li {
 .new-icon {
   display:none;
 }
+.cell.new > .new-icon {
+  display:block;
+}
+
 .grid-title {
   display:none;
 }
