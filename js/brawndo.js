@@ -7701,6 +7701,8 @@ var TheLouvre = new Class({
       this.current_art.addClass(this.options.active_art_class);
     }
     
+    this.fireEvent("shown", [this.current_art, this]);
+    
     return this;
   },
   next: function(){

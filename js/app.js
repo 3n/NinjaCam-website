@@ -260,6 +260,9 @@ window.addEvent('domready', function(){
           },
           onShowZoneCreated: function(show_zone, the_louvre){
             $$('.the_louvre_button').mouseDownClass('mousedown');
+          },
+          onShown: function(the_art){
+            if (the_art) the_art.removeClass('new');
           }
         });
 		  }
