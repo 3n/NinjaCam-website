@@ -494,8 +494,7 @@ ul li {
 }
 
 .new-icon {
-/*  display:none;*/
-  display:block;
+  display:none;
   position:absolute;
   right:4px;
   bottom:5px;
@@ -507,8 +506,8 @@ ul li {
   
   -webkit-border-radius:4px;
   -moz-border-radius:4px;  
-  -webkit-box-shadow: 0 2px 7px rgba(0,0,0,0.7);    
-  -moz-box-shadow: rgba(0,0,0,0.7) 0 2px 7px;
+  -webkit-box-shadow: 0 2px 3px rgba(0,0,0,0.9);    
+  -moz-box-shadow: rgba(0,0,0,0.9) 0 2px 3px;
   text-shadow:0 -1px 0 black;
   border-top:1px solid rgba(255,255,255,0.7);
   
@@ -517,9 +516,9 @@ ul li {
 .cell.new > .new-icon {
   display:block;
 }
-  .new-icon:hover {
-    -webkit-transform: scale(1.4);
-    -moz-transform: scale(1.4);             
+  .cell.new:hover .new-icon {
+    -webkit-transform: scale(.7);
+    -moz-transform: scale(.7);
   }
 
 .grid-title {
