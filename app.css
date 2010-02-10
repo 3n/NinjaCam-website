@@ -259,6 +259,10 @@ ul li {
   .webkit #new:hover {
     text-decoration:none;
   }
+  .chrome #new, .crap-browser #new {
+    -webkit-transform: rotate(0deg); 
+    -moz-transform: rotate(0deg);
+  }
   
 #sub-header { 
   text-shadow: 0 2px 0 black;  
