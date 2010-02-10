@@ -156,6 +156,13 @@ ul li {
 .clear { clear:both; }
   
   
+  
+  
+.red-bg, .new-icon {
+  background-color:#F72F3C;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FF525D), to(#AA272F));
+  background: -moz-linear-gradient(19% 75% 90deg, #AA272F, #FF525D);
+}
 
 .indented {
   -webkit-box-shadow: 0 1px 1px rgba(255,255,255,0.1), 0 -1px 1px rgba(255,255,255,0.03);
@@ -164,6 +171,10 @@ ul li {
   border-left:1px solid #090909 !important;
   border-right:1px solid #090909 !important;
 }
+
+
+
+
 
 .dark-text {
   color:#666;
@@ -483,11 +494,33 @@ ul li {
 }
 
 .new-icon {
-  display:none;
+/*  display:none;*/
+  display:block;
+  position:absolute;
+  right:4px;
+  bottom:5px;
+  padding:0 5px 5px 5px;
+  color:white;
+  text-align:center;  
+  font-size:90%;
+  line-height:12px;
+  
+  -webkit-border-radius:4px;
+  -moz-border-radius:4px;  
+  -webkit-box-shadow: 0 2px 7px rgba(0,0,0,0.7);    
+  -moz-box-shadow: rgba(0,0,0,0.7) 0 2px 7px;
+  text-shadow:0 -1px 0 black;
+  border-top:1px solid rgba(255,255,255,0.7);
+  
+  -webkit-transition: -webkit-transform 0.1s ease-in-out;  
 }
 .cell.new > .new-icon {
   display:block;
 }
+  .new-icon:hover {
+    -webkit-transform: scale(1.4);
+    -moz-transform: scale(1.4);             
+  }
 
 .grid-title {
   display:none;
