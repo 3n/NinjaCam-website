@@ -817,6 +817,13 @@ ul li {
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#0086CE));
   background: -moz-linear-gradient(19% 75% 90deg, #0086CE, #00A5FF);  
 }
+
+.cell {
+  -webkit-transition: -webkit-transform 0.1s ease-in;    
+}
+.cell:hover {
+  -webkit-transform: scale(1.05);
+}
   
 .cell:hover .thumb-wrapper {
   border:1px solid #7AD1FF;
