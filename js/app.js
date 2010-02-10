@@ -17,6 +17,9 @@ G = {
   trackEvent : function(category, action, label, value){    
     if (typeof(pageTracker) == "object") pageTracker._trackEvent(category, action, label, value);
     else if(typeof(_gaq) == "object") _gaq.push(['_trackEvent', category, action, label, value]);
+
+    if (console && console.log)
+      console.log($A(arguments).join(", "));
   },
   
   setup_video_hud : function(){
@@ -103,7 +106,7 @@ window.addEvent('domready', function(){
   // supported: twitpic, yfrog, twitgoo, tweetphoto, img.ly
   // not:       mobypicture
   
-	new MicroApp('twitter-and-flickr', [
+	G.micro_app = new MicroApp('twitter-and-flickr', [
 		[ /*new Flickr({ 
 				image_view_options : {
 					width  : 133,
@@ -120,9 +123,14 @@ window.addEvent('domready', function(){
         json_opts: { 
           rpp  : 50,
           data : { q : 'ninjacam' },
+          onComplete : function(d){
+            G.d = d;
+          },
           onFailure: function(){
-            $('twitter-and-flickr').removeClass('loading').addClass('failed');
-            G.trackEvent("Twitter", "failed");
+            if (!G.d){
+              $('twitter-and-flickr').removeClass('loading').addClass('failed');
+              G.trackEvent("Twitter", "failed");
+            }
           }
         },
 				shouldIncludeItem: function(item){
@@ -173,6 +181,7 @@ window.addEvent('domready', function(){
           img_elem.setStyle('display','none');
           
           img_elem.addEvent('error', function(){
+            if (console && console.log) console.log('image load error', this.get('src'));
             try {
               var tmp = this.getParent();
               if (tmp.hasClass('cell'))
@@ -182,7 +191,7 @@ window.addEvent('domready', function(){
             }catch(e){}
           });
           
-          img_elem.addEventOnce('load', function(){
+          var loaded_image = function(){
             this.setStyle('display','block');
             this.thumbnail(114,114,'thumbnail icon');
             new Element('div', {'class': 'thumb-wrapper'}).inject(cell, 'top');
@@ -205,7 +214,12 @@ window.addEvent('domready', function(){
             //                 .replace("http://img.ly/show/thumb/", "http://img.ly/show/full/");
             // });
             // }).delay(100, this);
-          }.bind(img_elem));
+          }.bind(img_elem);
+          
+          if (img_elem.complete) 
+            loaded_image.call(img_elem);
+          else
+            img_elem.addEventOnce('load', loaded_image);
           
           if (i < 5)
             $("recent-contributers").grab(
