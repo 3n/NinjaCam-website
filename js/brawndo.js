@@ -7941,3 +7941,12 @@ var Asset = {
 	}
 
 };
+/*
+Script: RandomGlobals
+	Just some random crap to add to the Global Namespace
+*/
+
+function coin_toss(prob){
+	return Math.random() > 1 - (prob || 0.5);
+}
+

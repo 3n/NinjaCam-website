@@ -5,6 +5,10 @@ Element.implement({
       'mousedown': this.addClass.bind(this, class_name),
       'mouseup':   this.removeClass.bind(this, class_name)      
     });
+  },
+  add_class_for_duration : function(class_name, duration){
+    this.addClass(class_name);
+    this.removeClass(class_name).delay(duration, this);
   }
 });
 
@@ -108,6 +112,18 @@ window.addEvent('domready', function(){
     G.add_tracking();
     $('logo').addEvent('mouseover', function(){ $('eye').addClass('hover'); });
     $('logo').addEvent('mouseout',  function(){ $('eye').removeClass('hover'); });    
+
+    var is_rotated = false;
+    $$('.eye').addEvent('click', function(e){
+      $('wrapper').getChildren().each(function(elem){
+        var degreez = is_rotated ? 0 : elem.get_transform_int() + Math.random()*30*(coin_toss() ? 1 : -1);
+        elem.rotate(degreez,{
+    			duration   : 1000,
+    			transition : 'ease-in-out'
+    		});
+      });
+      is_rotated = !is_rotated;
+  	});
   }).delay(1000);
   
   // supported: twitpic, yfrog, twitgoo, tweetphoto, img.ly
