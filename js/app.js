@@ -125,7 +125,7 @@ window.addEvent('domready', function(){
 															media   : 'photos',
 															extras  : 'date_taken,owner_name,tags' } } }), */
 		  new Twitter({
-        initial_limit: 36,		    
+        initial_limit: 40,		    
         // user_name    : 'ninjacam',
         json_opts: { 
           rpp  : 50,
