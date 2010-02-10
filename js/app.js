@@ -146,6 +146,8 @@ window.addEvent('domready', function(){
           return item.text.test(G.twitter_image_regex) && !is_rt;
 				},
 				gen_html: function(item){
+          if (!item.is_new) $(document.body).addClass('show-new');
+				  
 				  var img_url = item.text.match(G.twitter_image_regex)[0],
 				      src = img_url,
 				      tweet_url = item.source;

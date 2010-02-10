@@ -513,9 +513,12 @@ ul li {
   
   -webkit-transition: -webkit-transform 0.1s ease-in-out;  
 }
-.cell.new > .new-icon {
-  display:block;
-}
+  body.show-new .cell.new > .new-icon {
+    display:block;
+  }
+  body.all-new .new-icon {
+    display:none !important;
+  }
   .cell.new:hover .new-icon {
     -webkit-transform: scale(.7);
     -moz-transform: scale(.7);
