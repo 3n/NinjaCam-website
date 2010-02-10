@@ -56,6 +56,7 @@ G = {
     else                        $(document.body).addClass('webkit');
     if (navigator.userAgent.test('Chrome')) $(document.body).addClass('chrome');
     if (Browser.Engine.gecko) $(document.body).addClass('moz');
+    if (navigator.userAgent.test('Windows')) $(document.body).addClass('windowz');
   },
   
   add_tracking : function(){

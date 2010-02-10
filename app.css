@@ -259,7 +259,7 @@ ul li {
   .webkit #new:hover {
     text-decoration:none;
   }
-  .chrome #new, .crap-browser #new {
+  .windowz #new {
     -webkit-transform: rotate(0deg); 
     -moz-transform: rotate(0deg);
   }
