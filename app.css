@@ -312,7 +312,9 @@ ul li {
 #icon-large {
   width:52px;
   float:left;
-  -webkit-transition: -webkit-box-shadow 0.3s ease-in-out;    
+  -webkit-transition-property: -webkit-box-shadow, -webkit-transform;
+  -webkit-transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-in-out;
 }
 
 #buy-wrapper { 
@@ -376,6 +378,7 @@ ul li {
 #buy-wrapper:hover #icon-large {
   -webkit-box-shadow: 0 0 20px #00A5FF;
   -moz-box-shadow: #00A5FF 0 0 20px;  
+  -webkit-transform: scale(1.1);  
 }
 #buy-wrapper:hover #iphone-icon {
   background-position:-24px;
