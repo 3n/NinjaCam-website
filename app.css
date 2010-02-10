@@ -689,7 +689,7 @@ ul li {
 }
   .the_louvre_button:hover {
     text-decoration:none;
-    background: rgba(255,255,255,0.1);
+    background: rgba(155,155,155,0.1);
   }
   .the_louvre_button.the_louvre_disabled {
     opacity:0.4;
@@ -699,6 +699,14 @@ ul li {
     .the_louvre_disabled:hover {
       text-decoration:none !important;
     }
+  .the_louvre_button.mousedown {
+    background-color:#222;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(0,0,0,0.1)), to(rgba(255,255,255,0.06)));
+    background: -moz-linear-gradient(19% 75% 90deg, rgba(255,255,255,0.06), rgba(0,0,0,0.1));
+    border-top:1px solid #111;
+    padding-top:4px;
+    padding-bottom:9px;
+  }
 
 .the_louvre_next, .the_louvre_prev {
   font-size:20px;

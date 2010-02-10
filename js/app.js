@@ -1,3 +1,15 @@
+Element.implement({
+  'mouseDownClass' : function(class_name){
+    var class_name = class_name || 'mousedown';
+    this.addEvents({
+      'mousedown': this.addClass.bind(this, class_name),
+      'mouseup':   this.removeClass.bind(this, class_name)      
+    });
+  }
+});
+
+
+
 G = {
 
   twitter_image_regex : new RegExp(/(\w+:\/\/(yfrog|twitpic|twitgoo|tweetphoto|img)+\.[A-Za-z0-9-_:;\(\)%&\?\/.=]+)/),
@@ -222,6 +234,9 @@ window.addEvent('domready', function(){
           },
           get_img_href : function(the_art, i){            
             return the_art.retrieve('data').text.match(G.twitter_image_regex)[0];
+          },
+          onShowZoneCreated: function(show_zone, the_louvre){
+            $$('.the_louvre_button').mouseDownClass('mousedown');
           }
         });
 		  }
