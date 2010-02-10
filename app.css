@@ -823,6 +823,7 @@ ul li {
 }
 .cell:hover {
   -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);  
 }
   
 .cell:hover .thumb-wrapper {
