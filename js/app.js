@@ -247,7 +247,7 @@ window.addEvent('domready', function(){
           else
             img_elem.addEventOnce('load', loaded_image);
           
-          if (i < 5)
+          if (i < 15 && cell.retrieve('data').from_user !== "ninjacam")
             $("recent-contributers").grab(
               new Element('a', {
                 html: "@" + cell.retrieve('data').from_user,

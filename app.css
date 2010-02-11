@@ -719,6 +719,7 @@ ul li {
 }
 
 .the_louvre_button {
+  font-family:"Georgia";  
   padding:5px 14px 10px 14px;
   display:block;  
   color:white;
@@ -757,7 +758,6 @@ ul li {
 .the_louvre_next, .the_louvre_prev {
   font-size:20px;
   line-height:23px;
-  font-family:"Georgia";
 }
 .the_louvre_prev {
   float:left;
