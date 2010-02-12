@@ -145,7 +145,7 @@ window.addEvent('domready', function(){
         initial_limit: 40,		    
         // user_name    : 'ninjacam',
         json_opts: { 
-          rpp  : 50,
+          rpp  : 100,
           data : { q : 'ninjacam' },
           onComplete : function(d){
             G.d = d;
