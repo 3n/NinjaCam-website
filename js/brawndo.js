@@ -6755,7 +6755,7 @@ var Twitter = new Class({
     this.parent(options);
     this.options.web_source = "http://www.twitter.com/" + this.current_user();
     this.options.json_opts.data.q   = $pick(this.options.json_opts.data.q, "from:" + this.current_user());
-    this.options.json_opts.data.rpp = $pick(this.options.json_opts.data.rpp, this.options.initial_limit);
+    this.options.json_opts.data.rpp = Math.max(this.options.json_opts.data.rpp||0, this.options.initial_limit);
     return this;
   },
 

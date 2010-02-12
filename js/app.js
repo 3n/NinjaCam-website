@@ -142,11 +142,10 @@ window.addEvent('domready', function(){
 															media   : 'photos',
 															extras  : 'date_taken,owner_name,tags' } } }), */
 		  new Twitter({
-        initial_limit: 100,		    
+        initial_limit: 40,		    
         // user_name    : 'ninjacam',
-        json_opts: { 
-          rpp  : 100,
-          data : { q : 'ninjacam' },
+        json_opts: {           
+          data : { q : 'ninjacam', rpp  : 100 },
           onComplete : function(d){
             G.d = d;
           },
