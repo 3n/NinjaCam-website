@@ -199,6 +199,7 @@ window.addEvent('domready', function(){
 		]],
 		{
 		  onHtmlUpdated: function(){ 
+		    var recent_ninjas = [];
 		    $('twitter-and-flickr').removeClass('loading').getChildren('div.cell').each(function(cell,i){          
 		      var img_elem = cell.getFirst();
           
@@ -246,15 +247,19 @@ window.addEvent('domready', function(){
           else
             img_elem.addEventOnce('load', loaded_image);
           
-          if (i < 15 && cell.retrieve('data').from_user !== "ninjacam")
-            $("recent-contributers").grab(
-              new Element('a', {
-                html: "@" + cell.retrieve('data').from_user,
-                href: "http://www.twitter.com/" + cell.retrieve('data').from_user,
-                target: "_blank"
-              })
-            );
+          if (cell.retrieve('data').from_user !== "ninjacam")
+            recent_ninjas.include(cell.retrieve('data').from_user);
 		    });
+		    
+		    $("recent-contributers").adopt([
+		      recent_ninjas.map(function(rn){
+		        return new Element('a', {
+              html: "@" + rn,
+              href: "http://www.twitter.com/" + rn,
+              target: "_blank"
+            });
+		      }).first(15)
+		    ]);
 		    
         $('twitter-and-flickr').fade('in');
         
