@@ -16,7 +16,7 @@ Element.implement({
 
 G = {
 
-  twitter_image_regex : new RegExp(/(\w+:\/\/(yfrog|twitpic|twitgoo|tweetphoto|img)+\.[A-Za-z0-9-_:;\(\)%&\?\/.=]+)/),
+  twitter_image_regex : new RegExp(/(\w+:\/\/(yfrog|twitpic|twitgoo|tweetphoto|img|flic)+\.[A-Za-z0-9-_:;\(\)%&\?\/.=]+)/),
   
   trackEvent : function(category, action, label, value){    
     if (typeof(pageTracker) == "object") pageTracker._trackEvent(category, action, label, value);
@@ -70,17 +70,6 @@ G = {
         G.trackEvent("Click", this.get('id'), 'social');
       });
     });
-  },
-  
-  unbase: function(num, base){    
-    var base = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'.substring(0, base || 58);
-  	var len  = base.length;    
-  	var ret  = 0;
-  	for(var x=1;num.length>0;x*=len){
-  		ret += base.indexOf(num.charAt(num.length-1)) * x;
-  		num = num.substr(0,num.length-1);
-  	}
-  	return ret;
   }
   
 };
@@ -138,7 +127,7 @@ window.addEvent('domready', function(){
   	});
   }).delay(1000);
   
-  // supported: twitpic, yfrog, twitgoo, tweetphoto, img.ly
+  // supported: twitpic, yfrog, twitgoo, tweetphoto, img.ly, flic.kr
   // not:       mobypicture
   
 	G.micro_app = new MicroApp('twitter-and-flickr', [
@@ -189,6 +178,8 @@ window.addEvent('domready', function(){
             src = "http://TweetPhotoAPI.com/api/TPAPI.svc/imagefromurl?size=big&url=http://tweetphoto.com/" + img_url.match(/([^\/]+$)/)[0];            
           else if (img_url.test(/img.ly/))
             src = "http://img.ly/show/thumb/" + img_url.match(/([^\/]+$)/)[0];
+          else if (img_url.test(/flic.kr/))
+            src = "http://flic.kr/p/img/" + img_url.match(/([^\/]+$)/)[0] + ".jpg";
             
           var tweet = item.text.replace(/http:\/\/[^\s]+|^RT\s@[^\s]+/g,"").replace(/#ninjacam\s*$/g,""),
               user  = $pick(item.rt_from, item.from_user),
@@ -237,7 +228,8 @@ window.addEvent('domready', function(){
             var large_src = this.get('src').replace(".th.jpg", ":iphone")
                                            .replace("http://twitgoo.com/show/thumb/", "http://twitgoo.com/show/img/")            
                                            .replace("http://twitpic.com/show/thumb/", "http://twitpic.com/show/large/")
-                                           .replace("http://img.ly/show/thumb/", "http://img.ly/show/full/");
+                                           .replace("http://img.ly/show/thumb/", "http://img.ly/show/full/")
+                                           .replace(/http:\/\/flic.kr\/p\/img\/([^\/]+)\.jpg$/, "http://flic.kr/p/img/$1_m.jpg");
             
             this.store('large_src', large_src);
             
