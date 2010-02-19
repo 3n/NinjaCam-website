@@ -70,6 +70,17 @@ G = {
         G.trackEvent("Click", this.get('id'), 'social');
       });
     });
+  },
+  
+  unbase: function(num, base){    
+    var base = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'.substring(0, base || 58);
+  	var len  = base.length;    
+  	var ret  = 0;
+  	for(var x=1;num.length>0;x*=len){
+  		ret += base.indexOf(num.charAt(num.length-1)) * x;
+  		num = num.substr(0,num.length-1);
+  	}
+  	return ret;
   }
   
 };
