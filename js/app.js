@@ -179,7 +179,7 @@ window.addEvent('domready', function(){
           else if (img_url.test(/img.ly/))
             src = "http://img.ly/show/thumb/" + img_url.match(/([^\/]+$)/)[0];
           else if (img_url.test(/flic.kr/))
-            src = "http://flic.kr/p/img/" + img_url.match(/([^\/]+$)/)[0] + ".jpg";
+            src = "http://flic.kr/p/img/" + img_url.match(/([^\/]+$)/)[0] + "_m.jpg";
             
           var tweet = item.text.replace(/http:\/\/[^\s]+|^RT\s@[^\s]+/g,"").replace(/#ninjacam\s*$/g,""),
               user  = $pick(item.rt_from, item.from_user),
@@ -228,8 +228,8 @@ window.addEvent('domready', function(){
             var large_src = this.get('src').replace(".th.jpg", ":iphone")
                                            .replace("http://twitgoo.com/show/thumb/", "http://twitgoo.com/show/img/")            
                                            .replace("http://twitpic.com/show/thumb/", "http://twitpic.com/show/large/")
-                                           .replace("http://img.ly/show/thumb/", "http://img.ly/show/full/")
-                                           .replace(/http:\/\/flic.kr\/p\/img\/([^\/]+)\.jpg$/, "http://flic.kr/p/img/$1_m.jpg");
+                                           .replace("http://img.ly/show/thumb/", "http://img.ly/show/full/");
+                                           // .replace(/http:\/\/flic.kr\/p\/img\/([^\/]+)\.jpg$/, "http://flic.kr/p/img/$1_m.jpg");
             
             this.store('large_src', large_src);
             
