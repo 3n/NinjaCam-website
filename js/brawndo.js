@@ -22,7 +22,7 @@ provides: [MooTools, Native, Hash.base, Array.each, $util]
 
 var MooTools = {
 	'version': '1.2.5dev',
-	'build': 'a63c426f78dc710735ecf0dde2aea27abb93d53f'
+	'build': '71d0c4d80abee3c9c2e5a3396dc274dc58b7ea74'
 };
 
 var Native = function(options){
@@ -6755,7 +6755,7 @@ var Twitter = new Class({
     this.parent(options);
     this.options.web_source = "http://www.twitter.com/" + this.current_user();
     this.options.json_opts.data.q   = $pick(this.options.json_opts.data.q, "from:" + this.current_user());
-    this.options.json_opts.data.rpp = $pick(this.options.json_opts.data.rpp, this.options.initial_limit);
+    this.options.json_opts.data.rpp = Math.max(this.options.json_opts.data.rpp||0, this.options.initial_limit);
     return this;
   },
 

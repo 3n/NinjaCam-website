@@ -16,7 +16,7 @@ Element.implement({
 
 G = {
 
-  twitter_image_regex : new RegExp(/(\w+:\/\/(yfrog|twitpic|twitgoo|tweetphoto|img)+\.[A-Za-z0-9-_:;\(\)%&\?\/.=]+)/),
+  twitter_image_regex : new RegExp(/(\w+:\/\/(yfrog|twitpic|twitgoo|tweetphoto|img|flic)+\.[A-Za-z0-9-_:;\(\)%&\?\/.=]+)/),
   
   trackEvent : function(category, action, label, value){    
     if (typeof(pageTracker) == "object") pageTracker._trackEvent(category, action, label, value);
@@ -65,7 +65,7 @@ G = {
         G.trackEvent("Click", id, 'buy');
       });
     });
-    ['twitter-follow-1','twitter-follow-2'].each(function(id){
+    ['twitter-follow-1','twitter-follow-2','twitter-follow-3'].each(function(id){
       $(id).addEvent('click', function(){
         G.trackEvent("Click", this.get('id'), 'social');
       });
@@ -127,7 +127,7 @@ window.addEvent('domready', function(){
   	});
   }).delay(1000);
   
-  // supported: twitpic, yfrog, twitgoo, tweetphoto, img.ly
+  // supported: twitpic, yfrog, twitgoo, tweetphoto, img.ly, flic.kr
   // not:       mobypicture
   
 	G.micro_app = new MicroApp('twitter-and-flickr', [
@@ -144,9 +144,8 @@ window.addEvent('domready', function(){
 		  new Twitter({
         initial_limit: 40,		    
         // user_name    : 'ninjacam',
-        json_opts: { 
-          rpp  : 50,
-          data : { q : 'ninjacam' },
+        json_opts: {           
+          data : { q : 'ninjacam', rpp  : 100 },
           onComplete : function(d){
             G.d = d;
           },
@@ -179,6 +178,8 @@ window.addEvent('domready', function(){
             src = "http://TweetPhotoAPI.com/api/TPAPI.svc/imagefromurl?size=big&url=http://tweetphoto.com/" + img_url.match(/([^\/]+$)/)[0];            
           else if (img_url.test(/img.ly/))
             src = "http://img.ly/show/thumb/" + img_url.match(/([^\/]+$)/)[0];
+          else if (img_url.test(/flic.kr/))
+            src = "http://flic.kr/p/img/" + img_url.match(/([^\/]+$)/)[0] + "_m.jpg";
             
           var tweet = item.text.replace(/http:\/\/[^\s]+|^RT\s@[^\s]+/g,"").replace(/#ninjacam\s*$/g,""),
               user  = $pick(item.rt_from, item.from_user),
@@ -200,6 +201,7 @@ window.addEvent('domready', function(){
 		]],
 		{
 		  onHtmlUpdated: function(){ 
+		    var recent_ninjas = [];
 		    $('twitter-and-flickr').removeClass('loading').getChildren('div.cell').each(function(cell,i){          
 		      var img_elem = cell.getFirst();
           
@@ -227,6 +229,7 @@ window.addEvent('domready', function(){
                                            .replace("http://twitgoo.com/show/thumb/", "http://twitgoo.com/show/img/")            
                                            .replace("http://twitpic.com/show/thumb/", "http://twitpic.com/show/large/")
                                            .replace("http://img.ly/show/thumb/", "http://img.ly/show/full/");
+                                           // .replace(/http:\/\/flic.kr\/p\/img\/([^\/]+)\.jpg$/, "http://flic.kr/p/img/$1_m.jpg");
             
             this.store('large_src', large_src);
             
@@ -247,15 +250,19 @@ window.addEvent('domready', function(){
           else
             img_elem.addEventOnce('load', loaded_image);
           
-          if (i < 15 && cell.retrieve('data').from_user !== "ninjacam")
-            $("recent-contributers").grab(
-              new Element('a', {
-                html: "@" + cell.retrieve('data').from_user,
-                href: "http://www.twitter.com/" + cell.retrieve('data').from_user,
-                target: "_blank"
-              })
-            );
+          if (cell.retrieve('data').from_user !== "ninjacam")
+            recent_ninjas.include(cell.retrieve('data').from_user);
 		    });
+		    
+		    $("recent-contributers").adopt([
+		      recent_ninjas.map(function(rn){
+		        return new Element('a', {
+              html: "@" + rn,
+              href: "http://www.twitter.com/" + rn,
+              target: "_blank"
+            });
+		      }).first(15)
+		    ]);
 		    
         $('twitter-and-flickr').fade('in');
         
