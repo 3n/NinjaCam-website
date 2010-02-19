@@ -281,17 +281,18 @@ ul li {
 
 #ninjacam-concept-overview p, #footer p, #media-overview p {
   margin-bottom:14px;
-/*  padding:3px 8px 7px 8px;
+
+}
+
+#tweet-info {
+  margin-top:14px;
+  padding:3px 8px 7px 8px;
   width:151px;
   margin-left:-8px;
   background:rgba(0,0,0,0.2);
   -webkit-box-shadow: 0 1px 1px rgba(255,255,255,0.1);
   -webkit-border-radius:8px;
-  border-top:2px solid rgba(0,0,0,0.1);*/
-}
-
-#tweet-info {
-  margin-top:14px;
+  border-top:2px solid rgba(0,0,0,0.1);
 }
 #tweet-info img {
   width:36px;
