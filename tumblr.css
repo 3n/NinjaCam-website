@@ -53,6 +53,7 @@ h1, h1 a {
   
   h1 .the-very-best {
     font-size:30px;
+    text-shadow: 1px 1px 3px black;
   }
   
   h1 .ninja, h1 .cam {
@@ -65,7 +66,7 @@ h1, h1 a {
   h1 .ninja {
     margin-right:0.1em;    
     letter-spacing:-1px;    
-    -webkit-text-fill-color:rgba(0,0,0,0.2);
+    -webkit-text-fill-color:rgba(0,0,0,0.3);
     -webkit-text-stroke: 0.5px rgba(255,255,255,0.5);
     -webkit-transition: text-shadow 0.3s ease-in-out;    
   }
