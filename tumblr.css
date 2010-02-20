@@ -36,3 +36,47 @@ a {
     text-decoration:underline;
     background:none;    
   }
+  
+  
+  
+h1, h1 a {
+  color:white !important;
+  font-size:210%;
+  text-shadow: 1px 1px 5px black;  
+  text-transform:uppercase;
+  font-weight:bold;
+  line-height:1em;
+}
+  h1:hover, h1 a:hover {
+    text-decoration:none;
+  }
+  h1.ninja, h1.cam {
+    background: -webkit-gradient(linear, 0% 35%, 0% 79%, from(#FAFAFA), to(#A1A1A1), color-stop(.4,#C9C9C9)), none;
+    -webkit-background-clip: text;
+    color:transparent;
+  }
+  
+  h1 .ninja {
+    margin-right:0.1em;    
+    letter-spacing:-1px;    
+    -webkit-text-fill-color:rgba(0,0,0,0.4);
+    -webkit-text-stroke: 0.5px rgba(255,255,255,0.3);
+    -webkit-transition: text-shadow 0.3s ease-in-out;    
+  }
+  h1 .cam {
+    -webkit-text-stroke: 1px rgba(255,255,255,0.7);
+  }
+
+  h1:hover .ninja {
+    text-shadow: 0 0 100px white;
+  }
+  
+  
+#glow {
+  width:100%;
+  height:100%;  
+  position:absolute;
+  top:0;
+  background: -webkit-gradient(radial, 50% -100, 100, 50% -100, 1200, from(rgba(255,255,255,0.13)), to(rgba(0,0,0,0)));
+  background-image: -moz-radial-gradient(top 0deg, circle farthest-side, rgba(255,255,255,0.19) 0%, rgba(0,0,0,0) 120%);
+}
