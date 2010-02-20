@@ -27,8 +27,8 @@ p {
   text-shadow: black 1px 1px 2px;
 }
 
-a {
-  color:#00A5FF;
+a, #datetime a {
+  color:#00A5FF !important;
   text-decoration:none;
   background:none;
 }
@@ -114,6 +114,12 @@ img {
     background:none !important;
     cursor:default;
   }
+  
+.datetime {
+  border-right:1px solid black;
+  -webkit-box-shadow: 1px 0 0 #404040;
+  -moz-box-shadow: #404040 1px 0 0;
+}
   
 .wrapper {
   position:relative;
