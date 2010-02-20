@@ -1,0 +1,38 @@
+@font-face {
+	font-family: 'd';
+	src: url('http://ninjacam.com/d/dr.eot');
+  src: local('DINPro-Regular'), url('http://ninjacam.com/d/dr.woff') format('woff'), url('http://ninjacam.com/d/dr.otf') format('opentype'), url('http://ninjacam.com/d/dr.svg#DINPro-Regular') format('svg');
+	font-weight:normal;
+}
+
+@font-face {
+	font-family: 'd';
+	src: url('http://ninjacam.com/d/db.eot');
+	src: local('DINPro-Bold'), url('http://ninjacam.com/d/db.woff') format('woff'), url('http://ninjacam.com/d/db.otf') format('opentype'), url('http://ninjacam.com/d/db.svg#DINPro-Bold') format('svg');
+	font-weight:bold;
+}
+
+html, body { 
+  font-family: "d", 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color:#ccc;
+  font-size:16px;
+  background-color:#111;
+  background-image: url('http://ninjacam.com/images/bg.png');
+}
+
+p {
+  font-size:90%;
+  line-height:1.4em;
+  word-wrap:break-word;  
+  text-shadow: black 1px 1px 2px;
+}
+
+a {
+  color:#00A5FF;
+  text-decoration:none;
+  background:none;
+}
+  a:hover {
+    text-decoration:underline;
+    background:none;    
+  }
