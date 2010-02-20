@@ -41,30 +41,33 @@ a {
   
 h1, h1 a {
   color:white !important;
-  font-size:210%;
+  font-size:61px;
   text-shadow: 1px 1px 5px black;  
   text-transform:uppercase;
   font-weight:bold;
-  line-height:1em;
+  line-height:0.7em;
 }
   h1:hover, h1 a:hover {
     text-decoration:none;
   }
+  
+  h1 .the-very-best {
+    font-size:30px;
+  }
+  
   h1 .ninja, h1 .cam {
     background: -webkit-gradient(linear, 0% 35%, 0% 79%, from(#FAFAFA), to(#A1A1A1), color-stop(.4,#C9C9C9)), none;
     -webkit-background-clip: text;
     color:transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.7);
   }
   
   h1 .ninja {
     margin-right:0.1em;    
     letter-spacing:-1px;    
-    -webkit-text-fill-color:rgba(0,0,0,0.4);
-    -webkit-text-stroke: 0.5px rgba(255,255,255,0.1);
+    -webkit-text-fill-color:rgba(0,0,0,0.2);
+    -webkit-text-stroke: 0.5px rgba(255,255,255,0.5);
     -webkit-transition: text-shadow 0.3s ease-in-out;    
-  }
-  h1 .cam {
-    -webkit-text-stroke: 1px rgba(255,255,255,0.7);
   }
 
   h1:hover .ninja {
