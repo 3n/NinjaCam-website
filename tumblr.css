@@ -50,7 +50,7 @@ h1, h1 a {
   h1:hover, h1 a:hover {
     text-decoration:none;
   }
-  h1.ninja, h1.cam {
+  h1 .ninja, h1 .cam {
     background: -webkit-gradient(linear, 0% 35%, 0% 79%, from(#FAFAFA), to(#A1A1A1), color-stop(.4,#C9C9C9)), none;
     -webkit-background-clip: text;
     color:transparent;
@@ -60,7 +60,7 @@ h1, h1 a {
     margin-right:0.1em;    
     letter-spacing:-1px;    
     -webkit-text-fill-color:rgba(0,0,0,0.4);
-    -webkit-text-stroke: 0.5px rgba(255,255,255,0.3);
+    -webkit-text-stroke: 0.5px rgba(255,255,255,0.1);
     -webkit-transition: text-shadow 0.3s ease-in-out;    
   }
   h1 .cam {
