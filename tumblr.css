@@ -87,6 +87,15 @@ background:-webkit-gradient(linear, 0% 44%, 0.9% 69%, from(#FDFDFD), to(#A1A1A1)
     text-shadow: 0 0 100px white;
   }
   
+#big-eye {
+  width:132px;
+  height:129px;
+  background: urL('http://ninjacam.com/images/big_eye.png');
+  position:absolute;
+  top:20px;
+  left:-150px;
+}
+  
   
 #collected {
   font-size: 14px;
