@@ -45,6 +45,7 @@ h1 {
   border-bottom:1px solid black;
   -webkit-box-shadow: 0 1px 0 #404040;
   -moz-box-shadow: #404040 0 1px 0;
+  width:502px;
 }
 h1, h1 a {
   color:white !important;
@@ -62,6 +63,19 @@ h1, h1 a {
 /*    font-weight:normal;*/
     font-size:30px;
     text-shadow: 1px 1px 3px black;
+    
+/*    display: block;
+    font-size: 20px;
+    line-height: 1em;
+    text-align: center;
+    text-shadow: black 1px 1px 3px;
+    width: 79px;
+    height:67px;
+    background-color:#F72F3C;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FF525D), to(#AA272F));
+    background: -moz-linear-gradient(19% 75% 90deg, #AA272F, #FF525D);
+    padding:20px 8px 8px 8px;
+    -webkit-border-radius: 95px;*/
 
 /*  text-shadow: 0 1px 0 rgba(255,255,255,0.2);
   color:#191919;*/
@@ -101,7 +115,7 @@ background:-webkit-gradient(linear, 0% 44%, 0.9% 69%, from(#FDFDFD), to(#A1A1A1)
   font-size: 14px;
   line-height: 1em;
   position: absolute;
-  right: 0px;
+  right: 17px;
   top: 61px;
   width: 90px;
 }
