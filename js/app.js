@@ -290,7 +290,7 @@ window.addEvent('domready', function(){
           }
         });
         
-        $('archives-link').setStyle('display','block').delay(5000, $('archives-link'));
+        $('archives-link').setStyle.delay(5000, $('archives-link'), ['display','block']);
         if (document.referrer.test("tumblr.com"))
           $('tumblr-buttons').setStyle('display','block');
 		  }
