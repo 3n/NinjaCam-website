@@ -290,7 +290,7 @@ window.addEvent('domready', function(){
           }
         });
         
-        $('archives-link').setStyle('display','block');
+        $('archives-link').setStyle('display','block').delay(5000, $('archives-link'));
 		  }
 		}
 	).addEvent('modelInit', function(m){

@@ -607,7 +607,36 @@ ul li {
   
 #archives-link {
   display:none;
+  margin-top:14px;
 }
+  #archives-link span {
+    font-weight:normal;
+    font-size:14px;
+    color:#666;
+  }
+  #archives-link a {
+    display:block;
+    padding:5px 9px;
+    float:left;
+    margin-top:4px;
+    
+    font-weight:bold;
+    text-transform:uppercase;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;    
+    background-color:#00A5FF;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#00A5FF), to(#016296));
+    background: -moz-linear-gradient(19% 75% 90deg, #016296, #00A5FF);    
+    border-top:1px solid rgba(255,255,255,0.8);    
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    color:#00324D;
+    -webkit-transition: -webkit-box-shadow 0.1s ease-in;    
+  }
+    #archives-link a:hover {
+      text-decoration: none;
+      -webkit-box-shadow: 0 0 20px #00A5FF;
+      -moz-box-shadow: #00A5FF 0 0 20px;
+    }
 
 
 .the_louvre_show_zone_wrapper {
