@@ -445,18 +445,12 @@ ul li {
   width: 175px;
   float:right;
 }
-/*#iphone:hover { opacity: 1.0;}*/
-
-/* Flickr / Twitter Grid */
 
 #twitter-and-flickr {
   margin-top:8px;
-	width:512px;
+  width:512px;
 	display:inline;
 	float:left;
-	
-/*  visibility:hidden;
-  opacity:0;*/
 }
 
 @-webkit-keyframes spinnerRotate {
@@ -556,7 +550,7 @@ ul li {
   position    : relative;
   cursor      : pointer;
   line-height : 20px;
-	margin: 0 7px 14px 7px;
+	margin: 0 14px 14px 0;
 }
   .cell.single-wide {
     width  : 114px;
@@ -610,6 +604,10 @@ ul li {
     margin-left:0;
     -webkit-transform: rotate(-180deg); 
   }
+  
+#archives-link {
+/*  float:left;*/
+}
 
 
 .the_louvre_show_zone_wrapper {
@@ -863,6 +861,7 @@ ul li {
   height:100px;
   margin-bottom:50px;
 }
+
 
 
 
