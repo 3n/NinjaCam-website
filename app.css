@@ -645,6 +645,9 @@ ul li {
   top:5px;
   right:5px;
 }
+#tumblr_controls {
+  display:none;
+}
 
 .the_louvre_show_zone_wrapper {
   margin:0 7px;

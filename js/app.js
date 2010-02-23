@@ -292,7 +292,7 @@ window.addEvent('domready', function(){
         
         $('archives-link').setStyle.delay(3000, $('archives-link'), ['display','block']);
         if (document.referrer.test("tumblr.com"))
-          $('tumblr-buttons').setStyle('display','block');
+          $('tumblr_controls').setStyle('display','block');
 		  }
 		}
 	).addEvent('modelInit', function(m){
