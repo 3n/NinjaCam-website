@@ -608,10 +608,10 @@ ul li {
 #archives-link {
   display:none;
   margin-top:14px;
-  margin-left:-9px !important;
+  margin-left:0 !important;
 }
   #archives-link p {
-    margin-left:9px;
+    margin-left:14px;
   }
   #archives-link a {
     display:block;
