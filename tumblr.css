@@ -144,6 +144,10 @@ img {
     cursor:default;
   }
   
+.post p {
+  font-size:18px;
+}
+  
 .datetime {
   border-right:1px solid black;
   -webkit-box-shadow: 1px 0 0 #404040;
