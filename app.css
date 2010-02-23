@@ -97,9 +97,6 @@ h2 {
   font-size:120%;  
   text-transform:uppercase;
   color:#00A5FF;    
-  border-bottom:1px solid black;
-  -webkit-box-shadow: 0 1px 0 #404040;
-  -moz-box-shadow: #404040 0 1px 0;
   
   height:28px;
   margin-top:16px;
@@ -123,12 +120,13 @@ h4 {
   text-transform:uppercase;
   color:#00A5FF;
   padding-bottom:5px;
-  border-bottom:1px solid black;
-  -webkit-box-shadow: 0 1px 0 #404040;
 }
 
-h2, h4 {
+h2, h4, .mid-hr {
   text-shadow: 1px 1px 2px black;
+  border-bottom:1px solid black;
+  -webkit-box-shadow: 0 1px 0 #404040;
+  -moz-box-shadow: #404040 0 1px 0;
 }
 
 #top-follow {
@@ -608,7 +606,7 @@ ul li {
 #archives-link {
   display:none;
   margin-top:14px;
-  margin-left:0 !important;
+  margin-left:7px !important;
 }
   #archives-link p {
     margin-left:14px;
@@ -638,6 +636,12 @@ ul li {
       -webkit-box-shadow: 0 0 1px black, 0 2px 4px rgba(0,0,0,0.5), 0 0 20px #00A5FF;
       -moz-box-shadow: #00A5FF 0 0 20px;
     } 
+    
+.mid-hr {
+  height:5px;
+  margin-left:0 !important;
+  margin-top:50px;
+}
 
 #tumblr-buttons {
   display:none;
