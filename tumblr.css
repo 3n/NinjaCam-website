@@ -81,11 +81,10 @@ h1, h1 a {
   color:#191919;*/
   }
   
-  h1 .ninjacam {
+  .crap h1 .ninjacam {
     text-indent: -5000px;
-  }
-  .safari h1 .ninjacam {
-    text-indent: 0;
+    background: url("http://ninjacam.com/images/tumblr_header.png") no-repeat scroll -4px -8px transparent;
+    height:62px;
   }
   
   h1 .ninja, h1 .cam {
