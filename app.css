@@ -611,8 +611,7 @@ ul li {
 }
   #archives-link span {
     font-weight:normal;
-    font-size:14px;
-    color:#666;
+    color:#444;
   }
   #archives-link a {
     display:block;
@@ -630,7 +629,7 @@ ul li {
     border-top:1px solid rgba(255,255,255,0.8);    
     text-shadow: 0 1px 0 rgba(255,255,255,0.5);
     color:#00324D;
-    -webkit-transition: -webkit-box-shadow 0.1s ease-in;    
+    -webkit-transition: -webkit-box-shadow 0.3s ease-in;    
   }
     #archives-link a:hover {
       text-decoration: none; 
