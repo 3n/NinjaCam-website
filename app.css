@@ -633,10 +633,10 @@ ul li {
     -webkit-transition: -webkit-box-shadow 0.1s ease-in;    
   }
     #archives-link a:hover {
-      text-decoration: none;
+      text-decoration: none; 
       -webkit-box-shadow: 0 0 20px #00A5FF;
       -moz-box-shadow: #00A5FF 0 0 20px;
-    }
+    } 
 
 
 .the_louvre_show_zone_wrapper {
