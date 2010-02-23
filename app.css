@@ -608,19 +608,21 @@ ul li {
 #archives-link {
   display:none;
   margin-top:14px;
+  margin-left:-9px !important;
 }
-  #archives-link span {
-    font-weight:normal;
-    color:#444;
+  #archives-link p {
+    margin-left:9px;
   }
   #archives-link a {
     display:block;
-    padding:5px 9px;
+    padding:5px 9px 8px 9px;
     float:left;
     margin-top:4px;
-    
+    font-size:18px;    
     font-weight:bold;
-    text-transform:uppercase;
+    
+    -webkit-box-shadow: 0 0 1px black, 0 2px 4px rgba(0,0,0,0.5);
+    
     -webkit-border-radius:4px;
     -moz-border-radius:4px;    
     background-color:#00A5FF;
@@ -633,7 +635,7 @@ ul li {
   }
     #archives-link a:hover {
       text-decoration: none; 
-      -webkit-box-shadow: 0 0 20px #00A5FF;
+      -webkit-box-shadow: 0 0 1px black, 0 2px 4px rgba(0,0,0,0.5), 0 0 20px #00A5FF;
       -moz-box-shadow: #00A5FF 0 0 20px;
     } 
 
