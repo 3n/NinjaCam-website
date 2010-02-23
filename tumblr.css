@@ -105,6 +105,35 @@ h1, h1 a {
     text-shadow: 0 0 100px white;
   }
   
+.the-art, .the-art a {
+  font-size: 17px;
+  font-weight: normal;
+  text-align: right;
+  text-shadow: black 0px 2px 0px;
+  text-transform: none !important;
+} 
+.the-art { 
+  color: rgb(79, 79, 79); 
+  top: 78px;
+  width: 100px;
+  left: -259px;
+  line-height: 1em;
+  position: absolute;
+}
+.the-art a {
+  color:#00A5FF !important;
+  text-decoration:none;
+  background:none;
+  line-height: 2em;
+  font-size:15px;
+  font-weight:normal;
+}
+  .the-art a:hover {
+    color:#00A5FF;
+    text-decoration:underline;
+    background:none;    
+  }
+
 #big-eye {
   width:132px;
   height:129px;
