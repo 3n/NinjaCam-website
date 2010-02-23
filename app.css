@@ -639,6 +639,12 @@ ul li {
       -moz-box-shadow: #00A5FF 0 0 20px;
     } 
 
+#tumblr-buttons {
+  display:none;
+  position:absolute;
+  top:5px;
+  right:5px;
+}
 
 .the_louvre_show_zone_wrapper {
   margin:0 7px;

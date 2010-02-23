@@ -291,6 +291,8 @@ window.addEvent('domready', function(){
         });
         
         $('archives-link').setStyle('display','block').delay(5000, $('archives-link'));
+        if (document.referrer.test("tumblr.com"))
+          $('tumblr-buttons').setStyle('display','block');
 		  }
 		}
 	).addEvent('modelInit', function(m){
