@@ -289,6 +289,8 @@ window.addEvent('domready', function(){
             if (the_art) the_art.removeClass('new');
           }
         });
+        
+        $('archives-link').setStyle('display','block');
 		  }
 		}
 	).addEvent('modelInit', function(m){

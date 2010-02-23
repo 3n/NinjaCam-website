@@ -606,7 +606,7 @@ ul li {
   }
   
 #archives-link {
-/*  float:left;*/
+  display:none;
 }
 
 
