@@ -291,7 +291,7 @@ window.addEvent('domready', function(){
         });
         
         $('archives-link').setStyle.delay(3000, $('archives-link'), ['display','block']);
-        if (document.referrer.test("tumblr.com"))
+        if (document.referrer.test(/tumblr\.com|xkcdexplained\.com/))
           $('tumblr_controls').setStyle('display','block');
 		  }
 		}
