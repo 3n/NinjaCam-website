@@ -6760,35 +6760,37 @@ var Twitter = new Class({
   },
 
 	process_data: function(json){
-		this.db = json.results.map(function(json_item, i){		  
-		  if (this.options.shouldIncludeItem(json_item)){
-  		  var rt_match = json_item.text.match(/RT\s+@(\w+):?/);
-		    var json_item = $merge(json_item, {
-		      index       : i,
-  				title       : json_item.text,
-  				created_on  : Date.parse(json_item.created_at),
-  				source      : "http://www.twitter.com/" + json_item.from_user + "/status/" + json_item.id,
-  				is_new 			: this._item_is_new(json_item.created_at, this.options.site_name),
-  				rt_from     : (rt_match && rt_match.length > 1) ? rt_match[1] : null
-  			});  			  			
-  			json_item.html = this.options.gen_html(json_item);
-  			
-  			if (this.options.link_twitter_items)
-  			  json_item.html = json_item.html.link_hashcodes().link_replies();
-  			
-  			if (this.options.extra_rt_info && json_item.rt_from)
-    			new Request.JSONP({
-            url  : "http://twitter.com/users/show.json",
-            data : { id: json_item.rt_from },
-            onSuccess: function(data){
-              json_item.rt_from_info = data;              
-              this.fireEvent('extraRTInfoRecieved', [json_item, this]);
-            }.bind(this)
-          }).send();
-  			
-		    return json_item;
-		  }
-	  }.bind(this)).flatten();
+	  if (json){
+	    this.db = json.results.map(function(json_item, i){		  
+  		  if (this.options.shouldIncludeItem(json_item)){
+    		  var rt_match = json_item.text.match(/RT\s+@(\w+):?/);
+  		    var json_item = $merge(json_item, {
+  		      index       : i,
+    				title       : json_item.text,
+    				created_on  : Date.parse(json_item.created_at),
+    				source      : "http://www.twitter.com/" + json_item.from_user + "/status/" + json_item.id,
+    				is_new 			: this._item_is_new(json_item.created_at, this.options.site_name),
+    				rt_from     : (rt_match && rt_match.length > 1) ? rt_match[1] : null
+    			});  			  			
+    			json_item.html = this.options.gen_html(json_item);
+
+    			if (this.options.link_twitter_items)
+    			  json_item.html = json_item.html.link_hashcodes().link_replies();
+
+    			if (this.options.extra_rt_info && json_item.rt_from)
+      			new Request.JSONP({
+              url  : "http://twitter.com/users/show.json",
+              data : { id: json_item.rt_from },
+              onSuccess: function(data){
+                json_item.rt_from_info = data;              
+                this.fireEvent('extraRTInfoRecieved', [json_item, this]);
+              }.bind(this)
+            }).send();
+
+  		    return json_item;
+  		  }
+  	  }.bind(this)).flatten();
+	  }
 	
 		this.parent();
 		return this.db;

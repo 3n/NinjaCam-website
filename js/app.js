@@ -82,6 +82,49 @@ MicroAppModel.implement({
 });
 
 
+var Topsy = new Class({
+  Extends: Twitter, 
+  
+  process_data: function(json){
+    console.log(json);
+		this.db = json.response.list.map(function(json_item, i){		  
+		  if (this.options.shouldIncludeItem(json_item)){
+  		  var rt_match = json_item.content.match(/RT\s+@(\w+):?/);
+		    var json_item = $merge(json_item, {
+		      index       : i,
+  				title       : json_item.content,
+  				created_on  : Date.parse(json_item.firstpost_date),
+  				source      : json_item.trackback_permalink,
+  				is_new 			: this._item_is_new(json_item.firstpost_date, this.options.site_name),
+  				rt_from     : (rt_match && rt_match.length > 1) ? rt_match[1] : null
+  			});  			  			
+  			json_item.html = this.options.gen_html(json_item);
+  			
+  			if (this.options.link_twitter_items)
+  			  json_item.html = json_item.html.link_hashcodes().link_replies();
+  			
+  			if (this.options.extra_rt_info && json_item.rt_from)
+    			new Request.JSONP({
+            url  : "http://twitter.com/users/show.json",
+            data : { id: json_item.rt_from },
+            onSuccess: function(data){
+              json_item.rt_from_info = data;              
+              this.fireEvent('extraRTInfoRecieved', [json_item, this]);
+            }.bind(this)
+          }).send();
+  			
+		    return json_item;
+		  }
+	  }.bind(this)).flatten();
+	
+		this.parent();
+		return this.db;
+	}
+	
+})
+
+
+
 window.addEvent('domready', function() { G.dom_ready = true; });
 
 window.onerror = function(msg, url, linenumber){   
@@ -141,11 +184,12 @@ window.addEvent('domready', function(){
 															api_key : 'f31a8e4819faa5ec28ed3db580b76fb9',
 															media   : 'photos',
 															extras  : 'date_taken,owner_name,tags' } } }), */
-		  new Twitter({
+		  new Topsy({
         initial_limit: 40,		    
         // user_name    : 'ninjacam',
+        json_url   : "http://otter.topsy.com/search.js",
         json_opts: {           
-          data : { q : '#ninjacam', rpp  : 100 },
+          data : { q : '#ninjacam', 'window' : 'a', 'type' : 'tweet', 'perpage' : 40 },
           onComplete : function(d){
             G.d = d;
           },
@@ -157,14 +201,14 @@ window.addEvent('domready', function(){
           }
         },
 				shouldIncludeItem: function(item){
-          var is_rt = item.text.match("RT @");
-          // return (item.text.test(G.twitter_image_regex)) && (!is_rt || item.from_user == "ninjacam");
-          return item.text.test(G.twitter_image_regex) && !is_rt;
+          var is_rt = item.content.match("RT @");
+          // return (item.content.test(G.twitter_image_regex)) && (!is_rt || item.from_user == "ninjacam");
+          return item.content.test(G.twitter_image_regex) && !is_rt;
 				},
 				gen_html: function(item){
           if (!item.is_new) $(document.body).addClass('show-new');
 				  
-				  var img_url = item.text.match(G.twitter_image_regex)[0],
+				  var img_url = item.content.match(G.twitter_image_regex)[0],
 				      src = img_url,
 				      tweet_url = item.source;
 
@@ -181,10 +225,10 @@ window.addEvent('domready', function(){
           else if (img_url.test(/flic.kr/))
             src = "http://flic.kr/p/img/" + img_url.match(/([^\/]+$)/)[0] + "_m.jpg";
             
-          var tweet = item.text.replace(/http:\/\/[^\s]+|^RT\s@[^\s]+/g,"").replace(/#ninjacam\s*$/g,""),
-              user  = $pick(item.rt_from, item.from_user),
-              date  = "<a href='" + tweet_url + "' class='tweet-date'>" + Date.parse(item.created_at).timeDiffInWords() + "</a>",
-              tweet_icon = "<a target='_blank' href='http://www.twitter.com/" + user + "'><img src='" + item.profile_image_url + "' class='tweet-user-image icon'/></a>",
+          var tweet = item.content.replace(/http:\/\/[^\s]+|^RT\s@[^\s]+/g,"").replace(/#ninjacam\s*$/g,""),
+              user  = $pick(item.rt_from, item.trackback_author_nick),
+              date  = "<a href='" + tweet_url + "' class='tweet-date'>" + item.created_on.timeDiffInWords() + "</a>",
+              tweet_icon = "<a target='_blank' href='http://www.twitter.com/" + user + "'><img src='" + item.topsy_author_img + "' class='tweet-user-image icon'/></a>",
               tweet_user = "<a class='tweet-user' target='_blank' href='http://www.twitter.com/" + user + "'>@" + user + "</a>";
             
           return   "<img src='" + src + "'/>"
@@ -280,7 +324,7 @@ window.addEvent('domready', function(){
             return the_art.getFirst('.caption').get('html');
           },
           get_img_href : function(the_art, i){            
-            return the_art.retrieve('data').text.match(G.twitter_image_regex)[0];
+            return the_art.retrieve('data').content.match(G.twitter_image_regex)[0];
           },
           onShowZoneCreated: function(show_zone, the_louvre){
             $$('.the_louvre_button').mouseDownClass('mousedown');
