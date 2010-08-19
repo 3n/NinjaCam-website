@@ -298,7 +298,10 @@ window.addEvent('domready', function(){
 	).addEvent('modelInit', function(m){
 			m.addEvent('dataReady', function(mm){
 			  G.t = mm;
-			  G.grid_latest.set( 'twitter', mm.db[0].created_on.toString());
+        if (mm.db.length > 0)
+			    G.grid_latest.set( 'twitter', mm.db[0].created_on.toString());
+			  else
+			    $('twitter-and-flickr').removeClass('loading').addClass('failed');
 			});
 	})
   .to_html();
