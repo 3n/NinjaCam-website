@@ -86,7 +86,6 @@ var Topsy = new Class({
   Extends: Twitter, 
   
   process_data: function(json){
-    console.log(json);
 		this.db = json.response.list.map(function(json_item, i){		  
 		  if (this.options.shouldIncludeItem(json_item)){
   		  var rt_match = json_item.content.match(/RT\s+@(\w+):?/);
