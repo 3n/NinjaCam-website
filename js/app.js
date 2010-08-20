@@ -188,7 +188,7 @@ window.addEvent('domready', function(){
         // user_name    : 'ninjacam',
         json_url   : "http://otter.topsy.com/search.js",
         json_opts: {           
-          data : { q : '#ninjacam', 'window' : 'a', 'type' : 'tweet', 'perpage' : 40 },
+          data : { q : 'ninjacam', 'window' : 'a', 'type' : 'tweet', 'perpage' : 40 },
           onComplete : function(d){
             G.d = d;
           },
